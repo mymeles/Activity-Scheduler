@@ -42,7 +42,7 @@ public class Student {
 		setId(id);
 		setEmail(email);
 		setHashPW(hashPW);
-	
+
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class Student {
 			throw new IllegalArgumentException("Invalid Credit");
 		} 
 		
-		this.maxCredits = maxCredits;
+				this.maxCredits = maxCredits;
 	}
 
 	/**
