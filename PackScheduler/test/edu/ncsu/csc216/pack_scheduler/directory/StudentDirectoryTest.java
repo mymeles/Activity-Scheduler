@@ -126,7 +126,7 @@ public class StudentDirectoryTest {
 	/**
 	 * Tests StudentDirectory.saveStudentDirectory().
 	 */
-	@Test
+	@Test 
 	public void testSaveStudentDirectory() {
 		StudentDirectory sd = new StudentDirectory();
 		

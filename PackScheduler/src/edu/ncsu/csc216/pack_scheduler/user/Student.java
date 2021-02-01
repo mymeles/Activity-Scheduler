@@ -42,7 +42,7 @@ public class Student {
 		setId(id);
 		setEmail(email);
 		setHashPW(hashPW);
-
+	
 	}
 
 	/**
@@ -148,9 +148,9 @@ public class Student {
 			throw new IllegalArgumentException("Invalid first name");
 		}
 		for (int i = 0; i < email.length(); i++) {
-			if (email.charAt(i) == '.' && email.charAt(i) == '@') {
+			if (email.charAt(i) == '.' && email.charAt(i)!= '@') {
 				throw new IllegalArgumentException("Invalid email");
-			} else if (email.charAt(i) != '@' || email.charAt(i) != '.') {
+			} else if (email.charAt(i) != '@' && email.charAt(i) != '.') {
 				throw new IllegalArgumentException("Invalid email");
 			}
 		}
@@ -203,8 +203,7 @@ public class Student {
 	public void setMaxCredits(int maxCredits) {
 		if(maxCredits < MIN_CREDIT || maxCredits > MAX_CREDIT) {
 			throw new IllegalArgumentException("Invalid Credit");
-		}
-		
+		} 
 		
 		this.maxCredits = maxCredits;
 	}
@@ -242,7 +241,7 @@ public class Student {
 
 	private void setId(String id) {
 		if (id == null || "".equals(id)) {
-			throw new IllegalArgumentException("Ifinal static int MAX_CREDIT = 18;nvalid first name");
+			throw new IllegalArgumentException("Invalid id");
 		}
 		this.id = id;
 	}

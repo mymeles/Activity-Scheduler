@@ -61,7 +61,7 @@ public class StudentDirectory {
 	 * @param id student's id
 	 * @param email student's email
 	 * @param password student's password
-	 * @param repeatPassword student's repeated password
+	 * @param repeatPassword student's repeated password 
 	 * @param maxCredits student's max credits.
 	 * @return true if added
 	 */
@@ -119,7 +119,7 @@ public class StudentDirectory {
 				return true;
 			}
 		}
-		return false;
+		return false; 
 	}
 	
 	/**
