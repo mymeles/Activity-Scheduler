@@ -71,68 +71,11 @@ public class Student {
 		this(firstName, lastName, id, email, hashPW, 18);
 	}
 
-	@Override
-	public String toString() {
-		return "Student [firstName=" + firstName + ", lastName=" + lastName + ", id=" + id + ", email=" + email
-				+ ", hashPW=" + hashPW + ", maxCredits=" + maxCredits + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((hashPW == null) ? 0 : hashPW.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + maxCredits;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Student other = (Student) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (hashPW == null) {
-			if (other.hashPW != null)
-				return false;
-		} else if (!hashPW.equals(other.hashPW))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (maxCredits != other.maxCredits)
-			return false;
-		return true;
-	}
-
 	/**
 	 * Returns email address from the parameter
 	 * @return email
 	 */
+
 	public String getEmail() {
 		return email;
 	}
@@ -143,24 +86,25 @@ public class Student {
 	 * 
 	 * @param email the email to set
 	 */
+	
 	public void setEmail(String email) {
 		if (email == null || "".equals(email)) {
 			throw new IllegalArgumentException("Invalid first name");
 		}
-		for (int i = 0; i < email.length(); i++) {
-			if (email.charAt(i) == '.' && email.charAt(i)!= '@') {
-				throw new IllegalArgumentException("Invalid email");
-			} else if (email.charAt(i) != '@' && email.charAt(i) != '.') {
-				throw new IllegalArgumentException("Invalid email");
-			}
-		}
+	
+		int indexOfAtSymbol = email.indexOf('@');
+		int indexOfDotSymbol = email.indexOf('.');
 
+		if (indexOfAtSymbol == -1 || indexOfDotSymbol == -1 || indexOfAtSymbol > indexOfDotSymbol) {
+				throw new IllegalArgumentException("Invalid email");
+			
+		}
 		this.email = email;
 	}
 
 	/**
 	 * returns the password from the parameter
-	 * 
+	 * indexOfAtSymbol == -1
 	 * @return the password
 	 */
 	public String getHashPW() {
@@ -273,6 +217,65 @@ public class Student {
 	public String getId() {
 
 		return id;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((hashPW == null) ? 0 : hashPW.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + maxCredits;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (firstName == null) { 
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (hashPW == null) {
+			if (other.hashPW != null)
+				return false;
+		} else if (!hashPW.equals(other.hashPW))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (maxCredits != other.maxCredits)
+			return false;
+		return true;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "Student [firstName=" + firstName + ", lastName=" + lastName + ", id=" + id + ", email=" + email
+				+ ", hashPW=" + hashPW + ", maxCredits=" + maxCredits + "]";
 	}
 
 }

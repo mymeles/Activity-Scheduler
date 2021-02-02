@@ -23,7 +23,7 @@ public class StudentDirectory {
 	
 	/**
 	 * Creates an empty student directory.
-	 */
+	 */ 
 	public StudentDirectory() {
 		newStudentDirectory();
 	}
@@ -69,7 +69,7 @@ public class StudentDirectory {
 		String hashPW = "";
 		String repeatHashPW = "";
 		if (password == null || repeatPassword == null || "".equals(password) || "".equals(repeatPassword)) {
-			throw new IllegalArgumentException("Invalid password");
+			throw new IllegalArgumentException("Invalid password"); 
 		}
 		try {
 			MessageDigest digest1 = MessageDigest.getInstance(HASH_ALGORITHM);
