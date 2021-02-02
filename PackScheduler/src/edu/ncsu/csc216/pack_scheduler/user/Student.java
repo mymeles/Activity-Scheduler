@@ -1,5 +1,6 @@
 package edu.ncsu.csc216.pack_scheduler.user;
 
+
 /**
  * student class for student information.
  * 
@@ -21,7 +22,7 @@ public class Student {
 	/**field for max credit*/
 	private int maxCredits;
 	/** Constant for maximum credit */
-	final static private int MAX_CREDIT = 18;
+	final static private int MAX_CREDITS = 18;
 
 	/**
 	 * first name field that passes through setFristName
@@ -86,7 +87,6 @@ public class Student {
 	 * 
 	 * @param email the email to set
 	 */
-	
 	public void setEmail(String email) {
 		if (email == null || "".equals(email)) {
 			throw new IllegalArgumentException("Invalid first name"); 
@@ -146,7 +146,7 @@ public class Student {
 	 */
 	
 	public void setMaxCredits(int maxCredits) {
-		if(maxCredits < MIN_CREDIT || maxCredits > MAX_CREDIT) {
+		if(maxCredits < MIN_CREDIT || maxCredits > MAX_CREDITS) {
 			throw new IllegalArgumentException("Invalid Credit");
 		} 
 		
@@ -178,12 +178,11 @@ public class Student {
 		}
 		this.lastName = lastName;
 	}
-
+	
 	/**
 	 * set the value of id by checking if it is null or empty if so @throw IAE
 	 * @param id the id to set
 	 */
-
 	private void setId(String id) {
 		if (id == null || "".equals(id)) {
 			throw new IllegalArgumentException("Invalid id");
@@ -198,8 +197,8 @@ public class Student {
 	 */
 	public String getFirstName() {
 		return firstName;
-	}	/**
-
+	}
+	
 	/**
 	 * returns the value of lastName from the parameter
 	 * 
