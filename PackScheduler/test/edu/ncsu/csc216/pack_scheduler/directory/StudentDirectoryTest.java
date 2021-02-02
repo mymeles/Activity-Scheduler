@@ -129,7 +129,6 @@ public class StudentDirectoryTest {
 	@Test 
 	public void testSaveStudentDirectory() {
 		StudentDirectory sd = new StudentDirectory();
-		
 		//Add a student
 		sd.addStudent("Zahir", "King", "zking", "orci.Donec@ametmassaQuisque.com", "pw", "pw", 15);
 		assertEquals(1, sd.getStudentDirectory().length);

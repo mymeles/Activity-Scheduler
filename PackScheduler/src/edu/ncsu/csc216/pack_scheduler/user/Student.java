@@ -17,7 +17,7 @@ public class Student {
 	/** filed for email */
 	private String email;
 	/** filed for hashPW */
-	private String hashPW;
+	private String password;
 	/**field for max credit*/
 	private int maxCredits;
 	/** Constant for maximum credit */
@@ -41,7 +41,7 @@ public class Student {
 		setLastName(lastName);
 		setId(id);
 		setEmail(email);
-		setHashPW(hashPW);
+		setPassword(hashPW);
 
 	}
 
@@ -89,13 +89,14 @@ public class Student {
 	
 	public void setEmail(String email) {
 		if (email == null || "".equals(email)) {
-			throw new IllegalArgumentException("Invalid first name");
+			throw new IllegalArgumentException("Invalid first name"); 
 		}
 	
-		int indexOfAtSymbol = email.indexOf('@');
-		int indexOfDotSymbol = email.indexOf('.');
+		int firstIndexOfAtSymbol = email.indexOf('@');
+		int lastIndexOfDotSymbol = email.lastIndexOf('.');
+		
 
-		if (indexOfAtSymbol == -1 || indexOfDotSymbol == -1 || indexOfAtSymbol > indexOfDotSymbol) {
+		if (firstIndexOfAtSymbol == -1 || lastIndexOfDotSymbol == -1 || lastIndexOfDotSymbol < firstIndexOfAtSymbol) {
 				throw new IllegalArgumentException("Invalid email");
 			
 		}
@@ -107,8 +108,8 @@ public class Student {
 	 * indexOfAtSymbol == -1
 	 * @return the password
 	 */
-	public String getHashPW() {
-		return hashPW;
+	public String getPassword() {
+		return password;
 	}
 
 	/**
@@ -117,11 +118,11 @@ public class Student {
 	 * 
 	 * @param password the password to set
 	 */
-	public void setHashPW(String password) {
-		if (hashPW == null || "".equals(hashPW)) {
+	public void setPassword(String password) {
+		if (password == null || "".equals(password)) {
 			throw new IllegalArgumentException("Invalid password");
 		}
-		this.hashPW = password;
+		this.password = password;
 	}
 	
 
@@ -225,7 +226,7 @@ public class Student {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((hashPW == null) ? 0 : hashPW.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + maxCredits;
@@ -251,10 +252,10 @@ public class Student {
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
-		if (hashPW == null) {
-			if (other.hashPW != null)
+		if (password == null) {
+			if (other.password != null)
 				return false;
-		} else if (!hashPW.equals(other.hashPW))
+		} else if (!password.equals(other.password))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -275,7 +276,7 @@ public class Student {
 	@Override
 	public String toString() {
 		return "Student [firstName=" + firstName + ", lastName=" + lastName + ", id=" + id + ", email=" + email
-				+ ", hashPW=" + hashPW + ", maxCredits=" + maxCredits + "]";
+				+ ", hashPW=" + password + ", maxCredits=" + maxCredits + "]";
 	}
 
 }
