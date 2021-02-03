@@ -22,7 +22,7 @@ public class Student {
 	/**field for max credit*/
 	private int maxCredits;
 	/** Constant for maximum credit */
-	final static private int MAX_CREDITS = 18;
+	final static int MAX_CREDITS = 18;
 
 	/**
 	 * first name field that passes through setFristName
