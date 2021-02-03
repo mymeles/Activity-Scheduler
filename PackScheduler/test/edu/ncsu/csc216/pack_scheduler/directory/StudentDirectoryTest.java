@@ -127,7 +127,7 @@ public class StudentDirectoryTest {
 	 * Tests StudentDirectory.saveStudentDirectory().
 	 */
 	@Test 
-	public void testSaveStudentDirectory() {
+	public void testSaveStudentDirectory() { 
 		StudentDirectory sd = new StudentDirectory();
 		//Add a student
 		sd.addStudent("Zahir", "King", "zking", "orci.Donec@ametmassaQuisque.com", "pw", "pw", 15);
