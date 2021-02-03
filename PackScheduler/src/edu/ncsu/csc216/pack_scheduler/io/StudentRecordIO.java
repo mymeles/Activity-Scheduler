@@ -1,12 +1,9 @@
 package edu.ncsu.csc216.pack_scheduler.io;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,22 +16,14 @@ import edu.ncsu.csc216.pack_scheduler.user.Student;
  */
 public class StudentRecordIO {
 
+	
 	/**
-	 * firstName 0 lastName 1 ..... 5 *
-	 * 
-	 * Student st1 = new Student(splitLIne[0], ..LIne[5] -----this is in the loop
-	 * sd.add(st1);
-	 * 
-	 * * @param fileName...splitK
-	 * 
-	 * @return 
-	 * @throws FileNotFoundException
-	 */
-	/**
-	 * 
+	 * string parameter for file name
 	 * @param fileName
-	 * @return
+	 * 
+	 * @return a value of arraylist that conatins the fields value for student 
 	 * @throws FileNotFoundException
+	 * 
 	 */
 	public static ArrayList<Student> readStudentRecords(String fileName) throws FileNotFoundException {
 		Scanner fileReader = new Scanner(new FileInputStream(fileName));  //Create a file scanner to read the file
@@ -62,7 +51,7 @@ public class StudentRecordIO {
 	            //If the course is NOT a duplicate
 	            if (!duplicate) {
 	            students.add(student); //Add to the ArrayList!
-	            } //Otherwise ignore
+	            } //Otherwise ignore 
 	        } catch (IllegalArgumentException e) {
 	            //The line is invalid b/c we couldn't create a course, skip it!
 	        }
@@ -75,36 +64,36 @@ public class StudentRecordIO {
 
 		
 	/**
-	 * askhfdblasbdf
-	 * @param nextLine
-	 * adkjfbisabdf
+	 * parameter that passes Through file from ReadStudent Records fileName
+	 * @param line
+	 * Returns objects of students  
 	 * @return
-	 * alsjdkbfaskjbdf
+	 * uses this method to seprate the fields from the passes line and return value of students 
 	 */
-	
 	private static Student processStudent(String line) {
 
-		Scanner scan= new Scanner(line).useDelimiter(",");
-		// example CSC 116,Intro to Programming - Java,001,3,jdyoung2,MW,0910,1100
+		//  Changing the default delimiter of space to , and sperera the values  
+		Scanner scan = new Scanner(line).useDelimiter(",");
+		
 		
 		Student student;
 		try { 
 		// let say you have array list
-		ArrayList<String> fields= new ArrayList<String>();
+		ArrayList<String> fields = new ArrayList<String>();
 		while(scan.hasNext()) {
 		 fields.add(scan.next());
 		}
 		
 	
-		String firstName =fields.get(0);
-		String lastName =fields.get(1); // meaning full 
-		String id =fields.get(2); 
+		String firstName = fields.get(0);
+		String lastName = fields.get(1);
+		String id = fields.get(2); 
 		int maxCreidt = Integer.parseInt(fields.get(5));
 		String email = fields.get(4);
 		String hashPW = fields.get(5);
 		
 		
-		if(maxCreidt == 18) { 
+		if(maxCreidt == 18) {
 			student = new Student(firstName, lastName, id, email, hashPW);
 			return student;
 		}
@@ -113,7 +102,7 @@ public class StudentRecordIO {
 			student = new Student(firstName, lastName, id, email, hashPW, maxCreidt);
 			return student;			
 			}
- }catch (InputMismatchException e) {
+ } catch (IllegalArgumentException e) {
 		 throw e;
 	 }
 		
@@ -122,10 +111,13 @@ public class StudentRecordIO {
 
 
 	/**
-	 * 
+	 * passes a file called  fileName
 	 * @param fileName
+	 * student records stored in Student directory that hold student fields 
 	 * @param studentDirectory
+	 * throws an exception 
 	 * @throws IOException
+	 * this method writes students information taking it from student directory and on to the fileName
 	 */
 	public static void writeStudentRecords(String fileName, ArrayList<Student> studentDirectory) throws IOException {
 
