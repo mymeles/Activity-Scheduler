@@ -72,11 +72,11 @@ public class StudentDirectory {
 			throw new IllegalArgumentException("Invalid password"); 
 		}
 		try {
-			MessageDigest digest1 = MessageDigest.getInstance(HASH_ALGORITHM);
+			MessageDigest digest1 = MessageDigest.getInstance(HASH_ALGORITHM); 
 			digest1.update(password.getBytes());
 			hashPW = new String(digest1.digest());
 			
-			MessageDigest digest2 = MessageDigest.getInstance(HASH_ALGORITHM);
+			MessageDigest digest2 = MessageDigest.getInstance(HASH_ALGORITHM); 
 			digest2.update(repeatPassword.getBytes());
 			repeatHashPW = new String(digest2.digest());
 		} catch (NoSuchAlgorithmException e) {

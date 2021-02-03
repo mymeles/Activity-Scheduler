@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,7 +27,7 @@ public class StudentRecordIO {
 	 * 
 	 * * @param fileName...splitK
 	 * 
-	 * @return
+	 * @return 
 	 * @throws FileNotFoundException
 	 */
 	/**
@@ -42,7 +43,7 @@ public class StudentRecordIO {
 	        try { //Attempt to do the following
 	            //Read the line, process it in readCourse, and get the object
 	            //If trying to construct a Course in readCourse() results in an exception, flow of control will transfer to the catch block, below
-	            Student student = readStudentDirectory(fileReader.nextLine()); 
+	            Student student = processStudent(fileReader.nextLine()); 
 
 	            //Create a flag to see if the newly created Course is a duplicate of something already in the list  
 	            boolean duplicate = false;
@@ -74,13 +75,18 @@ public class StudentRecordIO {
 
 		
 	/**
-	 * 
+	 * askhfdblasbdf
 	 * @param nextLine
+	 * adkjfbisabdf
 	 * @return
+	 * alsjdkbfaskjbdf
 	 */
-	private static Student readStudentDirectory(String std) {
-		Scanner scan= new Scanner(std).useDelimiter(",");
+	
+	private static Student processStudent(String line) {
+
+		Scanner scan= new Scanner(line).useDelimiter(",");
 		// example CSC 116,Intro to Programming - Java,001,3,jdyoung2,MW,0910,1100
+		
 		Student student;
 		try { 
 		// let say you have array list
@@ -89,7 +95,7 @@ public class StudentRecordIO {
 		 fields.add(scan.next());
 		}
 		
-		// creating the course, fields you need are 6
+	
 		String firstName =fields.get(0);
 		String lastName =fields.get(1); // meaning full 
 		String id =fields.get(2); 
@@ -98,7 +104,7 @@ public class StudentRecordIO {
 		String hashPW = fields.get(5);
 		
 		
-		if(maxCreidt == 18) {
+		if(maxCreidt == 18) { 
 			student = new Student(firstName, lastName, id, email, hashPW);
 			return student;
 		}
@@ -107,7 +113,7 @@ public class StudentRecordIO {
 			student = new Student(firstName, lastName, id, email, hashPW, maxCreidt);
 			return student;			
 			}
- }catch (IllegalArgumentException e) {
+ }catch (InputMismatchException e) {
 		 throw e;
 	 }
 		
