@@ -89,8 +89,8 @@ public class StudentRecordIO {
 		String lastName = fields.get(1);
 		String id = fields.get(2); 
 		int maxCreidt = Integer.parseInt(fields.get(5));
-		String email = fields.get(4);
-		String hashPW = fields.get(5);
+		String email = fields.get(3);
+		String hashPW = fields.get(4);
 		
 		
 		if(maxCreidt == 18) {
@@ -99,11 +99,12 @@ public class StudentRecordIO {
 		}
 		
 		else {
+			
 			student = new Student(firstName, lastName, id, email, hashPW, maxCreidt);
 			return student;			
 			}
  } catch (IllegalArgumentException e) {
-		 throw e;
+		 throw e; 
 	 }
 		
 	}
@@ -124,7 +125,7 @@ public class StudentRecordIO {
 		PrintStream fileWriter = new PrintStream(new File(fileName));
 
 		for (int i = 0; i < studentDirectory.size(); i++) {
-		    fileWriter.println(studentDirectory.get(i).toString());
+		    fileWriter.println(studentDirectory.get(i).toString()); 
 		}
 
 		fileWriter.close();

@@ -43,6 +43,7 @@ public class Student {
 		setId(id);
 		setEmail(email);
 		setPassword(hashPW);
+		setMaxCredits(maxCredits);
 
 	}
 
@@ -243,7 +244,7 @@ public class Student {
 		Student other = (Student) obj;
 		if (email == null) {
 			if (other.email != null)
-				return false;
+				return false; 
 		} else if (!email.equals(other.email))
 			return false;
 		if (firstName == null) { 
@@ -273,9 +274,9 @@ public class Student {
 
 	
 	@Override
-	public String toString() {
-		return "Student [firstName=" + firstName + ", lastName=" + lastName + ", id=" + id + ", email=" + email
-				+ ", hashPW=" + password + ", maxCredits=" + maxCredits + "]";
+	public String toString() { 
+		return firstName + "," + lastName + "," + id + "," + email
+				+ "," + password + "," + maxCredits;
 	}
 
 }
