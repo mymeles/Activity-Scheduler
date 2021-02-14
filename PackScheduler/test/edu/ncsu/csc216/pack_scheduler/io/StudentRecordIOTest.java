@@ -71,7 +71,7 @@ public class StudentRecordIOTest {
 	        }
 	        
 	        expScanner.close();
-	        actScanner.close();
+	        actScanner.close(); 
 	    } catch (IOException e) {
 	        fail("Error reading files.");
 	    }
@@ -80,7 +80,7 @@ public class StudentRecordIOTest {
 	/** A string to old the hashed password */
 	private String hashPW;
 	/** Identifies the Hash algorithm*/
-	private static final String HASH_ALGORITHM = "SHA-256";
+	private static final String HASH_ALGORITHM = "SHA-256"; 
 	
 	/**
 	 * Runs before each test so ,pw, is replaced with a hashed value of "pw"

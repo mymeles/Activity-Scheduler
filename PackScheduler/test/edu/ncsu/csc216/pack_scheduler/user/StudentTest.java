@@ -271,7 +271,7 @@ public class StudentTest {
 		assertTrue(s2.equals(s1));
 		
 		//Test for each of the fields 
-		assertFalse(s1.equals(s3));
+		assertFalse(s1.equals(s3)); 
         assertFalse(s1.equals(s4));
         assertFalse(s1.equals(s5));
         assertFalse(s1.equals(s6));
@@ -299,7 +299,7 @@ public class StudentTest {
 		assertNotEquals(s1.hashCode(), s4.hashCode());
 		assertNotEquals(s1.hashCode(), s5.hashCode());
 		assertNotEquals(s1.hashCode(), s6.hashCode()); 
-		assertNotEquals(s1.hashCode(), s7.hashCode());
+		assertNotEquals(s1.hashCode(), s7.hashCode()); 
 	}
 
 	/**

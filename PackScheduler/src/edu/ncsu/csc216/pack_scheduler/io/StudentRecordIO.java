@@ -80,7 +80,7 @@ public class StudentRecordIO {
 		scan.useDelimiter(",");
 		Student student;
 		try {
-			// let say you have array list
+			// let say you have array list 
 			ArrayList<String> fields = new ArrayList<String>();
 			while (scan.hasNext()) {
 				fields.add(scan.next());

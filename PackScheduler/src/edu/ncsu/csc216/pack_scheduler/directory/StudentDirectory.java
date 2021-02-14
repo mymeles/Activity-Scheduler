@@ -25,7 +25,7 @@ public class StudentDirectory {
 	 * Creates an empty student directory.
 	 */ 
 	public StudentDirectory() {
-		newStudentDirectory();
+		newStudentDirectory(); 
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public class StudentDirectory {
 	 * This method also hashes the student's password for internal storage.
 	 * 
 	 * @param firstName student's first name
-	 * @param lastName student's last name
+	 * @param lastName student's last name 
 	 * @param id student's id
 	 * @param email student's email
 	 * @param password student's password
@@ -79,16 +79,16 @@ public class StudentDirectory {
 			MessageDigest digest2 = MessageDigest.getInstance(HASH_ALGORITHM); 
 			digest2.update(repeatPassword.getBytes());
 			repeatHashPW = new String(digest2.digest());
-		} catch (NoSuchAlgorithmException e) {
+		} catch (NoSuchAlgorithmException e) { 
 			throw new IllegalArgumentException("Cannot hash password");
 		}
-		
+		  
 		if (!hashPW.equals(repeatHashPW)) {
 			throw new IllegalArgumentException("Passwords do not match");
 		}
 		
 		//If an IllegalArgumentException is thrown, it's passed up from Student
-		//to the GUI
+		//to the GUI 
 		Student student = null;
 		if (maxCredits < 3) {
 			student = new Student(firstName, lastName, id, email, hashPW);
@@ -100,7 +100,7 @@ public class StudentDirectory {
 			Student s = studentDirectory.get(i);
 			if (s.getId().equals(student.getId())) {
 				return false;
-			}
+			} 
 		}
 		return studentDirectory.add(student);
 	}
@@ -125,14 +125,17 @@ public class StudentDirectory {
 	/**
 	 * Returns all students in the directory with a column for first name, last name, and id.
 	 * @return String array containing students first name, last name, and id.
-	 */
+	 */   
 	public String[][] getStudentDirectory() {
-		String [][] directory = new String[studentDirectory.size()][3];
+		String [][] directory = new String[studentDirectory.size()][5];
 		for (int i = 0; i < studentDirectory.size(); i++) {
 			Student s = studentDirectory.get(i);
 			directory[i][0] = s.getFirstName();
 			directory[i][1] = s.getLastName();
 			directory[i][2] = s.getId();
+			 
+			
+			
 		}
 		return directory;
 	}

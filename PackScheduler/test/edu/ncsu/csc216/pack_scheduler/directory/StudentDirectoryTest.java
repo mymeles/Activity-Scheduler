@@ -7,10 +7,14 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.ncsu.csc216.pack_scheduler.user.Student;
 
 /**
  * Tests StudentDirectory.
@@ -33,6 +37,8 @@ public class StudentDirectoryTest {
 	/** Test max credits */
 	private static final int MAX_CREDITS = 15;
 	
+
+	
 	/**
 	 * Resets course_records.txt for use in other tests.
 	 * @throws Exception if something fails during setup.
@@ -44,10 +50,36 @@ public class StudentDirectoryTest {
 		Path destinationPath = FileSystems.getDefault().getPath("test-files", "student_records.txt");
 		try {
 			Files.deleteIfExists(destinationPath);
-			Files.copy(sourcePath, destinationPath);
+			Files.copy(sourcePath, destinationPath); 
 		} catch (IOException e) {
 			fail("Unable to reset files");
 		}
+	}
+	
+	/** A string to old the hashed password */
+	private String hashPW;
+	/** Identifies the Hash algorithm*/
+	private static final String HASH_ALGORITHM = "SHA-256"; 
+	
+	String ValidTestFile = "test-file/student_records.txt";
+	StudentDirectory sdd = new StudentDirectory();
+	/**
+	 * Runs before each test so ,pw, is replaced with a hashed value of "pw"
+	 */
+	@Before
+	public void setUp1() { 
+	    try {
+	        String password = "pw";
+	        MessageDigest digest = MessageDigest.getInstance(HASH_ALGORITHM);
+	        digest.update(PASSWORD.getBytes());
+	        hashPW = new String(digest.digest());
+	        
+//	        for (int i = 0; i < validTestFile.length; i++) {
+//	            validStudents[i] = validStudents[i].replace(",pw,", "," + hashPW + ",");
+//	        }
+	    } catch (NoSuchAlgorithmException e) {
+	        fail("Unable to create hash during setup");
+	    }
 	}
 
 	/**
@@ -95,7 +127,7 @@ public class StudentDirectoryTest {
 	@Test
 	public void testAddStudent() {
 		StudentDirectory sd = new StudentDirectory();
-		
+
 		//Test valid Student
 		sd.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, MAX_CREDITS);
 		String [][] studentDirectory = sd.getStudentDirectory();
@@ -103,8 +135,15 @@ public class StudentDirectoryTest {
 		assertEquals(FIRST_NAME, studentDirectory[0][0]);
 		assertEquals(LAST_NAME, studentDirectory[0][1]);
 		assertEquals(ID, studentDirectory[0][2]);
+		
+		try {
+			sd.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, "", PASSWORD, MAX_CREDITS);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals("Invalid password", e.getMessage());
+			}
 	}
-
+ 
 	/**
 	 * Tests StudentDirectory.removeStudent().
 	 */
@@ -126,7 +165,7 @@ public class StudentDirectoryTest {
 	/**
 	 * Tests StudentDirectory.saveStudentDirectory().
 	 */
-	@Test 
+	@Test  
 	public void testSaveStudentDirectory() { 
 		StudentDirectory sd = new StudentDirectory();
 		//Add a student
