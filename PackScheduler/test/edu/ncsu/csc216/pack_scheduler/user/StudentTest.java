@@ -247,7 +247,7 @@ public class StudentTest {
 		
 		try {
 			s.setLastName("");
-			fail();
+			fail(); 
 		} catch (IllegalArgumentException e) {
 			assertEquals(LAST_NAME, s.getFirstName());
 		}
