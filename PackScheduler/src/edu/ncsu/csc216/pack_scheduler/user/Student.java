@@ -21,7 +21,7 @@ public class Student {
 	private String password;
 	/**field for max credit*/
 	private int maxCredits;
-	/** Constant for maximum credit */
+	/** Constant for maximum credit */ 
 	public final static int MAX_CREDITS = 18;
 
 	/**
@@ -73,9 +73,9 @@ public class Student {
 		this(firstName, lastName, id, email, hashPW, 18);
 	}
 
-	/**
+	/** 
 	 * Returns email address from the parameter
-	 * @return email
+	 * @return email(null, LAST_NAME, ID, EMAIL, PASSWORD, CREDITS);
 	 */
 
 	public String getEmail() {
@@ -103,7 +103,7 @@ public class Student {
 		}
 		this.email = email;
 	}
-
+ 
 	/**
 	 * returns the password from the parameter
 	 * indexOfAtSymbol == -1
@@ -226,13 +226,15 @@ public class Student {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + maxCredits;
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
 
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -244,18 +246,13 @@ public class Student {
 		Student other = (Student) obj;
 		if (email == null) {
 			if (other.email != null)
-				return false; 
+				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (firstName == null) { 
+		if (firstName == null) {
 			if (other.firstName != null)
 				return false;
 		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -263,16 +260,20 @@ public class Student {
 		} else if (!id.equals(other.id))
 			return false;
 		if (lastName == null) {
-			if (other.lastName != null)
+			if (other.lastName != null) 
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
 		if (maxCredits != other.maxCredits)
 			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
 		return true;
 	}
 
-	
 	@Override
 	public String toString() { 
 		return firstName + "," + lastName + "," + id + "," + email

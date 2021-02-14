@@ -16,7 +16,7 @@ import edu.ncsu.csc216.pack_scheduler.user.Student;
  */
 public class StudentRecordIO {
 
-	
+	 
 	/**
 	 * string parameter for file name
 	 * @param fileName
