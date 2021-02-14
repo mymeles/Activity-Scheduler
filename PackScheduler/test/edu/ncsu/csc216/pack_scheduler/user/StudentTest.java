@@ -57,7 +57,7 @@ public class StudentTest {
 		} catch (IllegalArgumentException e) { 
 			assertNull(s);
 		}
-		try { 
+		try {  
 			s = new Student(FIRST_NAME, LAST_NAME, ID, "meles.meles", PASSWORD, CREDITS);
 			assertEquals("meles.meles", s.getEmail()); 
 			fail();			
