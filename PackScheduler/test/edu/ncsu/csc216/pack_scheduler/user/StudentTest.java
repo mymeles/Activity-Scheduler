@@ -61,7 +61,7 @@ public class StudentTest {
 			s = new Student(FIRST_NAME, LAST_NAME, ID, "meles.meles", PASSWORD, CREDITS);
 			assertEquals("meles.meles", s.getEmail()); 
 			fail();			
-		} catch (IllegalArgumentException e) { 
+		} catch (IllegalArgumentException e) {  
 			assertNull(s);
 		}
 		try { 
@@ -273,7 +273,7 @@ public class StudentTest {
 		//Test for each of the fields 
 		assertFalse(s1.equals(s3)); 
         assertFalse(s1.equals(s4));
-        assertFalse(s1.equals(s5));
+        assertFalse(s1.equals(s5)); 
         assertFalse(s1.equals(s6));
         assertFalse(s1.equals(s7));
    	}

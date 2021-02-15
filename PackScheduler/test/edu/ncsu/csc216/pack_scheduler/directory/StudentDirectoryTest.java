@@ -113,6 +113,14 @@ public class StudentDirectoryTest {
 		} catch (IllegalArgumentException e) {
 			assertEquals("Invalid password", e.getMessage());
 			}
+		
+		// write a case that gets to the bottom part of addstudent method 
+		sd.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, 2);
+		assertEquals(2, studentDirectory.length);
+		assertEquals(FIRST_NAME, studentDirectory[0][0]); 
+		assertEquals(LAST_NAME, studentDirectory[0][1]);
+		assertEquals(ID, studentDirectory[0][2]);
+		
 	}
  
 	/**
@@ -135,7 +143,7 @@ public class StudentDirectoryTest {
 
 	/**
 	 * Tests StudentDirectory.saveStudentDirectory().
-	 */
+	 */ 
 	@Test  
 	public void testSaveStudentDirectory() { 
 		StudentDirectory sd = new StudentDirectory();
@@ -144,9 +152,16 @@ public class StudentDirectoryTest {
 		assertEquals(1, sd.getStudentDirectory().length);
 		sd.saveStudentDirectory("test-files/actual_student_records.txt");
 		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
+		
+		try {
+		StudentDirectory sdd = new StudentDirectory();
+		sdd.saveStudentDirectory("test-files/actual_student_records.txt");
+		} catch (Exception e) { 
+			assertEquals("Unable to write to file " + "test-files/actual_student_records.txt", e.getMessage());
+		}
 	}
 	
-	/**
+	/** 
 	 * Helper method to compare two files for the same contents
 	 * @param expFile expected output
 	 * @param actFile actual output

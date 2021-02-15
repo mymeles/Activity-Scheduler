@@ -60,7 +60,7 @@ public class StudentDirectory {
 	 * @param lastName student's last name 
 	 * @param id student's id
 	 * @param email student's email
-	 * @param password student's password
+	 * @param password student's password 
 	 * @param repeatPassword student's repeated password 
 	 * @param maxCredits student's max credits.
 	 * @return true if added
@@ -100,7 +100,7 @@ public class StudentDirectory {
 			Student s = studentDirectory.get(i);
 			if (s.getId().equals(student.getId())) {
 				return false;
-			} 
+			}
 		}
 		return studentDirectory.add(student);
 	}
@@ -147,7 +147,7 @@ public class StudentDirectory {
 	public void saveStudentDirectory(String fileName) {
 		try {
 			StudentRecordIO.writeStudentRecords(fileName, studentDirectory);
-		} catch (IOException e) {
+		} catch (IOException e) { 
 			throw new IllegalArgumentException("Unable to write to file " + fileName);
 		}
 	}
