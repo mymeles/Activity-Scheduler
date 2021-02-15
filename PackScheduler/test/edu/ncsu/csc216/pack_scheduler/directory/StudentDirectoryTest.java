@@ -115,11 +115,20 @@ public class StudentDirectoryTest {
 			}
 		
 		// write a case that gets to the bottom part of addstudent method 
-		sd.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, 2);
+		StudentDirectory sd1 = new StudentDirectory();
+		sd1.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, 2);
+		assertEquals(1, studentDirectory.length);
+		assertEquals(FIRST_NAME, studentDirectory[0][0]); 
+		assertEquals(LAST_NAME, studentDirectory[0][1]);
+		assertEquals(ID, studentDirectory[0][2]);
+		
+		sd1.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, 18);
 		assertEquals(2, studentDirectory.length);
 		assertEquals(FIRST_NAME, studentDirectory[0][0]); 
 		assertEquals(LAST_NAME, studentDirectory[0][1]);
 		assertEquals(ID, studentDirectory[0][2]);
+		
+		
 		
 	}
  

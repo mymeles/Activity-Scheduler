@@ -26,7 +26,7 @@ public class StudentTest {
 	/**field for max credit*/
 	private static final int CREDITS = 16;
 	/** Constant for maximum credit */ 
-	public final static int MAX_CREDITS = 18;
+	public final static int MAX_CREDITS = 18; 
   
 	/**
 	 * Tests the student constructor with all the field parameters.

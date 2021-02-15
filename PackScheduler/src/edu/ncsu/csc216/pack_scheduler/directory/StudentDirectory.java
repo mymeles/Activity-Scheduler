@@ -99,7 +99,7 @@ public class StudentDirectory {
 		for (int i = 0; i < studentDirectory.size(); i++) {
 			Student s = studentDirectory.get(i);
 			if (s.getId().equals(student.getId())) {
-				return false;
+				return false; 
 			}
 		}
 		return studentDirectory.add(student);
