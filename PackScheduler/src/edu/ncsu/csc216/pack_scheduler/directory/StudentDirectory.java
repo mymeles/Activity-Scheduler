@@ -122,7 +122,7 @@ public class StudentDirectory {
 		return false; 
 	}
 	
-	/**
+	/** 
 	 * Returns all students in the directory with a column for first name, last name, and id.
 	 * @return String array containing students first name, last name, and id.
 	 */   
