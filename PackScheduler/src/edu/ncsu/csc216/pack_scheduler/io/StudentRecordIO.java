@@ -36,7 +36,7 @@ public class StudentRecordIO {
 	} catch (IllegalArgumentException e) {
 		throw e;
 	} 
-		}
+		} 
 		// Close the Scanner b/c we're responsible with our file handles
 		fileReader.close();
 		// Return the ArrayList with all the courses we read!
@@ -61,7 +61,7 @@ public class StudentRecordIO {
 		String id;
 		String email;
 		String hashPW; 
-		int maxCredits;
+		int maxCredits = 0;
 		try {
 
 			if(scan.hasNext()){
@@ -96,14 +96,12 @@ public class StudentRecordIO {
 				throw new IllegalArgumentException();
 			}
 			if(scan.hasNext()){
-				maxCredits = scan.nextInt(); 
-			} else {
+				maxCredits = scan.nextInt();
 				scan.close();
-				throw new IllegalArgumentException();
-			}
-			
-			student = new Student(firstName, lastName, id, email, hashPW, maxCredits);
+			} 
 			scan.close();
+			student = new Student(firstName, lastName, id, email, hashPW, maxCredits);
+			//scan.close();
 			return student; 
 			
 

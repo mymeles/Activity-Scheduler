@@ -120,7 +120,7 @@ public class StudentRecordIOTest {
 	}  
 	
 	/**
-	 * Tests readinvalidStudentsRecords() 
+	 * Tests readinvalidStudentsRecords()  
 	 */
 	@Test
 	public void testReadInvalidStudentRecords() {
