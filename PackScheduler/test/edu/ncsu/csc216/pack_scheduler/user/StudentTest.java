@@ -100,11 +100,11 @@ public class StudentTest {
 			assertEquals(null, s.getFirstName()); 
 			fail();			
 		} catch (IllegalArgumentException e) { 
-			assertNull(s);
+			assertNull(s); 
 		}
 		try { 
-			s = new Student(FIRST_NAME, LAST_NAME, null, EMAIL, PASSWORD);
-			assertEquals(null, s.getId()); 
+			s = new Student(FIRST_NAME, LAST_NAME, "", EMAIL, PASSWORD);
+			assertEquals("", s.getId()); 
 			fail();			
 		} catch (IllegalArgumentException e) { 
 			assertNull(s);
@@ -208,7 +208,7 @@ public class StudentTest {
 		} catch (IllegalArgumentException e) {
 			assertEquals(CREDITS, s.getMaxCredits());
 		}
-	}
+	} 
 
 	/**
 	 * Tests first name is set correctly 

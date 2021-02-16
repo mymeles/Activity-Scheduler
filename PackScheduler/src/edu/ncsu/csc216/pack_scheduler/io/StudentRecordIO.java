@@ -28,42 +28,19 @@ public class StudentRecordIO {
 	 * 
 	 */
 	public static ArrayList<Student> readStudentRecords(String fileName) throws FileNotFoundException {
-		Scanner fileReader = new Scanner(new FileInputStream(fileName)); // Create a file scanner to read the file
+		Scanner fileReader = new Scanner(new FileInputStream(fileName)); // Create a file scanner read the file
 		ArrayList<Student> students = new ArrayList<Student>(); // Create an empty array of Course objects
 		while (fileReader.hasNextLine()) { // While we have more lines in the file
-			try { // Attempt to do the following
-					// Read the line, process it in readCourse, and get the object
-					// If trying to construct a Course in readCourse() results in an exception, flow
-					// of control will transfer to the catch block, below
-				Student student = processStudent(fileReader.nextLine());
-
-				// Create a flag to see if the newly created Course is a duplicate of something
-				// already in the list
-				boolean duplicate = false;
-				// Look at all the courses in our list
-				for (int i = 0; i < students.size(); i++) {
-					// Get the course at index i
-					Student current = students.get(i);
-					// Check if the name and section are the same
-					if (student.getFirstName().equals(current.getFirstName())
-							&& student.getEmail().equals(current.getEmail())) {
-						// It's a duplicate!
-						duplicate = true; 
-						break; // We can break out of the loop, no need to continue searching
-					}  
-				}
-				// If the course is NOT a duplicate
-				if (!duplicate) {
-					students.add(student); // Add to the ArrayList!
-				} // Otherwise ignore
-			} catch (IllegalArgumentException e) {
-				// The line is invalid b/c we couldn't create a course, skip it!
-			}
+			try { // Attempt to do the following)
+					students.add(processStudent(fileReader.nextLine()));
+	} catch (IllegalArgumentException e) {
+		throw e;
+	} 
 		}
 		// Close the Scanner b/c we're responsible with our file handles
 		fileReader.close();
 		// Return the ArrayList with all the courses we read!
-		return students;
+		return students; 
 	}
 
 	/**
@@ -78,46 +55,66 @@ public class StudentRecordIO {
 		// Changing the default delimiter of space to , and sperera the values
 		Scanner scan = new Scanner(line);
 		scan.useDelimiter(",");
-		Student student;
+		Student student = null;
+		String firstName;
+		String lastName;
+		String id;
+		String email;
+		String hashPW; 
+		int maxCredits;
 		try {
-			// let say you have array list 
-			ArrayList<String> fields = new ArrayList<String>();
-			while (scan.hasNext()) {
-				fields.add(scan.next());
-			} scan.close();
 
-			String firstName = fields.get(0);
-			String lastName = fields.get(1);
-			String id = fields.get(2);
-			String email = fields.get(3);
-			String hashPW = fields.get(4);
+			if(scan.hasNext()){
+				firstName = scan.next(); 
+			} else {
+				scan.close();
+				throw new IllegalArgumentException();
+			}
+			if(scan.hasNext()){
+				lastName = scan.next(); 
+			} else {
+				scan.close();
+				throw new IllegalArgumentException();
+			}
+			if(scan.hasNext()){
+				id = scan.next(); 
+			} else {
+				scan.close();
+				throw new IllegalArgumentException();
+			}
+			if(scan.hasNext()){
+				email = scan.next(); 
+			} else {
+				scan.close();
+				throw new IllegalArgumentException();
+			}
+			
+			if(scan.hasNext()){
+				hashPW = scan.next(); 
+			} else {
+				scan.close();
+				throw new IllegalArgumentException();
+			}
+			if(scan.hasNext()){
+				maxCredits = scan.nextInt(); 
+			} else {
+				scan.close();
+				throw new IllegalArgumentException();
+			}
+			
+			student = new Student(firstName, lastName, id, email, hashPW, maxCredits);
+			scan.close();
+			return student; 
 			
 
-			if (fields.size() == 5) {
-				student = new Student(firstName, lastName, id, email, hashPW);
-				return student;
-			} 
-
-			else { 
-				try { 
-					int maxCreidt = Integer.parseInt(fields.get(5));
-					student = new Student(firstName, lastName, id, email, hashPW, maxCreidt);
-					System.out.println(line);
-					return student;
-				} catch (Exception e) { 
-					throw new IllegalArgumentException();
-				} 
-
-			}
- 
 		} catch (IllegalArgumentException e) {
-			throw e; 
+			throw e;
 		}
- 
+
 	}
 
 	/**
-	 * passes a file called fileName  
+	 * passes a file called fileName
 	 * 
 	 * @param fileName         student records stored in Student directory that hold
 	 *                         student fields

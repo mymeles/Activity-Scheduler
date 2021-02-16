@@ -49,7 +49,7 @@ public class StudentDirectoryTest {
 		try {
 			Files.deleteIfExists(destinationPath);
 			Files.copy(sourcePath, destinationPath); 
-		} catch (IOException e) {
+		} catch (IOException e) { 
 			fail("Unable to reset files");
 		}
 	} 

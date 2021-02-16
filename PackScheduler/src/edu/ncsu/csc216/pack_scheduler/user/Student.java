@@ -151,7 +151,7 @@ public class Student {
 			throw new IllegalArgumentException("Invalid max credits");
 		} 
 		
-				this.maxCredits = maxCredits;
+		this.maxCredits = maxCredits;
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class Student {
 			throw new IllegalArgumentException("Invalid id");
 		}
 		this.id = id;
-	}
+	} 
 
 	/**
 	 * returns firstName from the parameter

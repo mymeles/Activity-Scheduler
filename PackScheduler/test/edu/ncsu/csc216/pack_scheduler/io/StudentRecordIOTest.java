@@ -120,27 +120,27 @@ public class StudentRecordIOTest {
 	}  
 	
 	/**
-	 * Tests readinvalidStudentsRecords()
+	 * Tests readinvalidStudentsRecords() 
 	 */
 	@Test
 	public void testReadInvalidStudentRecords() {
 		ArrayList<Student> students;
 		try {
 			students = StudentRecordIO.readStudentRecords(invalidTestFile);
-			assertEquals(1, students.size());
+			assertEquals(0, students.size());
 		} catch (FileNotFoundException e) {
 			fail("Unexpected FileNotFoundException");
-		} 
-	}
+		}  
+	} 
 
 	/**
 	 * Tests writeStudetsRecords()
 	 */
-	@Test
+	@Test 
 	public void testWriteStudentRecords() {
 		ArrayList<Student> students = new ArrayList<Student>();
 		students.add(new Student("Zahir", "King", "zking", "orci.Donec@ametmassaQuisque.com", hashPW, 15));
-		
+		 
 		
 		try {
 			StudentRecordIO.writeStudentRecords("test-files/actual_student_records.txt", students);
