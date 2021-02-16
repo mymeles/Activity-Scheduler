@@ -90,7 +90,7 @@ public class Student {
 	 */
 	public void setEmail(String email) {
 		if (email == null || "".equals(email)) {
-			throw new IllegalArgumentException("Invalid first name"); 
+			throw new IllegalArgumentException("Invalid email"); 
 		}
 	
 		int firstIndexOfAtSymbol = email.indexOf('@');
@@ -148,7 +148,7 @@ public class Student {
 	
 	public void setMaxCredits(int maxCredits) {
 		if(maxCredits < MIN_CREDIT || maxCredits > MAX_CREDITS) {
-			throw new IllegalArgumentException("Invalid Credit");
+			throw new IllegalArgumentException("Invalid max credits");
 		} 
 		
 				this.maxCredits = maxCredits;
@@ -175,7 +175,7 @@ public class Student {
 	 */
 	public void setLastName(String lastName) {
 		if (lastName == null || "".equals(lastName)) {
-			throw new IllegalArgumentException("Invalid first name");
+			throw new IllegalArgumentException("Invalid last name");
 		}
 		this.lastName = lastName;
 	}
