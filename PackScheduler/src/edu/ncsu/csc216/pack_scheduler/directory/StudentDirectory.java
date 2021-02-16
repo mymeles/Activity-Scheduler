@@ -64,7 +64,11 @@ public class StudentDirectory {
 	 * @param repeatPassword student's repeated password 
 	 * @param maxCredits student's max credits.
 	 * @return true if added
-	 */
+	 * 
+	 * @throws IAE if password or repeat passwrod is null, if password or reeat password is empty
+	 * @throws and IAE if password can not be hashed 
+	 * @throws if password hashed and repeat password hash do not qe
+	 */ 
 	public boolean addStudent(String firstName, String lastName, String id, String email, String password, String repeatPassword, int maxCredits) {
 		String hashPW = "";
 		String repeatHashPW = "";
@@ -90,7 +94,7 @@ public class StudentDirectory {
 		//If an IllegalArgumentException is thrown, it's passed up from Student
 		//to the GUI 
 		Student student = null;
-		if (maxCredits < 3) {
+		if (maxCredits < 3) { 
 			student = new Student(firstName, lastName, id, email, hashPW);
 		} else {
 			student = new Student(firstName, lastName, id, email, hashPW, maxCredits);

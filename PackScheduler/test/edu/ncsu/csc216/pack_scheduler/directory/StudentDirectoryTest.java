@@ -12,7 +12,6 @@ import java.util.Scanner;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.ncsu.csc216.pack_scheduler.io.StudentRecordIO;
 
 
 /**
@@ -127,7 +126,9 @@ public class StudentDirectoryTest {
 			assertEquals("Invalid password", e.getMessage());
 			}
 
-		sd.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, 2);
+		
+		sd.addStudent("john", LAST_NAME, "john123", EMAIL, PASSWORD, PASSWORD, 2);
+		studentDirectory = sd.getStudentDirectory();
 		assertEquals(2, studentDirectory.length);
 		assertEquals(FIRST_NAME, studentDirectory[0][0]); 
 		assertEquals(LAST_NAME, studentDirectory[0][1]);
@@ -167,13 +168,12 @@ public class StudentDirectoryTest {
 		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
 		
 		
-		StudentDirectory sdd = new StudentDirectory(); 
-
+//		StudentDirectory sdd = new StudentDirectory(); 
+//		sdd.addStudent("Zahir", "King", "zking", "orci.Donec@ametmassaQuisque.com", "pw", "pw", 15);
 //		try {
-//			sdd.saveStudentDirectory("test-files/actual_student_records.txt");
-//			fail();
+//			sdd.saveStudentDirectory("test-files/actual_student_recor.txt");
 //		} catch(IllegalArgumentException e) {
-//			assertEquals("Unable to write file test-files/testing_doc.txt", e.getMessage());
+//			fail("Unable to write file test-files/testing_doc.txt");
 //		}
 //		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
 
