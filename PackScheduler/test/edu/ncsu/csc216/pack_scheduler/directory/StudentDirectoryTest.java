@@ -12,6 +12,8 @@ import java.util.Scanner;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.ncsu.csc216.pack_scheduler.io.StudentRecordIO;
+
 
 /**
  * Tests StudentDirectory.
@@ -34,7 +36,7 @@ public class StudentDirectoryTest {
 	/** Test max credits */
 	private static final int MAX_CREDITS = 15;
 	
-
+ 
 	
 	/**
 	 * Resets course_records.txt for use in other tests.
@@ -90,7 +92,15 @@ public class StudentDirectoryTest {
 		//Test valid file
 		sd.loadStudentsFromFile(validTestFile);
 		assertEquals(10, sd.getStudentDirectory().length);
+		 
+	   // Test invalid files 
 		
+		try {
+			sd.loadStudentsFromFile("test-files/testing_doc.txt");
+			fail();
+		} catch(IllegalArgumentException e) {
+			assertEquals("Unable to read file test-files/testing_doc.txt", e.getMessage());
+		}
 		
 	}
 
@@ -106,8 +116,9 @@ public class StudentDirectoryTest {
 		String [][] studentDirectory = sd.getStudentDirectory();
 		assertEquals(1, studentDirectory.length);
 		assertEquals(FIRST_NAME, studentDirectory[0][0]);
-		assertEquals(LAST_NAME, studentDirectory[0][1]);
+		assertEquals(LAST_NAME, studentDirectory[0][1]); 
 		assertEquals(ID, studentDirectory[0][2]);
+		
 		
 		try {
 			sd.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, "", PASSWORD, MAX_CREDITS);
@@ -155,15 +166,16 @@ public class StudentDirectoryTest {
 		sd.saveStudentDirectory("test-files/actual_student_records.txt");
 		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
 		
-		StudentDirectory sdd = new StudentDirectory();
-		try {
-		sdd.saveStudentDirectory("test-files/actual_student_records.txt");
 		
-			} catch (Exception e) {
-				// there should be something 
-		}
-		
-		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
+		StudentDirectory sdd = new StudentDirectory(); 
+
+//		try {
+//			sdd.saveStudentDirectory("test-files/actual_student_records.txt");
+//			fail();
+//		} catch(IllegalArgumentException e) {
+//			assertEquals("Unable to write file test-files/testing_doc.txt", e.getMessage());
+//		}
+//		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
 
 	} 
 	 

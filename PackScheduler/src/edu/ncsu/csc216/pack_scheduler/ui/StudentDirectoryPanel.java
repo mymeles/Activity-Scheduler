@@ -91,7 +91,7 @@ public class StudentDirectoryPanel extends JPanel implements ActionListener {
 	 * Constructs the StudentDirectoryGUI and sets up the GUI 
 	 * components.
 	 */
-	public StudentDirectoryPanel() {
+	public StudentDirectoryPanel() { 
 		super(new GridLayout(4, 1));
 		
 		studentDirectory = new StudentDirectory();

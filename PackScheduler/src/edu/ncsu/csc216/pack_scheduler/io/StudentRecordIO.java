@@ -110,7 +110,7 @@ public class StudentRecordIO {
 			}
  
 		} catch (IllegalArgumentException e) {
-			throw e;
+			throw e; 
 		}
  
 	}

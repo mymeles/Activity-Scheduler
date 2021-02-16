@@ -22,7 +22,7 @@ public class StudentDirectory {
 	private static final String HASH_ALGORITHM = "SHA-256";
 	
 	/**
-	 * Creates an empty student directory.
+	 * Creates an empty student directory. 
 	 */ 
 	public StudentDirectory() {
 		newStudentDirectory(); 
@@ -42,14 +42,14 @@ public class StudentDirectory {
 	 * file cannot be found.
 	 * @param fileName file containing list of students
 	 */
-	public void loadStudentsFromFile(String fileName) {
+	public void loadStudentsFromFile(String fileName) { 
 		try {
 			studentDirectory = StudentRecordIO.readStudentRecords(fileName);
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("Unable to read file " + fileName); 
 		}
 	} 
-	 
+	  
 	/**
 	 * Adds a Student to the directory.  Returns true if the student is added and false if
 	 * the student is unable to be added because their id matches another student's id.
@@ -137,12 +137,13 @@ public class StudentDirectory {
 			
 			
 		}
-		return directory;
+		return directory; 
 	}
 	 
 	/** 
 	 * Saves all students in the directory to a file.
 	 * @param fileName name of file to save students to.
+	 * @throws an illegal argument exception if the file can't be read 
 	 */
 	public void saveStudentDirectory(String fileName) {
 		try {
