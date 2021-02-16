@@ -102,6 +102,7 @@ public class StudentRecordIO {
 				try { 
 					int maxCreidt = Integer.parseInt(fields.get(5));
 					student = new Student(firstName, lastName, id, email, hashPW, maxCreidt);
+					System.out.println(line);
 					return student;
 				} catch (Exception e) { 
 					throw new IllegalArgumentException();
