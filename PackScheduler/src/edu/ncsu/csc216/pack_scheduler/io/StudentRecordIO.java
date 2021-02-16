@@ -34,7 +34,7 @@ public class StudentRecordIO {
 			try { // Attempt to do the following)
 					students.add(processStudent(fileReader.nextLine()));
 	} catch (IllegalArgumentException e) {
-
+		throw new IllegalArgumentException();
 	} 
 		}
 		// Close the Scanner b/c we're responsible with our file handles
@@ -96,7 +96,7 @@ public class StudentRecordIO {
 			}
 			
 			if(scan.hasNext()){
-				hashPW= scan.next(); 
+				hashPW = scan.next(); 
 			} else {
 				scan.close();
 				throw new IllegalArgumentException("Invaild input");
