@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
+
 
 /**
  * Tests StudentDirectory.
@@ -51,7 +51,7 @@ public class StudentDirectoryTest {
 		} catch (IOException e) {
 			fail("Unable to reset files");
 		}
-	}
+	} 
 	
 	/**
 	 * Tests StudentDirectory().
@@ -90,6 +90,8 @@ public class StudentDirectoryTest {
 		//Test valid file
 		sd.loadStudentsFromFile(validTestFile);
 		assertEquals(10, sd.getStudentDirectory().length);
+		
+		
 	}
 
 	/**
@@ -113,22 +115,13 @@ public class StudentDirectoryTest {
 		} catch (IllegalArgumentException e) {
 			assertEquals("Invalid password", e.getMessage());
 			}
-		
-		// write a case that gets to the bottom part of addstudent method 
-		//StudentDirectory sd = new StudentDirectory();
+
 		sd.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, 2);
-		assertEquals(1, studentDirectory.length);
+		assertEquals(2, studentDirectory.length);
 		assertEquals(FIRST_NAME, studentDirectory[0][0]); 
 		assertEquals(LAST_NAME, studentDirectory[0][1]);
 		assertEquals(ID, studentDirectory[0][2]);
-		
-//		sd1.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, 18);
-//		assertEquals(fasle,studentDirectory.length);
-//		assertEquals(FIRST_NAME, studentDirectory[0][0]); 
-//		assertEquals(LAST_NAME, studentDirectory[0][1]);
-//		assertEquals(ID, studentDirectory[0][2]);
-//		
-		
+
 		
 	}
  
@@ -162,16 +155,20 @@ public class StudentDirectoryTest {
 		sd.saveStudentDirectory("test-files/actual_student_records.txt");
 		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
 		
-		try {
 		StudentDirectory sdd = new StudentDirectory();
+		try {
 		sdd.saveStudentDirectory("test-files/actual_student_records.txt");
-		} catch (Exception e) { 
-			assertEquals("Unable to write to file " + "test-files/actual_student_records.txt", e.getMessage());
+		
+			} catch (Exception e) {
+				// there should be something 
 		}
-	}
-	
-	/** 
-	 * Helper method to compare two files for the same contents
+		
+		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
+
+	} 
+	 
+	/** throw new IllegalArgumentException
+	 * Helper method to compare two files for the same contents 
 	 * @param expFile expected output
 	 * @param actFile actual output
 	 */

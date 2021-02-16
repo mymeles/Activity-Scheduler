@@ -46,10 +46,10 @@ public class StudentDirectory {
 		try {
 			studentDirectory = StudentRecordIO.readStudentRecords(fileName);
 		} catch (FileNotFoundException e) {
-			throw new IllegalArgumentException("Unable to read file " + fileName);
+			throw new IllegalArgumentException("Unable to read file " + fileName); 
 		}
-	}
-	
+	} 
+	 
 	/**
 	 * Adds a Student to the directory.  Returns true if the student is added and false if
 	 * the student is unable to be added because their id matches another student's id.
@@ -139,8 +139,8 @@ public class StudentDirectory {
 		}
 		return directory;
 	}
-	
-	/**
+	 
+	/** 
 	 * Saves all students in the directory to a file.
 	 * @param fileName name of file to save students to.
 	 */

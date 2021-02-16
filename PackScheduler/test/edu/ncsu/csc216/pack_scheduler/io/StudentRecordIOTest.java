@@ -145,8 +145,8 @@ public class StudentRecordIOTest {
 		try {
 			StudentRecordIO.writeStudentRecords("test-files/actual_student_records.txt", students);
 		} catch (IOException e) {
-			fail("Cannot write to course records file");
-		}
+			fail("Cannot write to student records file");
+		} 
 		
 		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
 	}

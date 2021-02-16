@@ -116,7 +116,7 @@ public class StudentRecordIO {
 	}
 
 	/**
-	 * passes a file called fileName 
+	 * passes a file called fileName  
 	 * 
 	 * @param fileName         student records stored in Student directory that hold
 	 *                         student fields
