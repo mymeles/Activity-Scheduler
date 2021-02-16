@@ -34,9 +34,9 @@ public class StudentRecordIO {
 			try { // Attempt to do the following)
 					students.add(processStudent(fileReader.nextLine()));
 	} catch (IllegalArgumentException e) {
-		throw e;
+
 	} 
-		} 
+		}
 		// Close the Scanner b/c we're responsible with our file handles
 		fileReader.close();
 		// Return the ArrayList with all the courses we read!
@@ -61,47 +61,55 @@ public class StudentRecordIO {
 		String id;
 		String email;
 		String hashPW; 
-		int maxCredits = 0;
+		int maxCredits;
 		try {
+//			// let say you have array list
+//			ArrayList<String> fields = new ArrayList<String>();
+//			while (scan.hasNext()) {
+//				fields.add(scan.next()); 
+//			}
+//			scan.close();
 
 			if(scan.hasNext()){
 				firstName = scan.next(); 
 			} else {
 				scan.close();
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("Invaild input");
 			}
 			if(scan.hasNext()){
 				lastName = scan.next(); 
 			} else {
 				scan.close();
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("Invaild input");
 			}
 			if(scan.hasNext()){
 				id = scan.next(); 
 			} else {
 				scan.close();
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("Invaild input");
 			}
 			if(scan.hasNext()){
 				email = scan.next(); 
 			} else {
 				scan.close();
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("Invaild input");
 			}
 			
 			if(scan.hasNext()){
-				hashPW = scan.next(); 
+				hashPW= scan.next(); 
 			} else {
 				scan.close();
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("Invaild input");
 			}
 			if(scan.hasNext()){
-				maxCredits = scan.nextInt();
+				maxCredits = scan.nextInt(); 
+			} else {
 				scan.close();
-			} 
-			scan.close();
+				throw new IllegalArgumentException("Invaild input");
+			}
+			
 			student = new Student(firstName, lastName, id, email, hashPW, maxCredits);
-			//scan.close();
+			scan.close();
 			return student; 
 			
 
