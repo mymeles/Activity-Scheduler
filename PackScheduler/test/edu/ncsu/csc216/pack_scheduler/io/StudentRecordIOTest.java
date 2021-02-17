@@ -124,11 +124,13 @@ public class StudentRecordIOTest {
 	 */
 	@Test
 	public void testReadInvalidStudentRecords() {
-		ArrayList<Student> students;
+		ArrayList<Student> students; 
 		try {
 			students = StudentRecordIO.readStudentRecords(invalidTestFile);
 			assertEquals(0, students.size());
-		} catch (FileNotFoundException e) {
+		
+		} catch (FileNotFoundException e) { 
+			assertEquals("Invalid input", e.getMessage());
 			fail("Unexpected FileNotFoundException");
 		}  
 	} 

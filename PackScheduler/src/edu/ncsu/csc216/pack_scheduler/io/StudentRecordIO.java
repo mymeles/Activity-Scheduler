@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +35,7 @@ public class StudentRecordIO {
 			try { // Attempt to do the following)
 					students.add(processStudent(fileReader.nextLine()));
 	} catch (IllegalArgumentException e) {
-		
+		//
 	} 
 		} 
 		// Close the Scanner b/c we're responsible with our file handles
@@ -42,7 +43,7 @@ public class StudentRecordIO {
 		// Return the ArrayList with all the courses we read!
 		return students; 
 	}
-
+ 
 	/**
 	 * parameter that passes Through file from ReadStudent Records fileName
 	 * 
@@ -56,24 +57,20 @@ public class StudentRecordIO {
 		Scanner scan = new Scanner(line);
 		scan.useDelimiter(",");
 		Student student = null;
-		String firstName;
+		
+		String firstName = null;
 		String lastName;
 		String id;
 		String email;
-		String hashPW; 
-		int maxCredits;
+		String hashPW;
+		int maxCredits; 
+		
 		try {
-//			// let say you have array list
-//			ArrayList<String> fields = new ArrayList<String>();
-//			while (scan.hasNext()) {
-//				fields.add(scan.next()); 
-//			}
-//			scan.close();
 
 			if(scan.hasNext()){
 				firstName = scan.next(); 
 			} else {
-				scan.close();
+				scan.close(); 
 				throw new IllegalArgumentException("Invaild input");
 			}
 			if(scan.hasNext()){
@@ -118,6 +115,7 @@ public class StudentRecordIO {
 		}
 
 	}
+
 
 	/**
 	 * passes a file called fileName

@@ -137,7 +137,7 @@ public class Student {
 	}
 	
 	/** constant for MIN_CREDIT to use in the below method*/
-	//final static int MIN_CREDIT = 3;
+	final static int MIN_CREDIT = 3;
 	/**
 	 * sets the maxCredit to the given parameter
 	 * @param maxCredits 
@@ -147,7 +147,7 @@ public class Student {
 	 */
 	
 	public void setMaxCredits(int maxCredits) {
-		if(maxCredits < 0 ) {
+		if(maxCredits < 0) {
 			throw new IllegalArgumentException("Invalid max credits");
 		} 
 		
@@ -172,7 +172,7 @@ public class Student {
 	 * @throw an exception
 	 * 
 	 * @param lastName the firstName to set
-	 */
+	 */ 
 	public void setLastName(String lastName) {
 		if (lastName == null || "".equals(lastName)) {
 			throw new IllegalArgumentException("Invalid last name");
