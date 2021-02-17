@@ -71,13 +71,10 @@ public class StudentTest {
 		} catch (IllegalArgumentException e) { 
 			assertNull(s);
 		}
-		try { 
+		
 			s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, 19);
 			assertEquals(19, s.getMaxCredits()); 
-			fail();			
-		} catch (IllegalArgumentException e) { 
-			assertNull(s);
-		}
+			
 		
 	}
 	
@@ -195,20 +192,9 @@ public class StudentTest {
 	@Test
 	public void testSetMaxCredits() {
 		Student s = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, CREDITS);
-		try {
-			s.setMaxCredits(2);
-			fail();			
-		} catch (IllegalArgumentException e) {
-			assertEquals(CREDITS, s.getMaxCredits());
-		}
+		assertEquals(CREDITS, s.getMaxCredits());
+	}
 		
-		try { 
-			s.setMaxCredits(19);
-			fail();
-		} catch (IllegalArgumentException e) {
-			assertEquals(CREDITS, s.getMaxCredits());
-		}
-	} 
 
 	/**
 	 * Tests first name is set correctly 

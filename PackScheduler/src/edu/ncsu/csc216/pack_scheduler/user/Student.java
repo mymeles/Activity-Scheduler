@@ -147,10 +147,6 @@ public class Student {
 	 */
 	
 	public void setMaxCredits(int maxCredits) {
-		if(maxCredits < MIN_CREDIT || maxCredits > MAX_CREDITS) {
-			throw new IllegalArgumentException("Invalid max credits");
-		} 
-		
 		this.maxCredits = maxCredits;
 	}
 
