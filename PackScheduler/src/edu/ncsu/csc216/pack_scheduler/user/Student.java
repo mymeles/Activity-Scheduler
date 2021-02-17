@@ -137,7 +137,7 @@ public class Student {
 	}
 	
 	/** constant for MIN_CREDIT to use in the below method*/
-	final static int MIN_CREDIT = 3;
+	//final static int MIN_CREDIT = 3;
 	/**
 	 * sets the maxCredit to the given parameter
 	 * @param maxCredits 
@@ -147,6 +147,10 @@ public class Student {
 	 */
 	
 	public void setMaxCredits(int maxCredits) {
+		if(maxCredits < 0 ) {
+			throw new IllegalArgumentException("Invalid max credits");
+		} 
+		
 		this.maxCredits = maxCredits;
 	}
 
@@ -185,7 +189,7 @@ public class Student {
 			throw new IllegalArgumentException("Invalid id");
 		}
 		this.id = id;
-	} 
+	}
 
 	/**
 	 * returns firstName from the parameter
