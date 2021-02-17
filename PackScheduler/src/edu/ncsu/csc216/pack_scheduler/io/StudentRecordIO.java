@@ -24,7 +24,7 @@ public class StudentRecordIO {
 	 * @param fileName
 	 * 
 	 * @return a value of arraylist that conatins the fields value for student
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException if the file isn't found 
 	 * 
 	 */
 	public static ArrayList<Student> readStudentRecords(String fileName) throws FileNotFoundException {
@@ -34,9 +34,9 @@ public class StudentRecordIO {
 			try { // Attempt to do the following)
 					students.add(processStudent(fileReader.nextLine()));
 	} catch (IllegalArgumentException e) {
-		throw new FileNotFoundException(); 
+		
 	} 
-		}
+		} 
 		// Close the Scanner b/c we're responsible with our file handles
 		fileReader.close();
 		// Return the ArrayList with all the courses we read!
