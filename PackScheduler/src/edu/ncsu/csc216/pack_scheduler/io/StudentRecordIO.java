@@ -34,7 +34,7 @@ public class StudentRecordIO {
 			try { // Attempt to do the following)
 					students.add(processStudent(fileReader.nextLine()));
 	} catch (IllegalArgumentException e) {
-		throw new IllegalArgumentException();
+		throw new FileNotFoundException(); 
 	} 
 		}
 		// Close the Scanner b/c we're responsible with our file handles
