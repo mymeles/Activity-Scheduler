@@ -29,7 +29,7 @@ public class StudentRecordIO {
 	 */
 	public static ArrayList<Student> readStudentRecords(String fileName) throws FileNotFoundException {
 		Scanner fileReader = new Scanner(new FileInputStream(fileName)); // Create a file scanner read the file
-		ArrayList<Student> students = new ArrayList<Student>(); // Create an empty array of Course objects
+		ArrayList<Student> students = new ArrayList<Student>(); // Create an empty array of Course object
 		while (fileReader.hasNextLine()) { // While we have more lines in the file
 			try { // Attempt to do the following)
 					students.add(processStudent(fileReader.nextLine()));
