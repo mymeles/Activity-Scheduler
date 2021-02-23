@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
+
 
 import edu.ncsu.csc216.pack_scheduler.io.StudentRecordIO;
 import edu.ncsu.csc216.pack_scheduler.user.Student;
@@ -86,7 +86,7 @@ public class StudentDirectory {
 			repeatHashPW = new String(digest2.digest());
 		} catch (NoSuchAlgorithmException e) { 
 			throw new IllegalArgumentException("Cannot hash password");
-		}
+		} 
 		  
 		if (!hashPW.equals(repeatHashPW)) {
 			throw new IllegalArgumentException("Passwords do not match");
