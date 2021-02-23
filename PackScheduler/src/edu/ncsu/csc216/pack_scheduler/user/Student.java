@@ -145,7 +145,7 @@ public class Student implements Comparable<Student> {
 	 */
 
 	public void setMaxCredits(int maxCredits) {
-		if (maxCredits < 0) {
+		if (maxCredits < 0 || maxCredits > MAX_CREDITS) {
 			throw new IllegalArgumentException("Invalid max credits");
 		}
 
@@ -285,7 +285,7 @@ public class Student implements Comparable<Student> {
 	 */
 	@Override
 	
-	public int compareTo(Student s) { 
+	public int compareTo(Student s) {  
 		if (s == null) {
 			throw new NullPointerException();
 		}
