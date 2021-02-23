@@ -57,7 +57,7 @@ public class StudentTest {
 			assertEquals(null, s.getId());
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertNull(s); 
+			assertNull(s);
 		}
 		try {
 			s = new Student(FIRST_NAME, LAST_NAME, ID, "meles.meles", PASSWORD, CREDITS);
@@ -310,44 +310,43 @@ public class StudentTest {
 		Student s2 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD);
 		String s3 = "Meles,Meles,mmeles,meles@ncsu.edu,MM@testing,18";
 		assertEquals(s3, s2.toString());
- 
+
 	}
-	
+
 	/**
-	 *  A method to test CompareTo method in student
+	 * A method to test CompareTo method in student
 	 */
 	@Test
 	public void testComapreTo() {
-	Student s1 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, CREDITS); 
-	Student s2 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, CREDITS); 
-	Student s3 = new Student(FIRST_NAME, "Abel", ID, EMAIL, PASSWORD, CREDITS);
-	Student s4 = new Student("Kidus", LAST_NAME, ID, EMAIL, PASSWORD, CREDITS); 
-	Student s5 = new Student(FIRST_NAME, LAST_NAME, "ameles", EMAIL, PASSWORD, CREDITS);
-	
-	// compare equal lastName, firstName, and unity id
-	assertEquals(0, s1.compareTo(s2)); 
-	
-	// compare by last name 
-	assertEquals(-1, s3.compareTo(s1));
-	assertEquals(1, s1.compareTo(s3));
-	
-	// compare by first Name
-	assertEquals(-1, s4.compareTo(s1));
-	assertEquals(1, s1.compareTo(s4));
-	
-	// compare by unity id
-	assertEquals(-1, s5.compareTo(s1));
-	assertEquals(1, s1.compareTo(s5));
-	
-	// compare to null throw an exception 
-	try {
-		s1.compareTo(null);
-		fail();
-	} catch (NullPointerException e) {
-		assertEquals(NullPointerException.class, e.getClass());
-	}
-	
-			
+		Student s1 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, CREDITS);
+		Student s2 = new Student(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, CREDITS);
+		Student s3 = new Student(FIRST_NAME, "Abel", ID, EMAIL, PASSWORD, CREDITS);
+		Student s4 = new Student("Kidus", LAST_NAME, ID, EMAIL, PASSWORD, CREDITS);
+		Student s5 = new Student(FIRST_NAME, LAST_NAME, "ameles", EMAIL, PASSWORD, CREDITS);
+
+		// compare equal lastName, firstName, and unity id
+		assertEquals(0, s1.compareTo(s2)); 
+
+		// compare by last name
+		assertEquals(-1, s3.compareTo(s1));
+		assertEquals(1, s1.compareTo(s3));
+
+		// compare by first Name
+		assertEquals(-1, s4.compareTo(s1));
+		assertEquals(1, s1.compareTo(s4));
+
+		// compare by unity id
+		assertEquals(-1, s5.compareTo(s1));
+		assertEquals(1, s1.compareTo(s5));
+
+		// compare to null throw an exception
+		try {
+			s1.compareTo(null);
+			fail();
+		} catch (NullPointerException e) {
+			assertEquals(NullPointerException.class, e.getClass());
+		}
+
 	}
 
 }

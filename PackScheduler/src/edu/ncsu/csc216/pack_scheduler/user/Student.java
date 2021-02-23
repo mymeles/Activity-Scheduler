@@ -276,7 +276,7 @@ public class Student implements Comparable<Student> {
 	public String toString() {
 		return firstName + "," + lastName + "," + id + "," + email + "," + password + "," + maxCredits;
 	}
-
+ 
 	
 	/**
 	 * questions to ask TA's 
@@ -315,7 +315,7 @@ public class Student implements Comparable<Student> {
 			}
 
 		} 
-			return 0; 
+			return 0;
 		
 	}
 

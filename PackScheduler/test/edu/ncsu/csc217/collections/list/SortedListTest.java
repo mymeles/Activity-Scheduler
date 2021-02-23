@@ -29,7 +29,7 @@ public class SortedListTest {
 		list.add("avocado");
 		list.add("pineapple");
 		list.add("apricot");
-		list.add("papaya");
+		list.add("papaya"); 
 		list.add("pomegranate");
 		list.add("peach");
 		list.add("jackfruit");
@@ -72,6 +72,7 @@ public class SortedListTest {
 		thrown = false;
 		try {
 			list.add("avocado");
+			fail();
 		} catch (IllegalArgumentException e) {
 			thrown = true;
 		}

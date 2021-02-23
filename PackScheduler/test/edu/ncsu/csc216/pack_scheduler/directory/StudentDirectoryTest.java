@@ -130,9 +130,9 @@ public class StudentDirectoryTest {
 		sd.addStudent("john", LAST_NAME, "john123", EMAIL, PASSWORD, PASSWORD, 2);
 		studentDirectory = sd.getStudentDirectory();
 		assertEquals(2, studentDirectory.length);
-		assertEquals(FIRST_NAME, studentDirectory[0][0]); 
+		assertEquals("john", studentDirectory[0][0]); 
 		assertEquals(LAST_NAME, studentDirectory[0][1]);
-		assertEquals(ID, studentDirectory[0][2]);
+		assertEquals("john123", studentDirectory[0][2]);
 
 		
 	}

@@ -106,7 +106,7 @@ public class StudentRecordIOTest {
 	 */
 	@Test
 	public void testReadValidStudentRecords() {
-		SortedList<Student> students; 
+		SortedList<Student> students;  
 		try {
 			students = StudentRecordIO.readStudentRecords(validTestFile);
 			assertEquals(10, students.size());

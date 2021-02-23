@@ -97,7 +97,7 @@ public class StudentRecordIO {
 				scan.close();
 				throw new IllegalArgumentException("Invaild input");
 			}
-			if(scan.hasNext()){
+			if(scan.hasNext()){ 
 				maxCredits = scan.nextInt(); 
 			} else {
 				scan.close();
