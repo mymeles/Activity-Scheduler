@@ -62,7 +62,7 @@ public class StudentDirectoryTest {
 		//Test that the StudentDirectory is initialized to an empty list
 		StudentDirectory sd = new StudentDirectory();
 		assertFalse(sd.removeStudent("sesmith5"));
-		assertEquals(0, sd.getStudentDirectory().length);
+		assertEquals(0, sd.getStudentDirectory().length); 
 	}
 
 	/**
