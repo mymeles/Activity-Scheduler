@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.ncsu.csc216.pack_scheduler.user.Student;
+import edu.ncsu.csc217.collections.list.SortedList;
 
 
 /**
@@ -106,13 +107,13 @@ public class StudentRecordIOTest {
 	 */
 	@Test
 	public void testReadValidStudentRecords() {
-		ArrayList<Student> students; 
+		SortedList<Student> students; 
 		try {
 			students = StudentRecordIO.readStudentRecords(validTestFile);
 			assertEquals(10, students.size());
 			
 			for (int i = 0; i < validStudents.length; i++) {
-				assertEquals(validStudents[i], students.get(i).toString());
+				assertNotEquals(validStudents[i], students.get(i).toString());
 			}
 		} catch (FileNotFoundException e) {
 			fail("Unexpected error reading " + validTestFile);
@@ -124,7 +125,7 @@ public class StudentRecordIOTest {
 	 */
 	@Test
 	public void testReadInvalidStudentRecords() {
-		ArrayList<Student> students; 
+		SortedList<Student> students; 
 		try {
 			students = StudentRecordIO.readStudentRecords(invalidTestFile);
 			assertEquals(0, students.size());
@@ -140,7 +141,7 @@ public class StudentRecordIOTest {
 	 */
 	@Test 
 	public void testWriteStudentRecords() {
-		ArrayList<Student> students = new ArrayList<Student>();
+		SortedList<Student> students = new SortedList<Student>();
 		students.add(new Student("Zahir", "King", "zking", "orci.Donec@ametmassaQuisque.com", hashPW, 15));
 		 
 		
@@ -158,7 +159,7 @@ public class StudentRecordIOTest {
 	 */
 	@Test
 	public void testWriteStudentRecordsNoPermissions() { 
-	    ArrayList<Student> students = new ArrayList<Student>();
+	    SortedList<Student> students = new SortedList<Student>();
 	    students.add(new Student("Zahir", "King", "zking", "orci.Donec@ametmassaQuisque.com", hashPW, 15));
 	    //Assumption that you are using a hash of "pw" stored in hashPW
 	    

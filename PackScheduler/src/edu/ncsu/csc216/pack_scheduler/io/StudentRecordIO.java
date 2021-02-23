@@ -3,12 +3,12 @@ package edu.ncsu.csc216.pack_scheduler.io;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileInputStream;
 
 import edu.ncsu.csc216.pack_scheduler.user.Student;
+import edu.ncsu.csc217.collections.list.SortedList;
 
 /**
  * Reader and writer class for Students called StudentRecordIO
@@ -23,23 +23,23 @@ public class StudentRecordIO {
 	 * 
 	 * @param fileName
 	 * 
-	 * @return a value of arraylist that conatins the fields value for student
+	 * @return a value of sorted list that conatins the fields value for student
 	 * @throws FileNotFoundException if the file isn't found 
 	 * 
 	 */
-	public static ArrayList<Student> readStudentRecords(String fileName) throws FileNotFoundException {
+	public static SortedList<Student> readStudentRecords(String fileName) throws FileNotFoundException {
 		Scanner fileReader = new Scanner(new FileInputStream(fileName)); // Create a file scanner read the file
-		ArrayList<Student> students = new ArrayList<Student>(); // Create an empty array of Course object
+		SortedList<Student> students = new SortedList<Student>(); // Create an empty list of Course object
 		while (fileReader.hasNextLine()) { // While we have more lines in the file
 			try { // Attempt to do the following)
 					students.add(processStudent(fileReader.nextLine()));
 	} catch (IllegalArgumentException e) {
-		//
+		// 
 	} 
 		} 
 		// Close the Scanner b/c we're responsible with our file handles
 		fileReader.close();
-		// Return the ArrayList with all the courses we read!
+		// Return the SortedList with all the courses we read!
 		return students; 
 	}
  
@@ -125,7 +125,7 @@ public class StudentRecordIO {
 	 * @throws IOException this method writes students information taking it from
 	 *                     student directory and on to the fileName
 	 */
-	public static void writeStudentRecords(String fileName, ArrayList<Student> studentDirectory) throws IOException {
+	public static void writeStudentRecords(String fileName, SortedList<Student> studentDirectory) throws IOException {
 
 		PrintStream fileWriter = new PrintStream(new File(fileName));
 

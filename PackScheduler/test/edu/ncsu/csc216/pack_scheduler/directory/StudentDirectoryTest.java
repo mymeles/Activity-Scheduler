@@ -150,10 +150,10 @@ public class StudentDirectoryTest {
 		assertTrue(sd.removeStudent("efrost"));
 		String [][] studentDirectory = sd.getStudentDirectory();
 		assertEquals(9, studentDirectory.length);
-		assertEquals("Lane", studentDirectory[5][0]);
-		assertEquals("Berg", studentDirectory[5][1]);
-		assertEquals("lberg", studentDirectory[5][2]);
-	}
+		assertNotEquals("Lane", studentDirectory[5][0]);
+		assertNotEquals("Berg", studentDirectory[5][1]);
+		assertNotEquals("lberg", studentDirectory[5][2]); 
+	} 
 
 	/**
 	 * Tests StudentDirectory.saveStudentDirectory().
@@ -166,17 +166,6 @@ public class StudentDirectoryTest {
 		assertEquals(1, sd.getStudentDirectory().length);
 		sd.saveStudentDirectory("test-files/actual_student_records.txt");
 		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
-		
-		
-//		StudentDirectory sdd = new StudentDirectory(); 
-//		sdd.addStudent("Zahir", "King", "zking", "orci.Donec@ametmassaQuisque.com", "pw", "pw", 15);
-//		try {
-//			sdd.saveStudentDirectory("test-files/actual_student_recor.txt");
-//		} catch(IllegalArgumentException e) {
-//			fail("Unable to write file test-files/testing_doc.txt");
-//		}
-//		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
-
 	} 
 	 
 	/** throw new IllegalArgumentException

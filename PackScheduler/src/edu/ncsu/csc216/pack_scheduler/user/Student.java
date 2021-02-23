@@ -1,13 +1,12 @@
 package edu.ncsu.csc216.pack_scheduler.user;
 
-
 /**
  * student class for student information.
  * 
  * @author meles
  *
  */
-public class Student {
+public class Student implements Comparable<Student> {
 
 	/** filed for last name */
 	private String firstName;
@@ -19,9 +18,9 @@ public class Student {
 	private String email;
 	/** filed for hashPW */
 	private String password;
-	/**field for max credit*/
+	/** field for max credit */
 	private int maxCredits;
-	/** Constant for maximum credit */ 
+	/** Constant for maximum credit */
 	public final static int MAX_CREDITS = 18;
 
 	/**
@@ -51,30 +50,29 @@ public class Student {
 	 * 
 	 * 
 	 * first name field that passes through setFristName with default MAX_CREDIT
-	 * @param firstName  
-	 * lastName field that passes through setLastName with default MAX_CREDIT
-	 *                   
-	 * @param lastName  
-	 *  id field that passes through setID with default MAX_CREDIT
-	 * @param id        
-	 *  email field that passes through setEmail with default
-	 *                   MAX_CREDIT
-	 * @param email      
-	 * hashPW filed that passes through setHashPW with default
-	 *                   MAX_CREDIT
-	 * @param hashPW     
 	 * 
-	 * maxCredit that passes as an integer of 18
-	 * @constant 18
-	 *  calls the default constructors with the default max credit value of 18
+	 * @param firstName lastName field that passes through setLastName with default
+	 *                  MAX_CREDIT
+	 * 
+	 * @param lastName  id field that passes through setID with default MAX_CREDIT
+	 * @param id        email field that passes through setEmail with default
+	 *                  MAX_CREDIT
+	 * @param email     hashPW filed that passes through setHashPW with default
+	 *                  MAX_CREDIT
+	 * @param hashPW
+	 * 
+	 *                  maxCredit that passes as an integer of 18
+	 * @constant 18 calls the default constructors with the default max credit value
+	 *           of 18
 	 * 
 	 */
 	public Student(String firstName, String lastName, String id, String email, String hashPW) {
 		this(firstName, lastName, id, email, hashPW, 18);
 	}
 
-	/** 
+	/**
 	 * Returns email address from the parameter
+	 * 
 	 * @return email(null, LAST_NAME, ID, EMAIL, PASSWORD, CREDITS);
 	 */
 
@@ -90,23 +88,22 @@ public class Student {
 	 */
 	public void setEmail(String email) {
 		if (email == null || "".equals(email)) {
-			throw new IllegalArgumentException("Invalid email"); 
+			throw new IllegalArgumentException("Invalid email");
 		}
-	
+
 		int firstIndexOfAtSymbol = email.indexOf('@');
 		int lastIndexOfDotSymbol = email.lastIndexOf('.');
-		
 
 		if (firstIndexOfAtSymbol == -1 || lastIndexOfDotSymbol == -1 || lastIndexOfDotSymbol < firstIndexOfAtSymbol) {
-				throw new IllegalArgumentException("Invalid email");
-			
+			throw new IllegalArgumentException("Invalid email");
+
 		}
 		this.email = email;
 	}
- 
+
 	/**
-	 * returns the password from the parameter
-	 * indexOfAtSymbol == -1
+	 * returns the password from the parameter indexOfAtSymbol == -1
+	 * 
 	 * @return the password
 	 */
 	public String getPassword() {
@@ -125,32 +122,33 @@ public class Student {
 		}
 		this.password = password;
 	}
-	
 
 	/**
 	 * returns the value of MaxCredit from the parameter
+	 * 
 	 * @return the maxCredits
 	 */
 
 	public int getMaxCredits() {
 		return maxCredits;
 	}
-	
-	/** constant for MIN_CREDIT to use in the below method*/
+
+	/** constant for MIN_CREDIT to use in the below method */
 	final static int MIN_CREDIT = 3;
+
 	/**
 	 * sets the maxCredit to the given parameter
-	 * @param maxCredits 
-	 * Checks if the parameter is less than 3 
-	 * or greater than 18 if it is @throw IAE
+	 * 
+	 * @param maxCredits Checks if the parameter is less than 3 or greater than 18
+	 *                   if it is @throw IAE
 	 * 
 	 */
-	
+
 	public void setMaxCredits(int maxCredits) {
-		if(maxCredits < 0) {
+		if (maxCredits < 0) {
 			throw new IllegalArgumentException("Invalid max credits");
-		} 
-		
+		}
+
 		this.maxCredits = maxCredits;
 	}
 
@@ -169,19 +167,21 @@ public class Student {
 
 	/**
 	 * sets the last name to the given parameter if it is not null or empty if so it
+	 * 
 	 * @throw an exception
 	 * 
 	 * @param lastName the firstName to set
-	 */ 
+	 */
 	public void setLastName(String lastName) {
 		if (lastName == null || "".equals(lastName)) {
 			throw new IllegalArgumentException("Invalid last name");
 		}
 		this.lastName = lastName;
 	}
-	
+
 	/**
 	 * set the value of id by checking if it is null or empty if so @throw IAE
+	 * 
 	 * @param id the id to set
 	 */
 	private void setId(String id) {
@@ -199,7 +199,7 @@ public class Student {
 	public String getFirstName() {
 		return firstName;
 	}
-	
+
 	/**
 	 * returns the value of lastName from the parameter
 	 * 
@@ -219,7 +219,7 @@ public class Student {
 
 		return id;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -233,14 +233,12 @@ public class Student {
 		return result;
 	}
 
-	
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
-			return false; 
+			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Student other = (Student) obj;
@@ -260,7 +258,7 @@ public class Student {
 		} else if (!id.equals(other.id))
 			return false;
 		if (lastName == null) {
-			if (other.lastName != null) 
+			if (other.lastName != null)
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
@@ -275,9 +273,48 @@ public class Student {
 	}
 
 	@Override
-	public String toString() { 
-		return firstName + "," + lastName + "," + id + "," + email
-				+ "," + password + "," + maxCredits;
+	public String toString() {
+		return firstName + "," + lastName + "," + id + "," + email + "," + password + "," + maxCredits;
+	}
+
+	
+	/**
+	 * questions to ask TA's 
+	 * is my code correct and what does the values from comapreTo mean?
+	 * how do i add the ClasscastEception in the comaPARE CODE
+	 */
+	@Override
+	
+	public int compareTo(Student s) { 
+		if (s == null) {
+			throw new NullPointerException();
+		}
+		if(this.lastName.compareTo(s.getLastName()) == 0 && this.firstName.compareTo(s.getFirstName()) == 0 && this.id.compareTo(s.getId()) == 0) {
+			return 0;
+		}
+	
+		if (this.lastName.compareTo(s.getLastName()) < 0) {
+			return -1;
+		} else if (this.lastName.compareTo(s.getLastName()) > 0) {
+			return 1; 
+		} else if (this.lastName.compareTo(s.getLastName()) == 0) {
+			if (this.firstName.compareTo(s.getFirstName()) < 0) {
+				return -1;
+			} else if (this.firstName.compareTo(s.getFirstName()) > 0) {
+				return 1;
+			} else if (this.firstName.compareTo(s.getFirstName()) == 0) {
+				if(this.id.compareTo(s.getId()) < 0) {
+					return -1;
+				}
+				else if(this.id.compareTo(s.getId()) > 0) {
+					return 1;
+				}
+				
+			}
+
+		} 
+			return 0; 
+		
 	}
 
 }
