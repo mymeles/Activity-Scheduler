@@ -281,7 +281,7 @@ public class Student implements Comparable<Student> {
 	/**
 	 * questions to ask TA's 
 	 * is my code correct and what does the values from comapreTo mean?
-	 * how do i add the ClasscastEception in the comaPARE CODE
+	 * how do i add the ClasscastEception in the comaPARE CODE -- this is automatic 
 	 */
 	@Override
 	
@@ -289,24 +289,26 @@ public class Student implements Comparable<Student> {
 		if (s == null) {
 			throw new NullPointerException();
 		}
-		if(this.lastName.compareTo(s.getLastName()) == 0 && this.firstName.compareTo(s.getFirstName()) == 0 && this.id.compareTo(s.getId()) == 0) {
+		if(this.lastName.compareToIgnoreCase(s.getLastName()) == 0 && this.firstName.compareToIgnoreCase(s.getFirstName()) == 0 && this.id.compareToIgnoreCase(s.getId()) == 0) {
 			return 0;
 		}
 	
-		if (this.lastName.compareTo(s.getLastName()) < 0) {
+		if (this.lastName.compareToIgnoreCase(s.getLastName()) < 0) {
 			return -1;
-		} else if (this.lastName.compareTo(s.getLastName()) > 0) {
+			// this M    > A  npositive  value 
+			// 
+		} else if (this.lastName.compareToIgnoreCase(s.getLastName()) > 0) {
 			return 1; 
-		} else if (this.lastName.compareTo(s.getLastName()) == 0) {
-			if (this.firstName.compareTo(s.getFirstName()) < 0) {
+		} else if (this.lastName.compareToIgnoreCase(s.getLastName()) == 0) {
+			if (this.firstName.compareToIgnoreCase(s.getFirstName()) < 0) {
 				return -1;
-			} else if (this.firstName.compareTo(s.getFirstName()) > 0) {
+			} else if (this.firstName.compareToIgnoreCase(s.getFirstName()) > 0) {
 				return 1;
-			} else if (this.firstName.compareTo(s.getFirstName()) == 0) {
-				if(this.id.compareTo(s.getId()) < 0) {
+			} else if (this.firstName.compareToIgnoreCase(s.getFirstName()) == 0) {
+				if(this.id.compareToIgnoreCase(s.getId()) < 0) {
 					return -1;
 				}
-				else if(this.id.compareTo(s.getId()) > 0) {
+				else if(this.id.compareToIgnoreCase(s.getId()) > 0) {
 					return 1;
 				}
 				

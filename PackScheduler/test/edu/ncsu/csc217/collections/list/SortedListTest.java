@@ -19,7 +19,7 @@ public class SortedListTest {
 	public void testSortedList() {
 		SortedList<String> list = new SortedList<String>();
 		assertEquals(0, list.size());
-		assertFalse(list.contains("apple"));
+		assertFalse(list.contains("apple")); 
 
 		// TTest that the list grows by adding at least 11 elements
 		// Remember the list's initial capacity is 10
@@ -306,7 +306,7 @@ public class SortedListTest {
 		list2.add("pineapple");
 		list2.add("apricot");
 		list2.add("papaya");
-		// list 3
+		// list 3 
 		list3.add("pomegranate");
 		list3.add("peach");
 		list3.add("jackfruit");

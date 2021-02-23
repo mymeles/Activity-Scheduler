@@ -324,12 +324,8 @@ public class StudentTest {
 	Student s4 = new Student("Kidus", LAST_NAME, ID, EMAIL, PASSWORD, CREDITS); 
 	Student s5 = new Student(FIRST_NAME, LAST_NAME, "ameles", EMAIL, PASSWORD, CREDITS);
 	
-	
-	
-
-	
 	// compare equal lastName, firstName, and unity id
-	assertEquals(0, s1.compareTo(s2));
+	assertEquals(0, s1.compareTo(s2)); 
 	
 	// compare by last name 
 	assertEquals(-1, s3.compareTo(s1));
