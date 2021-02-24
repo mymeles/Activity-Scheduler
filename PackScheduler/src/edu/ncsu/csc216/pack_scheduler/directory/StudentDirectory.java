@@ -42,6 +42,7 @@ public class StudentDirectory {
 	 * from the given file.  Throws an IllegalArgumentException if the 
 	 * file cannot be found.
 	 * @param fileName file containing list of students
+	 * @throws IAE if the file is not readable 
 	 */
 	public void loadStudentsFromFile(String fileName) { 
 		try {
@@ -94,19 +95,19 @@ public class StudentDirectory {
 		
 		//If an IllegalArgumentException is thrown, it's passed up from Student
 		//to the GUI 
-		Student student = null;
-		if (maxCredits < 3) { 
-			student = new Student(firstName, lastName, id, email, hashPW);
+		Student student = null; 
+		if (maxCredits < 3 || maxCredits >= Student.MAX_CREDITS) { 
+			student = new Student(firstName, lastName, id, email, hashPW); 
 		} else {
 			student = new Student(firstName, lastName, id, email, hashPW, maxCredits);
 		}
 		
 		for (int i = 0; i < studentDirectory.size(); i++) {
-			Student s = studentDirectory.get(i);
+			Student s = studentDirectory.get(i); 
 			if (s.getId().equals(student.getId())) {
 				return false; 
 			}
-		}
+		} 
 		return studentDirectory.add(student);
 	}
 	

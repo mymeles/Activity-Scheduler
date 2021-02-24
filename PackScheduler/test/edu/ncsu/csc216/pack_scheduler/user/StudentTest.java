@@ -331,6 +331,7 @@ public class StudentTest {
 		assertEquals(-1, s3.compareTo(s1));
 		assertEquals(1, s1.compareTo(s3));
 
+		// assertTure(s4.comareTo(s1) < 0) -- to assert true
 		// compare by first Name
 		assertEquals(-1, s4.compareTo(s1));
 		assertEquals(1, s1.compareTo(s4));
@@ -344,7 +345,7 @@ public class StudentTest {
 			s1.compareTo(null);
 			fail();
 		} catch (NullPointerException e) {
-			assertEquals(NullPointerException.class, e.getClass());
+			assertNotNull(s1); // no good assert  check to see anything in s1 
 		}
 
 	}

@@ -209,6 +209,7 @@ public class SortedListTest {
 		assertEquals(4, list.indexOf("mango"));
 		assertEquals(6, list.indexOf("pineapple"));
 		assertEquals(-1, list.indexOf("lychee"));
+		
 		//Test checking the index of null
 		boolean thrown = false;
 		try {
@@ -280,7 +281,7 @@ public class SortedListTest {
 		assertFalse(list.contains("pear"));
 		assertFalse(list.contains("lychee"));
 	}
-
+ 
 	/**
 	 * Tests that the equals method works for sorted list 
 	 */
