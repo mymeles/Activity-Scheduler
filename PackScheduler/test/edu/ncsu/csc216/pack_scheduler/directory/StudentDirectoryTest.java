@@ -134,7 +134,7 @@ public class StudentDirectoryTest {
 		assertEquals(LAST_NAME, studentDirectory[0][1]);
 		assertEquals("john123", studentDirectory[0][2]);
 
-		
+		 
 	}
  
 	/**
@@ -157,7 +157,7 @@ public class StudentDirectoryTest {
 
 	/**
 	 * Tests StudentDirectory.saveStudentDirectory().
-	 */ 
+	 */  
 	@Test  
 	public void testSaveStudentDirectory() { 
 		StudentDirectory sd = new StudentDirectory();

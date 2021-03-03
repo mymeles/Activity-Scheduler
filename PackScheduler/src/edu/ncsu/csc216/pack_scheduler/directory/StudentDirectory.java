@@ -95,7 +95,7 @@ public class StudentDirectory {
 		
 		//If an IllegalArgumentException is thrown, it's passed up from Student
 		//to the GUI 
-		Student student = null; 
+		Student student = null;  
 		if (maxCredits < 3 || maxCredits >= Student.MAX_CREDITS) { 
 			student = new Student(firstName, lastName, id, email, hashPW); 
 		} else {

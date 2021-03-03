@@ -24,7 +24,7 @@ public class StudentRecordIO {
 	 * @param fileName
 	 * 
 	 * @return a value of sorted list that conatins the fields value for student
-	 * @throws FileNotFoundException if the file isn't found 
+	 * @throws FileNotFoundException if the file isn't found
 	 * 
 	 */
 	public static SortedList<Student> readStudentRecords(String fileName) throws FileNotFoundException {
@@ -32,17 +32,17 @@ public class StudentRecordIO {
 		SortedList<Student> students = new SortedList<Student>(); // Create an empty list of Course object
 		while (fileReader.hasNextLine()) { // While we have more lines in the file
 			try { // Attempt to do the following)
-					students.add(processStudent(fileReader.nextLine()));
-	} catch (IllegalArgumentException e) {
-		// 
-	} 
-		} 
+				students.add(processStudent(fileReader.nextLine()));
+			} catch (IllegalArgumentException e) {
+				//
+			}
+		}
 		// Close the Scanner b/c we're responsible with our file handles
 		fileReader.close();
 		// Return the SortedList with all the courses we read!
-		return students; 
+		return students;
 	}
- 
+
 	/**
 	 * parameter that passes Through file from ReadStudent Records fileName
 	 * 
@@ -56,65 +56,63 @@ public class StudentRecordIO {
 		Scanner scan = new Scanner(line);
 		scan.useDelimiter(",");
 		Student student = null;
-		
+
 		String firstName = null;
 		String lastName;
 		String id;
 		String email;
 		String hashPW;
-		int maxCredits; 
-		
+		int maxCredits;
+
 		try {
 
-			if(scan.hasNext()){
-				firstName = scan.next(); 
-			} else {
-				scan.close(); 
-				throw new IllegalArgumentException("Invaild input");
-			}
-			if(scan.hasNext()){
-				lastName = scan.next(); 
+			if (scan.hasNext()) {
+				firstName = scan.next();
 			} else {
 				scan.close();
 				throw new IllegalArgumentException("Invaild input");
 			}
-			if(scan.hasNext()){
-				id = scan.next(); 
+			if (scan.hasNext()) {
+				lastName = scan.next();
 			} else {
 				scan.close();
 				throw new IllegalArgumentException("Invaild input");
 			}
-			if(scan.hasNext()){
-				email = scan.next(); 
+			if (scan.hasNext()) {
+				id = scan.next();
 			} else {
 				scan.close();
 				throw new IllegalArgumentException("Invaild input");
 			}
-			
-			if(scan.hasNext()){
-				hashPW = scan.next(); 
+			if (scan.hasNext()) {
+				email = scan.next();
 			} else {
 				scan.close();
 				throw new IllegalArgumentException("Invaild input");
 			}
-			if(scan.hasNext()){ 
-				maxCredits = scan.nextInt(); 
+
+			if (scan.hasNext()) {
+				hashPW = scan.next();
 			} else {
 				scan.close();
 				throw new IllegalArgumentException("Invaild input");
 			}
-			
+			if (scan.hasNext()) {
+				maxCredits = scan.nextInt();
+			} else {
+				scan.close();
+				throw new IllegalArgumentException("Invaild input");
+			}
+
 			student = new Student(firstName, lastName, id, email, hashPW, maxCredits);
 			scan.close();
-			return student; 
-			
+			return student;
 
 		} catch (IllegalArgumentException e) {
 			throw e;
 		}
 
 	}
-
 
 	/**
 	 * passes a file called fileName
