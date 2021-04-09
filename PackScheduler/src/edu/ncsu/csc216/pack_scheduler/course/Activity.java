@@ -1,79 +1,281 @@
 package edu.ncsu.csc216.pack_scheduler.course;
 
 /**
- * A class representaion of a school Activtity that handles Courses and Events
+ * This superclass saves the title, meeting days, starting and ending times of
+ * any given course. It also contains code to determine if any two
+ * activities are equivalent.
  * 
- * @author meles
+ * @author Alex Bernard
+ *
  */
 public abstract class Activity implements Conflict {
 
-	/** 
-	 * This method sees overlap between activities and throws ConflictException if they have overlaping time and date 
-	 * 
+	/**
+	 * If the meeting day and time of one activity occurs simultaneously with another activity in the 
+	 * schedule, a ConflictException is thrown.
+	 * @param possibleConflictingActivity The activity being compared to those in the schedule for time conflicts.
+	 * @throws ConflictException If two activities sharing the same meeting day have overlapping times.
 	 */
 	@Override
 	public void checkConflict(Activity possibleConflictingActivity) throws ConflictException {
-
-		for (int i = 0; i < possibleConflictingActivity.getMeetingDays().length(); i++) {
-
-			// this.meetingDays
-			if (this.meetingDays.contains("" + possibleConflictingActivity.getMeetingDays().charAt(i))) {
-				if(this.startTime == 0 || possibleConflictingActivity.startTime == 0) {
-					return;
-				}
-				if (this.startTime <= possibleConflictingActivity.startTime
-						&& this.endTime >= possibleConflictingActivity.startTime) {
-					throw new ConflictException();
-				}
-				if (this.startTime <= possibleConflictingActivity.endTime
-						&& this.endTime >= possibleConflictingActivity.endTime) {
-					throw new ConflictException();
-				}
-				if (possibleConflictingActivity.startTime <= this.endTime
-						&& possibleConflictingActivity.endTime >= this.endTime) {
-					throw new ConflictException();
-				}
-				if (possibleConflictingActivity.startTime <= this.startTime
-						&& possibleConflictingActivity.endTime >= this.startTime) {
-					throw new ConflictException();
-
+		boolean sameDay = false;
+		for (int i = 0; i < meetingDays.length(); i++) {
+			char thisDay = meetingDays.charAt(i);
+			for (int j = 0; j < possibleConflictingActivity.getMeetingDays().length(); j++) {
+				char possibleActivityDay = possibleConflictingActivity.getMeetingDays().charAt(j);
+				if (thisDay == possibleActivityDay && thisDay != 'A') {
+					sameDay = true;
+					break;
 				}
 			}
-		} 
+		}
+		if (sameDay) {
+			int possibleStartTime = possibleConflictingActivity.getStartTime();
+			int possibleEndTime = possibleConflictingActivity.getEndTime();
+			if (startTime >= possibleStartTime && startTime <= possibleEndTime) {
+				throw new ConflictException(title + " occurs during " + possibleConflictingActivity.getTitle());
+			} else if (possibleStartTime >= startTime && possibleStartTime <= endTime) {
+				throw new ConflictException(possibleConflictingActivity.getTitle() + " occurs during " + title);
+			}
+		}		
 	}
- 
-	/** Activities title. */
+
+	/** Maximum number of hours in a day */
+	private static final int UPPER_HOUR = 24;
+	/** Maximum number of minutes in an hour */
+	private static final int UPPER_MINUTE = 60;
+	/** Activity's title. */
 	private String title;
-	/** Activities meeting days */
+	/** Activity's meeting days */
 	private String meetingDays;
-	/** Activites starting time */
+	/** Activity's starting time */
 	private int startTime;
-	/** Activities endTime */
+	/** Activity's ending time */
 	private int endTime;
-	/** UPPER_HOUR limit for hour */
-	static final int UPPER_HOUR = 24;
-	/** upper limit for minute */
-	static final int UPPER_MIN = 60;
 
 	/**
-	 * Constructs a class that represents an activity with title title, meeting days
-	 * given with meetingDays, which starts at startTime and ends at endTime
-	 * meetingDays is given as a concatenation of the first letters of the days the
-	 * activity holds except for Thursday which is represented by "H" and Saturday
-	 * which is represented by "U"
+	 * Constructs a new subclass under the Activity superclass
 	 * 
-	 * @param title       a string that holds title of the activity
-	 * @param meetingDays a string that holds the meeting day of the activity
-	 * @param startTime   an integer that holds the startTime of activity
-	 * @param endTime     a string that holds the endTime of activity
+	 * @param title       The title of the given activity.
+	 * @param meetingDays Meeting days of the given activity.
+	 * @param startTime   The starting time of the given activity.
+	 * @param endTime     The endTime of the given activity.
 	 */
 	public Activity(String title, String meetingDays, int startTime, int endTime) {
 		super();
 		setTitle(title);
 		setMeetingDaysAndTime(meetingDays, startTime, endTime);
-
 	}
 
+	/**
+	 * Returns the Activity's title.
+	 * 
+	 * @return the title of the course
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * Changes the title of the Activity.
+	 * 
+	 * @param title the title to set
+	 * @throws IllegalArgumentException If title is null or empty
+	 */
+	public void setTitle(String title) {
+		if (title == null || title.length() == 0)
+			throw new IllegalArgumentException("Invalid course title");
+		this.title = title;
+	}
+
+	/**
+	 * Returns the meeting days of the class.
+	 * 
+	 * @return the meetingDays
+	 */
+	public String getMeetingDays() {
+		return meetingDays;
+	}
+
+	/**
+	 * Sets the meeting days, start, and end times of the given activity.
+	 * 
+	 * @param meetingDays The meetingDays to set.
+	 * @param startTime   The starting time of the given Activity.
+	 * @param endTime     The end time of the given Activity.
+	 * @throws IllegalArgumentException If the days or times fall out of bounds.
+	 */
+	public void setMeetingDaysAndTime(String meetingDays, int startTime, int endTime) {
+		if (meetingDays == null || meetingDays.length() == 0) {
+			throw new IllegalArgumentException("Invalid meeting days.");
+		} else if (meetingDays.charAt(0) == 'A' && meetingDays.length() == 1) {
+			this.meetingDays = "A";
+			this.startTime = 0;
+			this.endTime = 0;
+		} else {
+			int countM = 0;
+			int countT = 0;
+			int countW = 0;
+			int countH = 0;
+			int countF = 0;
+			int countS = 0;
+			int countU = 0;
+			for (int i = 0; i < meetingDays.length(); i++) {
+				switch (meetingDays.charAt(i)) {
+				case 'M':
+					countM += 1;
+					break;
+				case 'T':
+					countT += 1;
+					break;
+				case 'W':
+					countW += 1;
+					break;
+				case 'H':
+					countH += 1;
+					break;
+				case 'F':
+					countF += 1;
+					break;
+				case 'S':
+					countS += 1;
+					break;
+				case 'U':
+					countU += 1;
+					break;
+				default:
+					throw new IllegalArgumentException("Invalid meeting days.");
+				}
+			}
+			if (countM > 1 || countT > 1 || countW > 1 || countH > 1 || countF > 1) {
+				throw new IllegalArgumentException("Invalid meeting days.");
+			}
+			if (!isValidTime(startTime))
+				throw new IllegalArgumentException("Invalid start time.");
+			if (!isValidTime(endTime))
+				throw new IllegalArgumentException("Invalid end time.");
+			if (endTime < startTime)
+				throw new IllegalArgumentException("End time cannot be before start time.");
+			this.meetingDays = "";
+			if (countU == 1)
+				this.meetingDays += "U";
+			if (countM == 1)
+				this.meetingDays += "M";
+			if (countT == 1)
+				this.meetingDays += "T";
+			if (countW == 1)
+				this.meetingDays += "W";
+			if (countH == 1)
+				this.meetingDays += "H";
+			if (countF == 1)
+				this.meetingDays += "F";
+			if (countS == 1)
+				this.meetingDays += "S";
+			this.startTime = startTime;
+			this.endTime = endTime;
+		}
+	}
+
+	/**
+	 * Determines if the given time is valid for the given activity.
+	 * 
+	 * @param timeInput The Activity's time given in Military Time format
+	 * @return true If the minutes are between 60 and 0
+	 */
+	private boolean isValidTime(int timeInput) {
+		int inputHours = timeInput / 100;
+		int inputMinutes = timeInput % 100;
+		return !(inputHours >= UPPER_HOUR || inputHours < 0 || inputMinutes >= UPPER_MINUTE || inputMinutes < 0);
+	}
+
+	/**
+	 * Creates a string containing the meeting days, start and end times of a given
+	 * activity.
+	 * 
+	 * @return String containing the starting and end time of the activity along with
+	 *         its meeting days
+	 */
+	public String getMeetingString() {
+		String finalMessage = "";
+		String startString = "";
+		String endString = "";
+		if (meetingDays.charAt(0) == 'A')
+			finalMessage = "Arranged";
+		else {
+			startString = getTimeString(startTime);
+			endString = getTimeString(endTime);
+			finalMessage += meetingDays + " " + startString + "-" + endString;
+		}
+		return finalMessage;
+	}
+
+	/**
+	 * Creates a string that converts the time from military to standard format.
+	 * 
+	 * @param time The start or end time given in military format
+	 * @return String containing the time in standard format
+	 */
+	private String getTimeString(int time) {
+		String finalString = "";
+		boolean atPM = false;
+		int hours = 0;
+		int minutes = 0;
+		hours = time / 100;
+		if (hours > 11) {
+			atPM = true;
+			if (hours != 12)
+				hours -= 12;
+		}
+		minutes = time % 100;
+		finalString += hours + ":";
+		if (minutes < 10)
+			finalString += 0;
+		finalString += minutes;
+		if (atPM)
+			finalString += "PM";
+		else
+			finalString += "AM";
+		return finalString;
+	}
+
+	/**
+	 * Returns the start time of the course.
+	 * 
+	 * @return The startTime of the course.
+	 */
+	public int getStartTime() {
+		return startTime;
+	}
+
+	/**
+	 * Returns the end time of the course.
+	 * 
+	 * @return The endTime of the course
+	 */
+	public int getEndTime() {
+		return endTime;
+	}
+
+	/**
+	 * Creates a shortened string array of fields for the GUI to display.
+	 * 
+	 * @return A shortened array of strings for the GUI to display.
+	 */
+	public abstract String[] getShortDisplayArray();
+
+	/**
+	 * Creates a longer string array of fields for the GUI to display.
+	 * 
+	 * @return An array of strings to be displayed by the GUI.
+	 */
+	public abstract String[] getLongDisplayArray();
+
+	/**
+	 * This method generates a unique hashCode for the given object based on its
+	 * current fields.
+	 * 
+	 * @return A hash code based on the endTime, startTime, meetingDays, and title
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -86,10 +288,11 @@ public abstract class Activity implements Conflict {
 	}
 
 	/**
-	 * It returns true is obj is equal to this. obj and this are equal if they refer
-	 * to the smae object or obj is an instance of the same class and this and they
-	 * have the same end time and meeting days, start and end times, and title
+	 * This method determines if two Activity objects are equivalent based on given
+	 * fields.
 	 * 
+	 * @param obj The object being compared to the current activity.
+	 * @return True if the endTime, meetingDays, startTime, and title are equal.
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -118,214 +321,10 @@ public abstract class Activity implements Conflict {
 	}
 
 	/**
-	 * gets the title from the given parameter
+	 * Determines if two activity objects are equivalent.
 	 * 
-	 * @return a string value
-	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
-	 * sets the setTitle to the given parameter and checks whether the title is an
-	 * empty string or null and throws an exce23ption of " invalid title"
-	 * 
-	 * @param title the title to set
-	 */
-	public void setTitle(String title) {
-		if (title == null || "".equals(title)) {
-			throw new IllegalArgumentException("Invalid title.");
-		}
-		if (title == null || title.length() == 0) {
-			throw new IllegalArgumentException("Invalid title.");
-		}
-
-		this.title = title;
-	}
-
-	/**
-	 * fetchs an array of 4 elemts where the 3rd and 4th elemnets are title and
-	 * meeting information
-	 * 
-	 * @return a four element string array
-	 */
-	public abstract String[] getShortDisplayArray();
-
-	/**
-	 * fetchs an array of seven elements rwhere the 3rd and 6thth elemnets are title
-	 * and meeting information contaning condensed information about the activity
-	 * 
-	 * @return a seven element string array detailed information about the activity
-	 */
-	public abstract String[] getLongDisplayArray();
-
-	/**
-	 * a method that checks wether event or course is duplicate
-	 * 
-	 * @param activity holds event and course
-	 * @return true if duplicate otherwise false
+	 * @param activity The activity being compared to the current object.
+	 * @return True if two activities have the same name and class
 	 */
 	public abstract boolean isDuplicate(Activity activity);
-
-	/**
-	 * 
-	 * need to comment h sets the meeting-days and checks if the days are correct
-	 * 
-	 * the start time and checks if the time is in correct and checks if week days
-	 * are valid if not it @throws IAE startTime endTime sets the endTime and checks
-	 * if the time is correct if not @throws invalid time the below variables are
-	 * counter that are incremented in their respective places a method to set the
-	 * meeting days and class time *sets meeting days to the given parameter
-	 * 
-	 * @param meetingDays sets endTime to the given paramter
-	 * @param endTime     sets start time to the given parameter
-	 * @param startTime
-	 * 
-	 */
-	public void setMeetingDaysAndTime(String meetingDays, int startTime, int endTime) {
-
-		if ("A".equals(meetingDays)) {
-			this.meetingDays = meetingDays;
-			this.startTime = 0;
-			this.endTime = 0;
-			return;
-		}
-		// counter for Monday
-		int countMonday = 0;
-		// counter for Tuesday
-		int countTuseday = 0;
-		// counter for Wednesday
-		int countWednesday = 0;
-		// counter for Thursday
-		int countThursday = 0;
-		// counter for Friday
-		int countFriday = 0;
-
-		if (meetingDays == null || "".equals(meetingDays)) {
-			throw new IllegalArgumentException("Invalid meeting days");
-
-		}
-
-		else {
-
-			int startHour = startTime / 100;
-			int startMin = startTime % 100;
-			int endHour = endTime / 100;
-			int endMin = endTime % 100;
-
-			if (startHour < 0 || startHour >= UPPER_HOUR) {
-				throw new IllegalArgumentException("Invalid start time.");
-			}
-
-			else if (startMin < 0 || startMin >= UPPER_MIN) {
-				throw new IllegalArgumentException("Invalid start time.");
-			}
-
-			else if (endHour < 0 || endHour >= UPPER_HOUR) {
-				throw new IllegalArgumentException("Invalid end time.");
-			}
-
-			else if (endMin < 0 || endMin >= UPPER_MIN) {
-				throw new IllegalArgumentException("Invalid end time.");
-			} else if (endTime < startTime) {
-				throw new IllegalArgumentException("End time cannot be before start time.");
-			}
-			for (int i = 0; i < meetingDays.length(); i++) {
-
-				if (meetingDays.charAt(i) == 'M') {
-					countMonday++;
-				} else if (meetingDays.charAt(i) == 'T') {
-					countTuseday++;
-				} else if (meetingDays.charAt(i) == 'W') {
-					countWednesday++;
-				} else if (meetingDays.charAt(i) == 'H') {
-					countThursday++;
-				} else if (meetingDays.charAt(i) == 'F') {
-					countFriday++;
-				} else if (meetingDays.charAt(i) == 'U' || meetingDays.charAt(i) == 'S') {
-					continue;
-				}
-
-				else {
-					throw new IllegalArgumentException("Invalid meeting days.");
-				}
-			}
-
-			if (countMonday > 1 || countTuseday > 1 || countWednesday > 1 || countThursday > 1 || countFriday > 1) {
-
-				throw new IllegalArgumentException("Invalid meeting days.");
-			}
-
-		}
-		this.meetingDays = meetingDays;
-		this.startTime = startTime;
-		this.endTime = endTime;
-	}
-
-	private String getTimeString(int time) {
-		String timeD = "0" + String.valueOf(time % 100);
-		// endTime and startTime are given in military time so to convert
-		// for hour divide and for minute get the remainder
-		int timeH = time / 100;
-		int timeM = time % 100;
-
-		if (timeH >= 13 && timeM >= 10) {
-			return (timeH - 12) + ":" + timeM + "PM";
-		} else if (timeH > 12 && timeM < 10) {
-			return (timeH - 12) + ":" + timeD + "PM";
-		} else if (timeH < 12 && timeM >= 10) {
-			return timeH + ":" + timeM + "AM";
-		} else if (timeH == 12 && timeM >= 10) {
-			return timeH + ":" + timeM + "PM";
-		} else if (timeH == 12 && timeM < 10) {
-			return timeH + ":" + timeD + "PM";
-		} else {
-			return timeH + ":" + timeD + "AM";
-		}
-
-	}
-
-	/**
-	 * returns a human readable time range and meeting days of the class schedule
-	 * example "MW 1:30PM-2:45PM"
-	 * 
-	 * @return string of time date of the above format
-	 */
-	public String getMeetingString() {
-
-		if (endTime == 0) {
-			return "Arranged";
-		}
-		return meetingDays + " " + getTimeString(startTime) + "-" + getTimeString(endTime);
-	}
-
-	/**
-	 * returns the value of StartTime
-	 * 
-	 * @return the tstartTime return timeH + ":" + timeM + "AM";
-	 * 
-	 */
-	public int getStartTime() {
-		return startTime;
-	}
-
-	/**
-	 * returns the end time of the course
-	 * 
-	 * @return an integer
-	 */
-	public int getEndTime() {
-		return endTime;
-	}
-
-	/**
-	 * returns the meeting day of the course
-	 * 
-	 * @return a string
-	 */
-	public String getMeetingDays() {
-		
-		return meetingDays;
-	}
-
 }

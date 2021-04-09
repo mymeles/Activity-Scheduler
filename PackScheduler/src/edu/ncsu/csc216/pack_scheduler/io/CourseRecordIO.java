@@ -1,44 +1,41 @@
 package edu.ncsu.csc216.pack_scheduler.io;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import edu.ncsu.csc216.pack_scheduler.course.Course;
-import edu.ncsu.csc217.collections.list.SortedList;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+//import java.util.List;
+import java.util.Scanner;
+
+import edu.ncsu.csc216.pack_scheduler.course.Course;
+import edu.ncsu.csc217.collections.list.SortedList;
 
 /**
- * A class to read and Write course records 
- *  
- * @author meles 
+ * Reads Course records from text files and creates an associated ArrayList.
+ * Writes a set of CourseRecords from an ArrayList to a file.
  * 
+ * @author Alex Bernard
  */
-public class CourseRecordIO { 
+public class CourseRecordIO {
 
-	/**  
-	 * this method reads course records from fileName
+	/**
+	 * Reads course records from a file and generates a list of valid Courses. Any
+	 * invalid Courses are ignored. If the file to read cannot be found or the
+	 * permissions are incorrect a File NotFoundException is thrown.
 	 * 
-	 * @param fileName inputs is a string path to a .txt file 
-	 * @return this method reads CourseRecords file named fileName and returns a
-	 *         value of course lists in the form os arrayList 
-	 * @throwsFileNotFoundException
+	 * @param fileName The file to read Course records from.
+	 * @return A list of valid Courses.
+	 * @throws FileNotFoundException if the file cannot be found or read
 	 */
-	public static SortedList<edu.ncsu.csc216.pack_scheduler.course.Course> readCourseRecords(String fileName) throws FileNotFoundException {
+	public static SortedList<Course> readCourseRecords(String fileName) throws FileNotFoundException {
 		Scanner fileReader = new Scanner(new FileInputStream(fileName)); // Create a file scanner to read the file
 		SortedList<Course> courses = new SortedList<Course>(); // Create an empty array of Course objects
 		while (fileReader.hasNextLine()) { // While we have more lines in the file
-			try {
-				// Attempt to do the following
-				// Read the line, process it in readCourse, and get the object 
-
-				// If trying to construct a Cocoursesurse in readCourse() results in an exception, flow
-				// of control will transfer to the catch block, below
-
+			try { // Attempt to do the following
+					// Read the line, process it in readCourse, and get the object
+					// If trying to construct a Course in readCourse() results in an exception, flow
+					// of control will transfer to the catch block, below
 				Course course = readCourse(fileReader.nextLine());
 
 				// Create a flag to see if the newly created Course is a duplicate of something
@@ -48,7 +45,7 @@ public class CourseRecordIO {
 				for (int i = 0; i < courses.size(); i++) {
 					// Get the course at index i
 					Course current = courses.get(i);
-					// Check if the name and section are the same 
+					// Check if the name and section are the same
 					if (course.getName().equals(current.getName())
 							&& course.getSection().equals(current.getSection())) {
 						// It's a duplicate!
@@ -58,96 +55,74 @@ public class CourseRecordIO {
 				}
 				// If the course is NOT a duplicate
 				if (!duplicate) {
-					courses.add(course); // Add to the ArrayList!
+					courses.add(course); // Add to the SortedList!
 				} // Otherwise ignore
 			} catch (IllegalArgumentException e) {
 				// The line is invalid b/c we couldn't create a course, skip it!
 			}
 		}
 		// Close the Scanner b/c we're responsible with our file handles
-		fileReader.close(); 
-		// Return the ArrayList with all the courses we read
-		return courses; 
+		fileReader.close();
+		// Return the SortedList with all the courses we read!
+		return courses;
 	}
 
-
 	/**
-	 * this method accepts lines from the readCourseRecod and use a dilemeter to split them apart and turn them into 
-	 * an array list. 
-	 * @return
-	 * to pass the string file so it can be loaded by scanner object 
-	 * @param fileName
-	 * then we added the items into a course object and return it 
+	 * Reads through a given line and returns the line as a course object. If the
+	 * line does not fit the criteria for a valid object, it throws an illegal
+	 * argument exception.
+	 * 
+	 * @param nextLine The line input from the text file being used to create the
+	 *                 course object
+	 * @return A course object based on the given information from the given line
+	 * @throws Illegal Argument Exception If the given line does not have the right
+	 *                 number of lines.
 	 */
-	
-	private static Course readCourse(String fileName)  {
-		
-			Scanner scan = new Scanner(fileName);
-			scan.useDelimiter(",");
-			// example CSC 116,Intro to Programming - Java,001,3,jdyoung2,MW,0910,1100
-			Course course;
-			try { 
-			// let say you have array list
-			ArrayList<String> fields = new ArrayList<String>();
-			while(scan.hasNext()) {
-			 fields.add(scan.next()); 
-			 
-			} scan.close();
-			
-			String name = fields.get(0);
-			String title = fields.get(1); // meaning full 
-			String section = fields.get(2); 
-			int credits = Integer.parseInt(fields.get(3));
-			String id = fields.get(4);
-			String meetD = fields.get(5);
-			
-			if("A".equals(meetD) && fields.size() == 6) { 
-				course = new Course(name, title, section, credits, id, meetD);
-				return course;
-			} else if("A".equals(meetD) && fields.size() != 6) {
-				throw new IllegalArgumentException("Invalid meeting day and time");
-			}
-		
-			else {
-				try {
-				int stime = Integer.parseInt(fields.get(6)); 
-				int etime = Integer.parseInt(fields.get(7));
-				course = new Course(name, title, section, credits, id, meetD, stime, etime);
-				return course; 
-				} catch (Exception e) {
-					throw new IllegalArgumentException();
-			}
+	private static Course readCourse(String nextLine) {
+		Scanner lineReader = new Scanner(nextLine);
+		lineReader.useDelimiter(",");
+		Course returnCourse = null;
+		String[] courseField = new String[9];
+		int i = 0;
+		while (lineReader.hasNext() && i < 9) {
+			courseField[i] = lineReader.next();
+			i++;
 		}
-			
-						
-				
-	} catch (IllegalArgumentException e) {
-			 throw e;
-		 }
+		if (i < 7 || lineReader.hasNext()) {
+			lineReader.close();
+			throw new IllegalArgumentException("Invalid course");
+		} else if (courseField[6] != null && courseField[6].equals("A")) {
+			if (i > 7) {
+				lineReader.close();
+				throw new IllegalArgumentException("Invalid Course");
+			}
+			returnCourse = new Course(courseField[0], courseField[1], courseField[2], Integer.parseInt(courseField[3]),
+					courseField[4], Integer.parseInt(courseField[5]), courseField[6]);
+		} else {
+			returnCourse = new Course(courseField[0], courseField[1], courseField[2], Integer.parseInt(courseField[3]),
+					courseField[4], Integer.parseInt(courseField[5]), courseField[6], Integer.parseInt(courseField[7]),
+					Integer.parseInt(courseField[8]));
+		}
+
+		lineReader.close();
+		return returnCourse;
 	}
-	
+
 	/**
-	 * fileName is the name of the file that list of course info is stored
-	 * This course writes the information provided from the arrayList course and writes it in the fileName path 
-	 * @param fileName an input of arrayList of course information
-	 * @param courses  this method writes course information on the file called fileName
+	 * Writes the given list of Courses to a new file
 	 * 
-	 * @throwsIOException
-	 * 
+	 * @param fileName The file to write the schedule of Courses to.
+	 * @param courses  The list of Courses to write to the given file.
+	 * @throws IOException If the program cannot write to the given file.
 	 */
 	public static void writeCourseRecords(String fileName, SortedList<Course> courses) throws IOException {
-
 		PrintStream fileWriter = new PrintStream(new File(fileName));
 
-		// The line is invalid b/c we couldn't create a course, skip it!
-	
 		for (int i = 0; i < courses.size(); i++) {
 			fileWriter.println(courses.get(i).toString());
 		}
 
 		fileWriter.close();
-
 	}
-
 
 }

@@ -3,23 +3,15 @@
  */
 package edu.ncsu.csc216.pack_scheduler.course;
 
-import edu.ncsu.csc216.pack_scheduler.course.Activity;
-import edu.ncsu.csc216.pack_scheduler.course.ConflictException;
-
 /**
- * A class that Chekcs weather two instances of Activity have a conflict 
- *@author meles
- * @throws  ConflictException
- * 
+ * Creates a method to check for a conflict exception between activities
+ * @author Alex Bernard
  */
 public interface Conflict {
-	
 	/**
-	 * A method that Checks wather Course and Events have conflicts when they are added to The schedule 
-	 * @param possibleConflictingActivity represents Courses and events 
-	 * @throws ConflictException when event and course over lap in time and 
+	 * Determines if the time of the given activity conflicts with another activity in the schedule that shares the same meeting day
+	 * @param possibleConflictingActivity The activity being tested for conflicts in the schedule
+	 * @throws ConflictException If the time and days of the given activity overlaps with another.
 	 */
 	void checkConflict(Activity possibleConflictingActivity) throws ConflictException;
-
-
 }

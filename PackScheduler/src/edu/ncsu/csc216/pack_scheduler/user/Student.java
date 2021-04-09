@@ -1,322 +1,189 @@
 package edu.ncsu.csc216.pack_scheduler.user;
 
-/**
- * student class for student information.
- * 
- * @author meles
- *
- */
-public class Student implements Comparable<Student> {
+import edu.ncsu.csc216.pack_scheduler.course.Course;
+import edu.ncsu.csc216.pack_scheduler.user.schedule.Schedule;
 
-	/** filed for last name */
-	private String firstName;
-	/** filed for last name */
-	private String lastName;
-	/** filed id */
-	private String id;
-	/** filed for email */
-	private String email;
-	/** filed for hashPW */
-	private String password;
-	/** field for max credit */
+/**
+ * The following class stores the first name, last name, id, email, password,
+ * and credit hours of a given student.
+ * 
+ * @author Alex Bernard
+ */
+public class Student extends User implements Comparable<Student> {
+
+	/** Maximum number of credits. */
+	public static final int MAX_CREDITS = 18;
+
+	/** The student's max credit hours. */
 	private int maxCredits;
-	/** Constant for maximum credit */
-	public final static int MAX_CREDITS = 18;
+	
+	/** Single instance of a schedule for each student object */
+	private Schedule schedule = new Schedule();
 
 	/**
-	 * first name field that passes through setFristName
+	 * Constructs a student object with the given fields.
 	 * 
-	 * @param firstName  lastName field that passes through setLastName
-	 * @param lastName   id field that passes through setID
-	 * @param id         email field that passes through setEmail
-	 * @param email      hashPW filed that passes through setHashPW
-	 * @param hashPW     manxCredit that passes as an integer
-	 * @param maxCredits
-	 * 
-	 *                   Student constructor if maxCredit is passed
-	 * 
+	 * @param firstName  The student's first name.
+	 * @param lastName   The student's last name.
+	 * @param id         The student's id.
+	 * @param email      The student's email.
+	 * @param hashPW     The student's hash password.
+	 * @param maxCredits The student's maximum number of credits.
 	 */
 	public Student(String firstName, String lastName, String id, String email, String hashPW, int maxCredits) {
-		setFirstName(firstName);
-		setLastName(lastName);
-		setId(id);
-		setEmail(email);
-		setPassword(hashPW);
-		setMaxCredits(maxCredits); 
-
+		super(firstName, lastName, id, email, hashPW);
+		this.setMaxCredits(maxCredits);
 	}
 
 	/**
+	 * Constructs a student object without being given the max credits
 	 * 
-	 * 
-	 * first name field that passes through setFristName with default MAX_CREDIT
-	 * 
-	 * @param firstName lastName field that passes through setLastName with default
-	 *                  MAX_CREDIT
-	 * 
-	 * @param lastName  id field that passes through setID with default MAX_CREDIT
-	 * @param id        email field that passes through setEmail with default
-	 *                  MAX_CREDIT
-	 * @param email     hashPW filed that passes through setHashPW with default
-	 *                  MAX_CREDIT
-	 * @param hashPW
-	 * 
-	 *                  maxCredit that passes as an integer of 18
-	 * @constant 18 calls the default constructors with the default max credit value
-	 *           of 18
-	 * 
+	 * @param firstName The student's first name.
+	 * @param lastName  The student's last name.
+	 * @param id        The student's id.
+	 * @param email     The student's email.
+	 * @param hashPW    The student's hash password.
 	 */
 	public Student(String firstName, String lastName, String id, String email, String hashPW) {
-		this(firstName, lastName, id, email, hashPW, 18);
+		this(firstName, lastName, id, email, hashPW, MAX_CREDITS);
 	}
 
 	/**
-	 * Returns email address from the parameter
+	 * Returns the student's maximum credits.
 	 * 
-	 * @return email(null, LAST_NAME, ID, EMAIL, PASSWORD, CREDITS);
+	 * @return the maxCredits.
 	 */
-
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * sets email to the giving parameter and checks if email is null or empty also
-	 * that it contains the char "@" "." if not @throws IAE
-	 * 
-	 * @param email the email to set
-	 */
-	public void setEmail(String email) {
-		if (email == null || "".equals(email)) {
-			throw new IllegalArgumentException("Invalid email");
-		}
-
-		int firstIndexOfAtSymbol = email.indexOf('@');
-		int lastIndexOfDotSymbol = email.lastIndexOf('.');
-
-		if (firstIndexOfAtSymbol == -1 || lastIndexOfDotSymbol == -1 || lastIndexOfDotSymbol < firstIndexOfAtSymbol) {
-			throw new IllegalArgumentException("Invalid email");
-
-		}
-		this.email = email;
-	}
-
-	/**
-	 * returns the password from the parameter indexOfAtSymbol == -1
-	 * 
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * returns the value of hashPW if it is not null or empty Otherwise it @throws
-	 * IAE
-	 * 
-	 * @param password the password to set
-	 */
-	public void setPassword(String password) {
-		if (password == null || "".equals(password)) {
-			throw new IllegalArgumentException("Invalid password");
-		}
-		this.password = password;
-	}
-
-	/**
-	 * returns the value of MaxCredit from the parameter
-	 * 
-	 * @return the maxCredits
-	 */
-
 	public int getMaxCredits() {
 		return maxCredits;
 	}
 
-	/** constant for MIN_CREDIT to use in the below method */
-	final static int MIN_CREDIT = 3;
-
 	/**
-	 * sets the maxCredit to the given parameter
+	 * Sets the given max credits.
 	 * 
-	 * @param maxCredits Checks if the parameter is less than 3 or greater than 18
-	 *                   if it is @throw IAE
-	 * 
+	 * @param maxCredits the maxCredits to set.
+	 * @throws IllegalArgumentException If max Credits are greater than 18 or lower
+	 *                                  than 3
 	 */
-
 	public void setMaxCredits(int maxCredits) {
-		if (maxCredits < 0 || maxCredits > MAX_CREDITS) {
+		if (maxCredits > MAX_CREDITS || maxCredits < 3)
 			throw new IllegalArgumentException("Invalid max credits");
-		}
-
 		this.maxCredits = maxCredits;
 	}
 
 	/**
-	 * sets the first name to the given parameter if it is not null or empty if so
-	 * it @throws an exception
+	 * Creates a comma separated string using the object's fields.
 	 * 
-	 * @param firstName the firstName to set
+	 * @return String containing a list of fields in the student object separated by
+	 *         commas.
 	 */
-	public void setFirstName(String firstName) {
-		if (firstName == null || "".equals(firstName)) {
-			throw new IllegalArgumentException("Invalid first name");
+	@Override
+	public String toString() {
+		String finalString = this.getFirstName() + "," + this.getLastName() + "," + this.getId() + "," + this.getEmail()
+				+ "," + this.getPassword() + "," + maxCredits;
+		return finalString;
+	}
+
+	/**
+	 * This method determines a student object's position in relation to another
+	 * given student object. The method first compares last names, then first names,
+	 * and IDs last.
+	 * 
+	 * @param o The other student object
+	 */
+	@Override
+	public int compareTo(Student o) {
+		if (!this.getLastName().equals(o.getLastName())) {
+			return compareStrings(this.getLastName(), o.getLastName());
+
+		} else if (!this.getFirstName().equals(o.getFirstName())) {
+			return compareStrings(this.getFirstName(), o.getFirstName());
+
+		} else if (!this.getId().equals(o.getId())) {
+			return compareStrings(this.getId(), o.getId());
+
 		}
-		this.firstName = firstName;
+		return 0;
 	}
 
 	/**
-	 * sets the last name to the given parameter if it is not null or empty if so it
+	 * Helper method for compareTo. Iterates through the input string values and
+	 * determines which is to be placed first in a sorted list
 	 * 
-	 * @throw an exception
-	 * 
-	 * @param lastName the firstName to set
+	 * @param here  The value of one of this object's fields
+	 * @param other The field of the opposing object the current is being compared
+	 *              to.
+	 * @return 1 if this object is placed ahead of the opposing object, and -1 in
+	 *         the opposite case.
 	 */
-	public void setLastName(String lastName) {
-		if (lastName == null || "".equals(lastName)) {
-			throw new IllegalArgumentException("Invalid last name");
+	private int compareStrings(String here, String other) {
+		for (int i = 0; i < here.length(); i++) {
+			if (i >= other.length())
+				return 1;
+			char thisChar = here.charAt(i);
+			char otherChar = other.charAt(i);
+			if (thisChar != otherChar) {
+				if (Character.isLowerCase(thisChar))
+					Character.toUpperCase(thisChar);
+				if (Character.isLowerCase(otherChar))
+					Character.toUpperCase(otherChar);
+				if (thisChar > otherChar)
+					return 1;
+				else if (thisChar < otherChar)
+					return -1;
+			}
 		}
-		this.lastName = lastName;
+		return -1;
 	}
 
 	/**
-	 * set the value of id by checking if it is null or empty if so @throw IAE
+	 * Returns a unique hashCode based on the current Student's max credits and
+	 * fields that are listed as part of this object's superclass
 	 * 
-	 * @param id the id to set
+	 * @return A hashCode generated from the current Student's maxCredits field and
+	 *         User superclass fields
 	 */
-	private void setId(String id) {
-		if (id == null || "".equals(id)) {
-			throw new IllegalArgumentException("Invalid id");
-		}
-		this.id = id;
-	}
-
-	/**
-	 * returns firstName from the parameter
-	 * 
-	 * @return firstName
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
-
-	/**
-	 * returns the value of lastName from the parameter
-	 * 
-	 * @return lastName
-	 */
-	public String getLastName() {
-
-		return lastName;
-	}
-
-	/**
-	 * returns the value of id from the parameter
-	 * 
-	 * @return id
-	 */
-	public String getId() {
-
-		return id;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		int result = super.hashCode();
 		result = prime * result + maxCredits;
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
 
+	/**
+	 * Determines if the Student and User fields of the two given objects are equal.
+	 * 
+	 * @return True if the fields of each object are equal
+	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Student other = (Student) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (maxCredits != other.maxCredits)
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		return true;
-	}
+		return maxCredits == other.maxCredits;
 
-	@Override
-	public String toString() {
-		return firstName + "," + lastName + "," + id + "," + email + "," + password + "," + maxCredits;
 	}
- 
 	
 	/**
-	 * questions to ask TA's 
-	 * is my code correct and what does the values from comapreTo mean?
-	 * how do i add the ClasscastEception in the comaPARE CODE -- this is automatic 
+	 * Getter method for pulling in the student's specific schedule for adjustments
+	 * 
+	 * @return the student's schedule
 	 */
-	@Override
-	
-	public int compareTo(Student s) {  
-		if (s == null) {
-			throw new NullPointerException();
-		}
-		if(this.lastName.compareToIgnoreCase(s.getLastName()) == 0 && this.firstName.compareToIgnoreCase(s.getFirstName()) == 0 && this.id.compareToIgnoreCase(s.getId()) == 0) {
-			return 0;
-		}
-	
-		if (this.lastName.compareToIgnoreCase(s.getLastName()) < 0) {
-			return -1;
-			// this M    > A  npositive  value 
-			// 
-		} else if (this.lastName.compareToIgnoreCase(s.getLastName()) > 0) {
-			return 1; 
-		} else if (this.lastName.compareToIgnoreCase(s.getLastName()) == 0) {
-			if (this.firstName.compareToIgnoreCase(s.getFirstName()) < 0) {
-				return -1;
-			} else if (this.firstName.compareToIgnoreCase(s.getFirstName()) > 0) {
-				return 1;
-			} else if (this.firstName.compareToIgnoreCase(s.getFirstName()) == 0) {
-				if(this.id.compareToIgnoreCase(s.getId()) < 0) {
-					return -1;
-				}
-				else if(this.id.compareToIgnoreCase(s.getId()) > 0) {
-					return 1;
-				}
-				
-			}
-
-		} 
-			return 0;
-		
+	public Schedule getSchedule() {
+		return schedule;
 	}
-
+	
+	/**
+	 * Method that determines if the selected course "can" be added to the student's schedule
+	 * @param course selected by the student
+	 * @return true if the course can be added to the schedule
+	 */
+	public boolean canAdd(Course course) {
+		if (!schedule.canAdd(course)) {
+			return false;
+		} 
+		return !(schedule.getScheduleCredits() + course.getCredits() > this.maxCredits);
+	}
 }

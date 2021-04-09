@@ -1,0 +1,6 @@
+Archive of Fixed Bugs in RegistrationManager
+- logout method originally set to current user. Changed to null
+- boolean login method: added if statement to top of method to catch if there is already a current login session
+- boolean login method: rotated registrar login to the top of the method
+- boolean login method: added a throw IAE if student is null
+- constructor: initialized course catalog and student directory

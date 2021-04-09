@@ -12,7 +12,7 @@ import java.util.Scanner;
 import org.junit.Before;
 import org.junit.Test;
 
-
+//import edu.ncsu.csc216.pack_scheduler.io.StudentRecordIO;
 
 /**
  * Tests StudentDirectory.
@@ -35,8 +35,6 @@ public class StudentDirectoryTest {
 	/** Test max credits */
 	private static final int MAX_CREDITS = 15;
 	
- 
-	
 	/**
 	 * Resets course_records.txt for use in other tests.
 	 * @throws Exception if something fails during setup.
@@ -48,12 +46,12 @@ public class StudentDirectoryTest {
 		Path destinationPath = FileSystems.getDefault().getPath("test-files", "student_records.txt");
 		try {
 			Files.deleteIfExists(destinationPath);
-			Files.copy(sourcePath, destinationPath); 
-		} catch (IOException e) { 
+			Files.copy(sourcePath, destinationPath);
+		} catch (IOException e) {
 			fail("Unable to reset files");
 		}
-	} 
-	
+	}
+
 	/**
 	 * Tests StudentDirectory().
 	 */
@@ -62,7 +60,7 @@ public class StudentDirectoryTest {
 		//Test that the StudentDirectory is initialized to an empty list
 		StudentDirectory sd = new StudentDirectory();
 		assertFalse(sd.removeStudent("sesmith5"));
-		assertEquals(0, sd.getStudentDirectory().length); 
+		assertEquals(0, sd.getStudentDirectory().length);
 	}
 
 	/**
@@ -80,7 +78,7 @@ public class StudentDirectoryTest {
 		sd.newStudentDirectory();
 		assertEquals(0, sd.getStudentDirectory().length);
 	}
-
+ 
 	/**
 	 * Tests StudentDirectory.loadStudentsFromFile().
 	 */
@@ -91,16 +89,14 @@ public class StudentDirectoryTest {
 		//Test valid file
 		sd.loadStudentsFromFile(validTestFile);
 		assertEquals(10, sd.getStudentDirectory().length);
-		 
-	   // Test invalid files 
 		
+		sd = new StudentDirectory();
+		//Test invalid file
 		try {
-			sd.loadStudentsFromFile("test-files/testing_doc.txt");
-			fail();
-		} catch(IllegalArgumentException e) {
-			assertEquals("Unable to read file test-files/testing_doc.txt", e.getMessage());
+			sd.loadStudentsFromFile("test-files/invalid_file.txt");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Unable to read file test-files/invalid_file.txt", e.getMessage());
 		}
-		
 	}
 
 	/**
@@ -109,7 +105,7 @@ public class StudentDirectoryTest {
 	@Test
 	public void testAddStudent() {
 		StudentDirectory sd = new StudentDirectory();
-
+		
 		//Test valid Student
 		sd.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, MAX_CREDITS);
 		String [][] studentDirectory = sd.getStudentDirectory();
@@ -118,25 +114,13 @@ public class StudentDirectoryTest {
 		assertEquals(LAST_NAME, studentDirectory[0][1]); 
 		assertEquals(ID, studentDirectory[0][2]);
 		
-		
-		try {
-			sd.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, "", PASSWORD, MAX_CREDITS);
-			fail();
-		} catch (IllegalArgumentException e) {
-			assertEquals("Invalid password", e.getMessage());
-			}
-
-		
-		sd.addStudent("john", LAST_NAME, "john123", EMAIL, PASSWORD, PASSWORD, 2);
-		studentDirectory = sd.getStudentDirectory();
-		assertEquals(2, studentDirectory.length);
-		assertEquals("john", studentDirectory[0][0]); 
-		assertEquals(LAST_NAME, studentDirectory[0][1]);
-		assertEquals("john123", studentDirectory[0][2]);
-
-		 
+		sd = new StudentDirectory();
+		sd.addStudent(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, MAX_CREDITS);
+		//Test invalid Student
+		assertFalse(sd.addStudent(LAST_NAME, FIRST_NAME, ID, EMAIL, PASSWORD, PASSWORD, MAX_CREDITS));
+		assertEquals(1, sd.getStudentDirectory().length);
 	}
- 
+
 	/**
 	 * Tests StudentDirectory.removeStudent().
 	 */
@@ -150,26 +134,34 @@ public class StudentDirectoryTest {
 		assertTrue(sd.removeStudent("efrost"));
 		String [][] studentDirectory = sd.getStudentDirectory();
 		assertEquals(9, studentDirectory.length);
-		assertNotEquals("Lane", studentDirectory[5][0]);
-		assertNotEquals("Berg", studentDirectory[5][1]);
-		assertNotEquals("lberg", studentDirectory[5][2]); 
-	} 
+		assertEquals("Shannon", studentDirectory[3][0]);
+		assertEquals("Hansen", studentDirectory[3][1]);
+		assertEquals("shansen", studentDirectory[3][2]);
+	}
 
 	/**
 	 * Tests StudentDirectory.saveStudentDirectory().
-	 */  
-	@Test  
-	public void testSaveStudentDirectory() { 
+	 */
+	@Test
+	public void testSaveStudentDirectory() {
 		StudentDirectory sd = new StudentDirectory();
+		
 		//Add a student
 		sd.addStudent("Zahir", "King", "zking", "orci.Donec@ametmassaQuisque.com", "pw", "pw", 15);
 		assertEquals(1, sd.getStudentDirectory().length);
 		sd.saveStudentDirectory("test-files/actual_student_records.txt");
 		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
-	} 
-	 
-	/** throw new IllegalArgumentException
-	 * Helper method to compare two files for the same contents 
+		
+		//Test IOException
+		try {
+			sd.saveStudentDirectory("/home/sesmith5/actual_student_records.txt");
+		} catch(IllegalArgumentException e) {
+			assertEquals("Unable to write to file /home/sesmith5/actual_student_records.txt", e.getMessage());
+		}
+	}
+	
+	/**
+	 * Helper method to compare two files for the same contents
 	 * @param expFile expected output
 	 * @param actFile actual output
 	 */

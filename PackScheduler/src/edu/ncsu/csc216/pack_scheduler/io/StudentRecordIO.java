@@ -1,137 +1,82 @@
 package edu.ncsu.csc216.pack_scheduler.io;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileInputStream;
 
 import edu.ncsu.csc216.pack_scheduler.user.Student;
 import edu.ncsu.csc217.collections.list.SortedList;
-
 /**
- * Reader and writer class for Students called StudentRecordIO
- * 
- * @author meles
- *
+ * This class reads text files to create SortedLists of student objects. 
+ * Saved sortedLists can then be printed into a text file.
+ * @author Alex Bernard
  */
 public class StudentRecordIO {
-
+	
 	/**
-	 * string parameter for file name
-	 * 
-	 * @param fileName
-	 * 
-	 * @return a value of sorted list that conatins the fields value for student
-	 * @throws FileNotFoundException if the file isn't found
-	 * 
+	 * This method creates a sorted list of student objects using the file provided by the user.
+	 * @param fileName The name of the text file the student objects will be constructed from
+	 * @return SortedList containing a sorted list of student objects
+	 * @throws FileNotFoundException If the file from the provided fileName is invalid
 	 */
 	public static SortedList<Student> readStudentRecords(String fileName) throws FileNotFoundException {
-		Scanner fileReader = new Scanner(new FileInputStream(fileName)); // Create a file scanner read the file
-		SortedList<Student> students = new SortedList<Student>(); // Create an empty list of Course object
-		while (fileReader.hasNextLine()) { // While we have more lines in the file
-			try { // Attempt to do the following)
-				students.add(processStudent(fileReader.nextLine()));
+		SortedList<Student> finalArray = new SortedList<Student>(); 
+		Scanner scan = new Scanner(new FileInputStream(fileName));
+		String currentStudent = "";
+		Student newStudent;
+		while (scan.hasNextLine()) {
+			currentStudent = scan.nextLine();
+			try {
+				newStudent = processStudent(currentStudent);
+				finalArray.add(newStudent);
 			} catch (IllegalArgumentException e) {
 				//
 			}
 		}
-		// Close the Scanner b/c we're responsible with our file handles
-		fileReader.close();
-		// Return the SortedList with all the courses we read!
-		return students;
+		scan.close();
+		return finalArray;
 	}
 
 	/**
-	 * parameter that passes Through file from ReadStudent Records fileName
-	 * 
-	 * @param line Returns objects of students
-	 * @return uses this method to seprate the fields from the passes line and
-	 *         return value of students
+	 * Constructs a student object using the elements from the input string.
+	 * @param student The string input being read to construct a student object.
+	 * @return A student object using the tokens from the string as fields.
+	 * @throws IllegalArgumentException If the input string does not meet the necessary criteria to construct a student object.
 	 */
-	private static Student processStudent(String line) {
-
-		// Changing the default delimiter of space to , and sperera the values
-		Scanner scan = new Scanner(line);
-		scan.useDelimiter(",");
-		Student student = null;
-
-		String firstName = null;
-		String lastName;
-		String id;
-		String email;
-		String hashPW;
-		int maxCredits;
-
-		try {
-
-			if (scan.hasNext()) {
-				firstName = scan.next();
-			} else {
-				scan.close();
-				throw new IllegalArgumentException("Invaild input");
-			}
-			if (scan.hasNext()) {
-				lastName = scan.next();
-			} else {
-				scan.close();
-				throw new IllegalArgumentException("Invaild input");
-			}
-			if (scan.hasNext()) {
-				id = scan.next();
-			} else {
-				scan.close();
-				throw new IllegalArgumentException("Invaild input");
-			}
-			if (scan.hasNext()) {
-				email = scan.next();
-			} else {
-				scan.close();
-				throw new IllegalArgumentException("Invaild input");
-			}
-
-			if (scan.hasNext()) {
-				hashPW = scan.next();
-			} else {
-				scan.close();
-				throw new IllegalArgumentException("Invaild input");
-			}
-			if (scan.hasNext()) {
-				maxCredits = scan.nextInt();
-			} else {
-				scan.close();
-				throw new IllegalArgumentException("Invaild input");
-			}
-
-			student = new Student(firstName, lastName, id, email, hashPW, maxCredits);
-			scan.close();
-			return student;
-
-		} catch (IllegalArgumentException e) {
-			throw e;
+	private static Student processStudent(String student) {
+		Scanner input = new Scanner(student);
+		Student outputStudent;
+		input.useDelimiter(",");
+		int i = 0;
+		String[] studentField = new String[6];
+		while (input.hasNext() && i < 6) {
+			studentField[i] = input.next();
+			i++; 
 		}
-
+		input.close();
+		if (i < 6) throw new IllegalArgumentException("Invalid student");
+		else {
+			outputStudent = new Student(studentField[0], studentField[1], studentField[2], studentField[3], 
+					studentField[4], Integer.parseInt(studentField[5]));
+		}
+		return outputStudent;
 	}
-
+	
 	/**
-	 * passes a file called fileName
-	 * 
-	 * @param fileName         student records stored in Student directory that hold
-	 *                         student fields
-	 * @param studentDirectory throws an exception
-	 * @throws IOException this method writes students information taking it from
-	 *                     student directory and on to the fileName
+	 * Writes the elements of the student list into one text file.
+	 * @param fileName The name of the file where the student directory is being written to.
+	 * @param studentDirectory The list of student objects being changed to string objects.
+	 * @throws IOException If the string cannot be written to the given file
 	 */
-	public static void writeStudentRecords(String fileName, SortedList<Student> studentDirectory) throws IOException {
-
-		PrintStream fileWriter = new PrintStream(new File(fileName));
-
+	public static void writeStudentRecords(String fileName, SortedList<Student> studentDirectory) throws IOException {	
+		PrintStream studentFile = new PrintStream(new File(fileName));
 		for (int i = 0; i < studentDirectory.size(); i++) {
-			fileWriter.println(studentDirectory.get(i).toString());
+			studentFile.println(studentDirectory.get(i).toString());
 		}
-
-		fileWriter.close();
-
+		studentFile.close();
 	}
+
 }
