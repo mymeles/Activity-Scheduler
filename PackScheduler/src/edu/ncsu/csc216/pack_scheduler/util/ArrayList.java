@@ -29,6 +29,7 @@ public class ArrayList<E> extends AbstractList<E> {
 		size = 0;
 		list = (E[]) new Object[INIT_SIZE];
 	}
+	
 
 	/**
 	 * Adds a new element to the list at the given index

@@ -37,8 +37,17 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 	 * @param capacity The value being set as the AbstractList capacity
 	 */
 	public void setCapacity(int capacity) {
-		if (capacity <= 0 || capacity < size) throw new IllegalArgumentException("Invalid capacity");
+		if (capacity <= 0 || capacity < size) 
+			throw new IllegalArgumentException("Invalid capacity");
 		this.capacity = capacity;
+	}
+	
+	/**
+	 *  Returns the capacity of a list 
+	 * @return	an integer
+	 */
+	public int getCapacity() {
+		return capacity;
 	}
 	
 	/**
@@ -191,7 +200,7 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 		public ListNode(E data) {
 			this(data, null);
 		}
-		
+		 
 		/**
 		 * Constructs a ListNode with the given data and reference
 		 * @param data The object stored at the given list node
