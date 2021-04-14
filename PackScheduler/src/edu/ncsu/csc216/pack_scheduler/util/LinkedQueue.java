@@ -37,9 +37,9 @@ public class LinkedQueue<E> implements Queue<E> {
 
 	@Override
 	public E dequeue() { 
-		if (list.isEmpty()) {
+		if (list.isEmpty()) 
 			throw new NoSuchElementException();
-		}
+
 		E top = list.get(0);
 		list.remove(0);
 		return top;
