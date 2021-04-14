@@ -57,7 +57,7 @@ public class CourseTest {
 	}
 
 	/**
-	 * Tests the Course constructor with 4 parameters.
+	 * Tests the Course constructor with 4 parameters. 
 	 */
 	@Test
 	public void testCourseStringStringStringIntStringString() {

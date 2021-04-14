@@ -3,8 +3,11 @@
  */
 package edu.ncsu.csc216.pack_scheduler.course.roll;
 
+import edu.ncsu.csc216.pack_scheduler.course.Course;
 import edu.ncsu.csc216.pack_scheduler.user.Student;
 import edu.ncsu.csc216.pack_scheduler.util.LinkedAbstractList;
+import edu.ncsu.csc216.pack_scheduler.util.LinkedQueue;
+import edu.ncsu.csc216.pack_scheduler.util.Queue;
 
 /**
  * This class lists students enrolled in a single course
@@ -25,16 +28,40 @@ public class CourseRoll {
 	/** A list containing with */
 	private LinkedAbstractList<Student> roll;
 
+	/** An inetger representing Wait list size */
+	private static final int WAITLIST_SIZE = 10;
+
+	/** a course that is being enrolled */
+	private Course course;
+
+	/** a queue for wait list students */
+	private Queue<Student> waitlist;
+
 	/**
 	 * The constructor for a CourseRoll object. The enrollmentCap is set to the
 	 * given parameter and a new LinkedAbstractList of Student objects is created.
 	 * 
 	 * @param enrollmentCap The maximum number of students that can be enrolled in a
 	 *                      single course
+	 * @param course        representes a course that is being enrolled
 	 */
-	public CourseRoll(int enrollmentCap) {
+	public CourseRoll(Course course, int enrollmentCap) {
+
+		setCourse(course);
 		setEnrollmentCap(enrollmentCap);
 		roll = new LinkedAbstractList<Student>(this.enrollmentCap);
+		waitlist = new LinkedQueue<Student>(WAITLIST_SIZE);
+	}
+
+	/**
+	 * A method to set the course
+	 * 
+	 * @param course
+	 */
+	private void setCourse(Course course) {
+		if (course == null)
+			throw new IllegalArgumentException();
+		this.course = course;
 	}
 
 	/**
@@ -61,7 +88,7 @@ public class CourseRoll {
 			throw new IllegalArgumentException("Invalid enrollmentCap.");
 		else if (roll != null && enrollmentCap < roll.size())
 			throw new IllegalArgumentException("enrollmentCap cannot be less than enrolled students.");
-		else if(roll != null)
+		else if (roll != null)
 			roll.setCapacity(enrollmentCap);
 		this.enrollmentCap = enrollmentCap;
 	}
@@ -75,8 +102,10 @@ public class CourseRoll {
 	public void enroll(Student student) {
 		if (student == null)
 			throw new IllegalArgumentException("Student cannot be null.");
-		else if (getOpenSeats() == 0)
-			throw new IllegalArgumentException("Course cannot exceed enrollmentCap.");
+		else if (getOpenSeats() == 0 || enrollmentCap == roll.size())
+			waitlist.enqueue(student);
+		else if(waitlist.size() == WAITLIST_SIZE)
+			throw new IllegalArgumentException();
 		else {
 			try {
 				roll.add(student);
@@ -94,13 +123,17 @@ public class CourseRoll {
 	 *                                  course
 	 */
 	public void drop(Student student) {
-		if (student == null)
+		Queue<Student> waitlist1 = waitlist;
+		if (student == null) {
 			throw new IllegalArgumentException("Cannot remove null student");
-		else {
+		} else {
 			for (int i = 0; i < roll.size(); i++) {
 				if (roll.get(i).equals(student)) {
 					roll.remove(i);
+					roll.add(waitlist.dequeue());
 					break;
+				} else if (waitlist1.dequeue().equals(student)) {
+					 waitlist.dequeue();
 				}
 			}
 		}
@@ -123,14 +156,27 @@ public class CourseRoll {
 	 *         course
 	 */
 	public boolean canEnroll(Student student) {
-		if (getOpenSeats() == 0)
+		Queue<Student> waitlist1 = waitlist;
+		if (getOpenSeats() == 0 && waitlist.size() < WAITLIST_SIZE)
 			return false;
 		else {
 			for (int i = 0; i < roll.size(); i++) {
 				if (roll.get(i).equals(student))
 					return false;
+				if (waitlist1.dequeue().equals(student)) {
+					return false;
+				}
 			}
 			return true;
 		}
+	}
+
+	/**
+	 * A method that returns the size of the students on wait list
+	 * 
+	 * @return an integer
+	 */
+	public int getNumberOnWaitlist() {
+		return waitlist.size();
 	}
 }

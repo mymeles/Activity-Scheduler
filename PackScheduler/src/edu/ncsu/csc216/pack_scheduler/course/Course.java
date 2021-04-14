@@ -67,7 +67,7 @@ public class Course extends Activity implements Comparable<Course> {
 		this.setSection(section);
 		this.setCredits(credits);
 		this.setInstructorId(instructorId);
-		roll = new CourseRoll(enrollmetnCap);
+		roll = new CourseRoll(this, enrollmetnCap); 
 	}
 
 	/**

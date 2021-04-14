@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import edu.ncsu.csc216.pack_scheduler.course.Course;
 import edu.ncsu.csc216.pack_scheduler.user.Student;
 
 /**
@@ -16,31 +17,52 @@ import edu.ncsu.csc216.pack_scheduler.user.Student;
  */
 public class CourseRollTest {
 
+	/** Course name */
+	private static final String NAME = "CSC216";
+	/** Course title */
+	private static final String TITLE = "Software Development Fundamentals";
+	/** Course section */
+	private static final String SECTION = "001";
+	/** Course credits */
+	private static final int CREDITS = 3;
+	/** Course instructor id */
+	private static final String INSTRUCTOR_ID = "sesmith5";
+	/** enrollment capacity for a given course */
+	private static final int ENCAP = 10;
+	/** Course meeting days */
+	private static final String MEETING_DAYS = "MW";
+	/** Course start time */
+	private static final int START_TIME = 1330;
+	/** Course end time */
+	private static final int END_TIME = 1445;
+	
 	/**
 	 * Tests the constructor for CourseRoll
 	 */
 	@Test
 	public void testCourseRoll() {
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENCAP, MEETING_DAYS, START_TIME, END_TIME);
+
 		CourseRoll testRoll;
 		// Construct valid CourseRoll objects
-		testRoll = new CourseRoll(10);
+		testRoll = new CourseRoll(c, 10);
 		assertNotNull(testRoll);
 		assertEquals(10, testRoll.getEnrollmentCap());
-		testRoll = new CourseRoll(250);
+		testRoll = new CourseRoll(c, 250);
 		assertEquals(250, testRoll.getEnrollmentCap());
 		
 		// Construct invalid CourseRoll objects
 		testRoll = null;
 		// enrollmentCap > 250
 		try {
-			testRoll = new CourseRoll(251);
+			testRoll = new CourseRoll(c, 251);
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertNull(testRoll);
 		}
 		// enrollmentCap < 10
 		try {
-			testRoll = new CourseRoll(9);
+			testRoll = new CourseRoll(c, 9);
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertNull(testRoll);
@@ -52,8 +74,9 @@ public class CourseRollTest {
 	 */
 	@Test
 	public void testGetEnrollmentCap() {
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENCAP, MEETING_DAYS, START_TIME, END_TIME);
 		CourseRoll testRoll;
-		testRoll = new CourseRoll(20);
+		testRoll = new CourseRoll(c, 20);
 		
 		// setEnrollment cap 20 -> 250
 		testRoll.setEnrollmentCap(250);
@@ -69,8 +92,9 @@ public class CourseRollTest {
 	 */
 	@Test
 	public void testSetEnrollmentCap() {
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENCAP, MEETING_DAYS, START_TIME, END_TIME);
 		CourseRoll testRoll;
-		testRoll = new CourseRoll(20);
+		testRoll = new CourseRoll(c, 20);
 		Student[] testStudents = new Student[15];
 		// enroll 15 students
 		for (int i = 0; i < 15; i++) {
@@ -102,8 +126,9 @@ public class CourseRollTest {
 	 */
 	@Test
 	public void testEnroll() {
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENCAP, MEETING_DAYS, START_TIME, END_TIME);
 		CourseRoll testRoll;
-		testRoll = new CourseRoll(15);
+		testRoll = new CourseRoll(c, 15);
 		Student[] testStudents = new Student[15];
 		// enroll 15 students when enrollmentCap == 15
 		for (int i = 0; i < 15; i++) {
@@ -143,8 +168,9 @@ public class CourseRollTest {
 	 */
 	@Test
 	public void testDrop() {
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENCAP, MEETING_DAYS, START_TIME, END_TIME);
 		CourseRoll testRoll;
-		testRoll = new CourseRoll(15);
+		testRoll = new CourseRoll(c, 15);
 		Student[] testStudents = new Student[15];
 		for (int i = 0; i < 15; i++) {
 			testStudents[i] = new Student("firstName" + i, "lastName" + i, "id" + i, i + "@email.com", "password" + i);
@@ -174,8 +200,9 @@ public class CourseRollTest {
 	 */
 	@Test
 	public void testGetOpenSeats() {
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENCAP, MEETING_DAYS, START_TIME, END_TIME);
 		CourseRoll testRoll;
-		testRoll = new CourseRoll(15);
+		testRoll = new CourseRoll(c, 15);
 		// Tests that enrollmentCap == openSeats when no students are enrolled
 		assertEquals(testRoll.getEnrollmentCap(), testRoll.getOpenSeats());
 		
@@ -186,7 +213,7 @@ public class CourseRollTest {
 		}
 		assertEquals(0, testRoll.getOpenSeats());
 		testRoll.drop(testStudents[0]);
-		assertEquals(1, testRoll.getOpenSeats());
+		assertEquals(1, testRoll.getOpenSeats()); 
 		testRoll.setEnrollmentCap(14);
 		assertEquals(0, testRoll.getOpenSeats());
 		testRoll.setEnrollmentCap(20);
@@ -198,8 +225,9 @@ public class CourseRollTest {
 	 */
 	@Test
 	public void testCanEnroll() {
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENCAP, MEETING_DAYS, START_TIME, END_TIME);
 		CourseRoll testRoll;
-		testRoll = new CourseRoll(10);
+		testRoll = new CourseRoll(c, 10);
 		Student[] testStudents = new Student[15];
 		for (int i = 0; i < 15; i++) {
 			testStudents[i] = new Student("firstName" + i, "lastName" + i, "id" + i, i + "@email.com", "password" + i);
