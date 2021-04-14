@@ -4,6 +4,7 @@
 package edu.ncsu.csc216.pack_scheduler.util;
 
 import java.util.EmptyStackException;
+import java.util.NoSuchElementException;
 
 /**
  * A Method that represents a Queue of objects 
@@ -38,7 +39,7 @@ public class LinkedQueue<E> implements Queue<E> {
 	@Override
 	public E dequeue() { 
 		if (list.isEmpty()) {
-			throw new EmptyStackException();
+			throw new NoSuchElementException();
 		}
 		E top = list.get(0);
 		list.remove(0);
