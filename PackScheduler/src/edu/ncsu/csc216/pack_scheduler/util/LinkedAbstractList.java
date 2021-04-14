@@ -161,7 +161,7 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 	public void add(int idx, E element) {
 		if (idx < 0 || idx > this.size())
 			throw new IndexOutOfBoundsException("Invalid index");
-		else if (this.size() == capacity)
+		else if (size == capacity)
 			throw new IllegalArgumentException("Size == Capacity");
 		else if (element == null)
 			throw new NullPointerException("element cannot equal null");
