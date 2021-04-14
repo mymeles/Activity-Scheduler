@@ -43,16 +43,14 @@ public class ArrayQueue<E> implements Queue<E> {
 		if (list.isEmpty()) {
 			throw new NoSuchElementException();
 		}
-		E top = list.get(0);
+		E bottom = list.get(0);
 		list.remove(0);
-		return top;
+		return bottom;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		if (list.size() == 0) 
-			return true;
-		return false;
+		return list.size() == 0;
 	}
 
 	@Override
