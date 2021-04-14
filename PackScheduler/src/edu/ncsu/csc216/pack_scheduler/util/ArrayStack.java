@@ -6,14 +6,26 @@ package edu.ncsu.csc216.pack_scheduler.util;
 import java.util.EmptyStackException;
 
 /**
- * @author Meles Meles
+ * A method that constructs a stack 
+ * @author meles
  *
+ * @param <E> a generic object for stack 
  */
 public class ArrayStack<E> implements Stack<E> {
 
+	/**
+	 * a list used for bulding the stack
+	 */
 	private ArrayList<E> list;
+	/**
+	 * An inetegr to set the capacity 
+	 */
 	private int capacity;
 
+	/**
+	 * A constrcutor for bulding an ArrayStack
+	 * @param capacity is an integer
+	 */
 	public ArrayStack(int capacity) {
 		list = new ArrayList<E>();
 		setCapacity(capacity);

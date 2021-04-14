@@ -6,19 +6,21 @@ package edu.ncsu.csc216.pack_scheduler.util;
 import java.util.EmptyStackException;
 
 /**
+ * A method that constructs a LinkedStack 
  * @author meles
  *
+ * @param <E> a generic object for Linikedstack 
  */
 public class LinkedStack<E> implements Stack<E>  {
 
 	/**
-	 * 
+	 * A linked AbstractList used to build the stack
 	 */
 	private LinkedAbstractList<E> list;
 	
 	/**
-	 * 
-	 * @param capacity
+	 * A constrcutor for bulding an ArrayStack
+	 * @param capacity is an integer
 	 */
 	public LinkedStack(int capacity){
 		list = new LinkedAbstractList<E>(capacity);

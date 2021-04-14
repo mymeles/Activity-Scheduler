@@ -6,8 +6,16 @@ import java.util.EmptyStackException;
 
 import org.junit.Test;
 
+/**
+ * A class to test LinkedQueue
+ * @author meles
+ *
+ */
 public class LinkedQueueTest {
 
+	/**
+	 * A method to test LinkedQueue()
+	 */
 	@Test
 	public void testLinkedQueue() {
 		Queue<String> list = new LinkedQueue<String>(5);
@@ -24,6 +32,9 @@ public class LinkedQueueTest {
 		assertEquals(5, list.size());
 	}
 
+	/**
+	 * A method to test enqueue()
+	 */
 	@Test
 	public void testEnqueue() {
 		Queue<String> list = new LinkedQueue<String>(5);
@@ -54,6 +65,9 @@ public class LinkedQueueTest {
 		}
 	}
 
+	/**
+	 * A method to test dequeue()
+	 */
 	@Test
 	public void testDequeue() {
 		Queue<String> list = new LinkedQueue<String>(5);

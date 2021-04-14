@@ -6,6 +6,11 @@ import java.util.EmptyStackException;
 
 import org.junit.Test;
 
+/**
+ * A class to test the class ArrayStack
+ * @author meles
+ *
+ */
 public class ArrayStackTest {
 
 	/**
@@ -59,6 +64,9 @@ public class ArrayStackTest {
 		}
 	}
 
+	/**
+	 * Test method for pop()
+	 */ 
 	@Test
 	public void testPop() {
 		Stack<String> list = new ArrayStack<String>(5);
@@ -108,6 +116,9 @@ public class ArrayStackTest {
 		
 	}
 
+	/**
+	 * Test method for setCapacity()
+	 */
 	@Test
 	public void testSetcapacity() {
 		Stack<String> list = new ArrayStack<String>(5);

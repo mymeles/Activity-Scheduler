@@ -222,7 +222,7 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 				}
 				removedObject = current.next.data;
 				current.next = current.next.next;
-				if(idx == size-1) {
+				if(idx == size - 1) {
 					back = current;
 				}
 			}

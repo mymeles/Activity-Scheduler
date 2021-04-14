@@ -46,29 +46,11 @@ public class CourseRollTest {
 	/** Valid id used for testing. */
 	private final String id = "ajberna2";
 
-	/** Alternate valid id used for testing */
-	private final String validId = "ajbernar";
-
 	/** Valid email used for testing. */
 	private final String email = "ajberna2@ncsu.edu";
 
-	/** Invalid Email, no @ symbol */
-	private final String invalidEmail1 = "emailncsu.edu";
-
-	/** Invalid Email, no . symbol */
-	private final String invalidEmail2 = "email@ncsuedu";
-
-	/** Invalid Email, . before @ */
-	private final String invalidEmail3 = "email.ncsu@edu";
-
-	/** Valid Email */
-	private final String validEmail = "email@ncsu.edu";
-
 	/** Valid password used for testing. */
 	private final String password = "Something";
-
-	/** Alternate valid password used for testing */
-	private final String validPassword = "Password";
 
 	/** Valid creditHours used for testing */
 	private final int credits = 15;
@@ -224,18 +206,14 @@ public class CourseRollTest {
 		assertEquals(1, testRoll.getOpenSeats());
 		testRoll.enroll(testStudents[0]);
 		assertEquals(0, testRoll.getOpenSeats());
-		
+
 		Student s = new Student(first, last, id, email, password, credits);
-		Student s2 = new Student(first, last, id, email, password, credits);
-		
+
 		assertTrue(testRoll.canEnroll(s));
 		testRoll.enroll(s);
-		
+
 		testRoll.drop(testStudents[0]);
 		assertEquals(0, testRoll.getOpenSeats());
-		
-
-		
 
 	}
 
@@ -260,7 +238,7 @@ public class CourseRollTest {
 		assertEquals(1, testRoll.getOpenSeats());
 		testRoll.setEnrollmentCap(14);
 		assertEquals(0, testRoll.getOpenSeats());
-		testRoll.setEnrollmentCap(20); 
+		testRoll.setEnrollmentCap(20);
 		assertEquals(6, testRoll.getOpenSeats());
 	}
 
@@ -273,7 +251,6 @@ public class CourseRollTest {
 		CourseRoll testRoll;
 		testRoll = new CourseRoll(c, 10);
 		Student s = new Student(first, last, id, email, password, credits);
-		Student s2 = new Student(first, last, id, email, password, credits);
 
 		assertTrue(testRoll.canEnroll(s));
 		testRoll.enroll(s);

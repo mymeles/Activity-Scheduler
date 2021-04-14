@@ -56,7 +56,9 @@ public class CourseRoll {
 	/**
 	 * A method to set the course
 	 * 
-	 * @param course
+	 * @param course is a Course
+	 * 
+	 * @throws IllegalArgumentException if the course is null;
 	 */
 	private void setCourse(Course course) {
 		if (course == null)

@@ -6,6 +6,11 @@ import java.util.EmptyStackException;
 
 import org.junit.Test;
 
+/**
+ * A class that tests the class ArrayQueue
+ * @author meles
+ *
+ */
 public class ArrayQueueTest {
 
 	/**
@@ -27,6 +32,9 @@ public class ArrayQueueTest {
 		assertEquals(5, list.size());
 	}
 
+	/**
+	 * A method to test the for enqueue
+	 */
 	@Test
 	public void testEnqueue() {
 		Queue<String> list = new ArrayQueue<String>(5);
@@ -57,6 +65,9 @@ public class ArrayQueueTest {
 		}
 	}
 
+	/**
+	 * A method to test the for dequeue
+	 */
 	@Test
 	public void testDequeue() {
 		Queue<String> list = new ArrayQueue<String>(5);

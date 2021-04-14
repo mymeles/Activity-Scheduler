@@ -7,14 +7,14 @@ import java.util.EmptyStackException;
 import org.junit.Test;
 
 /**
- * 
+ *  A class to test the class LinkedStack
  * @author Meles Meles
  *
  */
 public class LinkedStackTest {
 
 	/**
-	 * Testing method for ArrayStack()
+	 * Testing method for LinkedStack()
 	 */
 	@Test
 	public void testLinkedStack() {
@@ -66,6 +66,9 @@ public class LinkedStackTest {
 		}
 	}
 
+	/**
+	 * Test method for pop()
+	 */ 
 	@Test
 	public void testPop() {
 		Stack<String> list = new LinkedStack<String>(5);
@@ -115,6 +118,9 @@ public class LinkedStackTest {
 		
 	}
 
+	/**
+	 * Test method for setCapacity()
+	 */ 
 	@Test
 	public void testSetcapacity() {
 		Stack<String> list = new LinkedStack<String>(5);

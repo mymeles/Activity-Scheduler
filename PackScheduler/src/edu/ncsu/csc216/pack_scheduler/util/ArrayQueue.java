@@ -3,19 +3,25 @@
  */
 package edu.ncsu.csc216.pack_scheduler.util;
 
-import java.util.EmptyStackException;
 import java.util.NoSuchElementException;
 
 /**
+ * A class that constructs an array Queue 
  * @author Meles Meles
- *
+ * @param <E> is a generic object for the class
  */
 public class ArrayQueue<E> implements Queue<E> {
 
+	/** A list of Arraylist to construct the ArrayQueue */
 	private ArrayList<E> list;
 
+	/** an inetger to set the capacity*/
 	private int capacity;
 	
+	/**
+	 * A constructor for ArrayQueue that takes in capacity
+	 * @param capacity is an integer
+	 */
 	public ArrayQueue(int capacity) {
 		list = new ArrayList<E>();
 		setCapacity(capacity);
@@ -67,8 +73,8 @@ public class ArrayQueue<E> implements Queue<E> {
 
 	@Override
 	public boolean contains(E obj) {
-		// TODO Auto-generated method stub
-		return false;
+
+		return list.contains(obj);
 	}
 
 }

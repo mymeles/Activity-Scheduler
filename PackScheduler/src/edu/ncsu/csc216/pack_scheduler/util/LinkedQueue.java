@@ -3,7 +3,6 @@
  */
 package edu.ncsu.csc216.pack_scheduler.util;
 
-import java.util.EmptyStackException;
 import java.util.NoSuchElementException;
 
 /**
@@ -66,6 +65,7 @@ public class LinkedQueue<E> implements Queue<E> {
 		
 	}
 	
+	@Override
 	public boolean contains(E obj) {
 		return list.contains1(obj);
 	}
