@@ -64,5 +64,9 @@ public class LinkedQueue<E> implements Queue<E> {
 		list.setCapacity(capacity);
 		
 	}
+	
+	public boolean contains(E obj) {
+		return list.contains1(obj);
+	}
 
 }

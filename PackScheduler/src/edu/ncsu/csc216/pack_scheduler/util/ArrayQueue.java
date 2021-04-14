@@ -63,4 +63,11 @@ public class ArrayQueue<E> implements Queue<E> {
 
 	}
 
+
+	@Override
+	public boolean contains(E obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

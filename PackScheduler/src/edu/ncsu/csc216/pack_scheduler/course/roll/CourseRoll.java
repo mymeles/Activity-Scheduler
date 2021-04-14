@@ -104,7 +104,7 @@ public class CourseRoll {
 			throw new IllegalArgumentException("Student cannot be null.");
 		else if (getOpenSeats() == 0 || enrollmentCap == roll.size())
 			waitlist.enqueue(student);
-		else if(waitlist.size() == WAITLIST_SIZE)
+		else if (waitlist.size() == WAITLIST_SIZE)
 			throw new IllegalArgumentException();
 		else {
 			try {
@@ -123,17 +123,22 @@ public class CourseRoll {
 	 *                                  course
 	 */
 	public void drop(Student student) {
-		Queue<Student> waitlist1 = waitlist;
-		if (student == null) {
+		Student s;
+		if (student == null)
 			throw new IllegalArgumentException("Cannot remove null student");
+		if (roll.contains(student))
+			roll.remove(student);
+
+		// checks if the Student is on wait list
+		if (!waitlist.isEmpty()) {
+			s = waitlist.dequeue(); // Removes and returns the element at the front of the Queue
+			roll.add(roll.size(), s);
+			s.getSchedule().addCourseToSchedule(course);
 		} else {
-			for (int i = 0; i < roll.size(); i++) {
-				if (roll.get(i).equals(student)) {
-					roll.remove(i);
-					roll.add(waitlist.dequeue());
-					break;
-				} else if (waitlist1.dequeue().equals(student)) {
-					 waitlist.dequeue();
+			for (int i = 0; i < waitlist.size(); i++) {
+				s = waitlist.dequeue(); // Removes and returns the element at the front of the Queue
+				if (!student.equals(s)) {
+					waitlist.enqueue(s);
 				}
 			}
 		}
@@ -156,16 +161,14 @@ public class CourseRoll {
 	 *         course
 	 */
 	public boolean canEnroll(Student student) {
-		Queue<Student> waitlist1 = waitlist;
 		if (getOpenSeats() == 0 && waitlist.size() < WAITLIST_SIZE)
+			return true;
+		else if (waitlist.contains(student)) {
 			return false;
-		else {
+		} else {
 			for (int i = 0; i < roll.size(); i++) {
 				if (roll.get(i).equals(student))
 					return false;
-				if (waitlist1.dequeue().equals(student)) {
-					return false;
-				}
 			}
 			return true;
 		}

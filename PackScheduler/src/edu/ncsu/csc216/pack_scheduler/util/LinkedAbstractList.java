@@ -81,6 +81,21 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 			return current.data;
 		}
 	}
+	
+	/**
+	 * A method that returns an elemnt that exists in the list 
+	 * @param e the object we are looking for in the element 
+	 * @return a boolean
+	 */
+	public boolean contains1(E e) {
+		ListNode current = front;
+		while (current != null) {
+			if (current.data.equals(e))
+				return true;
+			current = current.next;
+		}
+		return false;
+	}
 
 	/**
 	 * Replaces the object at the given index with the given object

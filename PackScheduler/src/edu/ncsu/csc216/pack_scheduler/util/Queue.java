@@ -17,4 +17,6 @@ public interface Queue<E> {
 	int size();
 	
 	void setCapacity(int capacity);
+
+	boolean contains(E obj);
 }
