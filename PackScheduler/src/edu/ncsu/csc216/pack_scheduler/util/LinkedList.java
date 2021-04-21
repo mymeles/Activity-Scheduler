@@ -4,13 +4,19 @@ import java.util.AbstractSequentialList;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
+/**
+ * 
+ * @author Meles Meles
+ *
+ * @param <E> The generic object type stored in the LinkedList
+ */
 public class LinkedList<E> extends AbstractSequentialList<E> {
 
 	/** The number of ListNodes in the LinkedList */
 	private int size;
 
 	/** The ListNode contained at index 0 */
-	private ListNode front;  
+	private ListNode front;
 
 	/** The ListNode containing the last element of the list. */
 	private ListNode back;
@@ -28,7 +34,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	}
 
 	@Override
-	public ListIterator<E> listIterator(int idx) { 
+	public ListIterator<E> listIterator(int idx) {
 		return new LinkedListIterator(idx);
 
 	}
@@ -36,7 +42,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	@Override
 	public int size() {
 		return size;
-	} 
+	}
 
 	@Override
 	public void add(int idx, E element) {
@@ -101,10 +107,18 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 
 		}
 
+		/**
+		 * Adds an object before the element that would be returned and increments the
+		 * size
+		 * 
+		 * @param ele is generic type data
+		 * @throws NullPointerException id the added element is null
+		 */
 		@Override
 		public void add(E ele) {
-			if (ele == null)
+			if (ele == null) {
 				throw new NullPointerException();
+			}
 			ListNode add = new ListNode(ele, next, previous);
 			previous.next = add;
 			add.prev = previous;
@@ -137,10 +151,18 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			return previous.data != null;
 		}
 
+		/**
+		 * assuming there is an element after the iterators position the retrived data
+		 * node is updated to the next().data element we want to return and then the
+		 * current position idex is decremented
+		 * @return  a generic type found at the idex of next idex 
+		 * @throws NoSuchElementException is hasNext is false
+		 */
 		@Override
 		public E next() {
-			if (!hasNext())
+			if (!hasNext()) {
 				throw new NoSuchElementException();
+			}
 			lastRetrevied = next;
 			E rtn = next.data;
 
@@ -166,8 +188,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 
 			previous = previous.next;
 			next = next.prev;
-			nextIdx++;
-			prevIdx++;
+			nextIdx--;
+			prevIdx--;
 
 			return rtn;
 		}
@@ -184,7 +206,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			if (previous.prev != null)
 				previous.prev.next = next;
 
-			next.prev = previous.prev; 
+			next.prev = previous.prev;
 			previous = previous.prev;
 			lastRetrevied = null;
 			size--;
@@ -233,6 +255,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		 * 
 		 * @param data The object stored at the given list node
 		 * @param next The subsequent ListNode in the linkedList
+		 * @param prev The previous ListNode in the linkedList
 		 */
 		public ListNode(E data, ListNode next, ListNode prev) {
 			this.data = data;
