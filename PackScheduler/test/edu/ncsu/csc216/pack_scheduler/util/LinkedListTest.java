@@ -4,19 +4,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-/**
- * Tests the functionality of methods in ArrayList class
- * @author Alex Bernard
- *
- */
-public class ArrayListTest {
+public class LinkedListTest {
+
 
 	/**
-	 * Default test for arrayList constructor
+	 * Default test for LinkedList constructor
 	 */
 	@Test
-	public void testArrayList() {
-		ArrayList<String> testList = new ArrayList<String>();
+	public void testLinkedList() {
+		LinkedList<String> testList = new LinkedList<String>();
 		assertEquals(0, testList.size());
 	}
 
@@ -26,7 +22,8 @@ public class ArrayListTest {
 	 */
 	@Test
 	public void testAdd() {
-		ArrayList<String> testList = new ArrayList<String>();
+		LinkedList<String> testList = new LinkedList<String>();
+		
 		// Add to an empty list
 		testList.add(0, "Celery");
 		assertEquals("Celery", testList.get(0));
@@ -70,7 +67,7 @@ public class ArrayListTest {
 		try {
 			testList.add(0, "Vegtable");
 			fail();
-		} catch (IllegalArgumentException e) {
+		} catch (IndexOutOfBoundsException e) {
 			assertEquals(4, testList.size());
 		}
 		
@@ -98,7 +95,7 @@ public class ArrayListTest {
 	 */
 	@Test
 	public void testRemove() {
-		ArrayList<String> testList = new ArrayList<String>();
+		LinkedList<String> testList = new LinkedList<String>();
 		String removedElement = null;
 		// Remove from empty list
 		try {
@@ -178,7 +175,7 @@ public class ArrayListTest {
 	 */
 	@Test
 	public void testSet() {
-		ArrayList<String> testList = new ArrayList<String>();
+		LinkedList<String> testList = new LinkedList<String>();
 		String removedElement = null;
 		
 		// Set empty list (IndexOutOfBoundsException)
@@ -246,44 +243,6 @@ public class ArrayListTest {
 		assertEquals("Tomato", testList.get(3));
 		
 	}
-	
-	/**
-	 * Tests the functionality of the get method
-	 */
-	@Test
-	public void testGet() {
-		ArrayList<String> testList = new ArrayList<String>();
-		String getElement = null;
-		// Get from empty list
-		try {
-			getElement = testList.get(0);
-			fail();
-		} catch(IndexOutOfBoundsException e) {
-			assertNull(getElement);
-		}
-		
-		// Add Elements
-		testList.add(0, "Celery");
-		testList.add(1, "Cabbage");
-		testList.add(2, "Carrot");
-		testList.add(3, "Vegtable");
-		
-		// Get Index Out of Bounds
-		try {
-			getElement = testList.get(-1);
-			fail();
-		} catch(IndexOutOfBoundsException e) {
-			assertNull(getElement);
-		}
-		
-		try {
-			getElement = testList.get(4);
-			fail();
-		} catch(IndexOutOfBoundsException e) {
-			assertNull(getElement);
-		}
-		
-		getElement = testList.get(0);
-		assertEquals("Celery", getElement);
-	}
+
+
 }

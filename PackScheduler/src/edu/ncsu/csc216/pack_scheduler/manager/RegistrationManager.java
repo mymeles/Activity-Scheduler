@@ -10,7 +10,9 @@ import java.util.Properties;
 import edu.ncsu.csc216.pack_scheduler.catalog.CourseCatalog;
 import edu.ncsu.csc216.pack_scheduler.course.Course;
 import edu.ncsu.csc216.pack_scheduler.course.roll.CourseRoll;
+import edu.ncsu.csc216.pack_scheduler.directory.FacultyDirectory;
 import edu.ncsu.csc216.pack_scheduler.directory.StudentDirectory;
+import edu.ncsu.csc216.pack_scheduler.user.Faculty;
 import edu.ncsu.csc216.pack_scheduler.user.Student;
 import edu.ncsu.csc216.pack_scheduler.user.User;
 import edu.ncsu.csc216.pack_scheduler.user.schedule.Schedule;
@@ -30,6 +32,8 @@ public class RegistrationManager {
 	private CourseCatalog courseCatalog;
 	/** Directory of currently enrolled students */
 	private StudentDirectory studentDirectory;
+	/** Directory of currently teaching faculty */
+	private FacultyDirectory facultyDirectory;
 	/** Registrar user that is performing Manager functions */
 	private User registrar;
 	/** The current user of the PackScheduler */
@@ -46,6 +50,7 @@ public class RegistrationManager {
 		createRegistrar();
 		studentDirectory = new StudentDirectory();
 		courseCatalog = new CourseCatalog();
+		facultyDirectory = new FacultyDirectory();
 	}
 
 	/**
@@ -146,7 +151,22 @@ public class RegistrationManager {
 			} catch (NoSuchAlgorithmException e) {
 				throw new IllegalArgumentException();
 			}
-		} else {
+		} else if(facultyDirectory.getFacultyById(id) != null) {
+			Faculty f = facultyDirectory.getFacultyById(id);
+			try {
+				MessageDigest digest = MessageDigest.getInstance(HASH_ALGORITHM);
+				digest.update(password.getBytes());
+				String localHashPW = new String(digest.digest());
+				if (f.getPassword().equals(localHashPW)) {
+					currentUser = f;
+					return true;
+				}
+			} catch (NoSuchAlgorithmException e) {
+				throw new IllegalArgumentException();
+			}
+		}
+		
+		else {
 			Student s = studentDirectory.getStudentById(id);
 			if (s == null) {
 				throw new IllegalArgumentException("User doesn't exist.");

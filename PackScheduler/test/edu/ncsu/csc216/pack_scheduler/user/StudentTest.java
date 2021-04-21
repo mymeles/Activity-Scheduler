@@ -14,7 +14,7 @@ import edu.ncsu.csc216.pack_scheduler.course.Course;
  *
  */
 public class StudentTest {
-
+ 
 	/** Valid first name used for testing. */
 	private final String first = "Alex";
 
@@ -490,7 +490,7 @@ public class StudentTest {
 		//canAdd a duplicate courses 
 		assertFalse(s1.canAdd(c));
 		assertFalse(s1.canAdd(e));
-		
+		 
 		//canAdd a null course
 		assertFalse(s1.canAdd(null));
 		

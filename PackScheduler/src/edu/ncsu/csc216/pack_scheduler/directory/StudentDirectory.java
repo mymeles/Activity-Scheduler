@@ -27,7 +27,7 @@ public class StudentDirectory {
 	 * Creates an empty student directory.
 	 */
 	public StudentDirectory() {
-		newStudentDirectory();
+		newStudentDirectory(); 
 	}
 
 	/**

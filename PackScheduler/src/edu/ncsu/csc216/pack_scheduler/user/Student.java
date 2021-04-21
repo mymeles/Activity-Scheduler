@@ -13,7 +13,7 @@ public class Student extends User implements Comparable<Student> {
 
 	/** Maximum number of credits. */
 	public static final int MAX_CREDITS = 18;
-
+ 
 	/** The student's max credit hours. */
 	private int maxCredits;
 	
