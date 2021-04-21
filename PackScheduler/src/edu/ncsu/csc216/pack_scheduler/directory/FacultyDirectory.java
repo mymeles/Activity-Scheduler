@@ -13,7 +13,7 @@ import edu.ncsu.csc216.pack_scheduler.util.LinkedList;
 
 /**
  * Maintains a directory of all faculty enrolled at NC State. All faculty have
- * a unique id.
+ * a unique id
  * 
  * @author Meles Meles
  *
