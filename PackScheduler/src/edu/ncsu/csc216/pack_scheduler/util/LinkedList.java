@@ -224,13 +224,17 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-		 * 
+		 * retunrs the index of the previous element in the LinkedList 
+		 * @return integer
 		 */
 		@Override
 		public int previousIndex() {
 			return prevIdx;
 		}
 
+		/**
+		 * Removes the element that is the current next
+		 */
 		@Override
 		public void remove() {
 			if (lastRetrevied == null)

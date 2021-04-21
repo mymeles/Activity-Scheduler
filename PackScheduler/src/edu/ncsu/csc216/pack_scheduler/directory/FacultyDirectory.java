@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Iterator;
 import java.util.ListIterator;
 
 import edu.ncsu.csc216.pack_scheduler.io.FacultyRecordIO;
