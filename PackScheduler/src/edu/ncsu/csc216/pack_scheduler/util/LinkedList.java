@@ -5,7 +5,8 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
- * A class that constructs a double linked list which utilizes ListIterators  
+ * A class that constructs a double linked list which utilizes ListIterators
+ * 
  * @author Meles Meles
  *
  * @param <E> The generic object type stored in the LinkedList
@@ -30,7 +31,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		back = new ListNode(null);
 		front.next = back;
 		back.prev = front;
-		size = 0;  
+		size = 0;
 	}
 
 	@Override
@@ -46,15 +47,16 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	public int size() {
 		return size;
 	}
- 
+
 	/**
 	 * Adds the element to the linked list at the given index.
-	 * @param idx an integer indicating the idx which the elemnts is added on 
+	 * 
+	 * @param idx an integer indicating the idx which the elemnts is added on
 	 */
 	@Override
 	public void add(int idx, E element) {
-		if (size >= 0 && contains(element))
-			throw new IndexOutOfBoundsException();
+		if (contains(element))
+			throw new IllegalArgumentException();
 		ListIterator<E> iter = listIterator(idx);
 		iter.add(element);
 	}
@@ -76,6 +78,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	}
 
 	/**
+	 * A class that impements the LinkedListIterator for the use of stepping forward
+	 * and backwared into the list. It thas the functionality of add, set, hasNext, hasPervious
 	 * 
 	 * @author meles
 	 *
@@ -167,7 +171,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		 * assuming there is an element after the iterators position the retrived data
 		 * node is updated to the next().data element we want to return and then the
 		 * current position idex is decremented.
-		 * @return  a generic type found at the idex of next idex 
+		 * 
+		 * @return a generic type found at the idex of next idex
 		 * @throws NoSuchElementException is hasNext is false
 		 */
 		@Override
@@ -187,7 +192,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-		 * returns  the index of the next element in the list
+		 * returns the index of the next element in the list
 		 */
 		@Override
 		public int nextIndex() {
@@ -195,17 +200,18 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-
+		 * 
 		 * assuming there is an element before the iterators position the retrived data
 		 * node is updated to the next().data element we want to return and then the
 		 * current position idex is decremented.
-		 * @return  a generic type found at the idex of next idex 
-		 * @throws NoSuchElementException is hasNext is false 
+		 * 
+		 * @return a generic type found at the idex of next idex
+		 * @throws NoSuchElementException is hasNext is false
 		 */
 		@Override
 		public E previous() {
 			if (!hasPrevious())
-				throw new NoSuchElementException(); 
+				throw new NoSuchElementException();
 			lastRetrevied = previous;
 			E rtn = previous.data;
 
@@ -217,6 +223,9 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			return rtn;
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public int previousIndex() {
 			return prevIdx;
