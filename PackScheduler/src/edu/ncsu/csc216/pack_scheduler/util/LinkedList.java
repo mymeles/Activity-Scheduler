@@ -10,7 +10,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	private int size;
 
 	/** The ListNode contained at index 0 */
-	private ListNode front; 
+	private ListNode front;  
 
 	/** The ListNode containing the last element of the list. */
 	private ListNode back;
@@ -18,9 +18,6 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	/**
 	 * Default constructor for a LinkedAbstractList. Assigns the given parameter as
 	 * the capacity and initializes size with 0 and front with null
-	 * 
-	 * @param capacity The total number of ListNodes a LinkedAbstractList will
-	 *                 contain
 	 */
 	public LinkedList() {
 		front = new ListNode(null);
@@ -31,7 +28,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	}
 
 	@Override
-	public LinkedListIterator listIterator(int idx) {
+	public ListIterator<E> listIterator(int idx) { 
 		return new LinkedListIterator(idx);
 
 	}
@@ -45,7 +42,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	public void add(int idx, E element) {
 		if (contains(element) && size > 0)
 			throw new IndexOutOfBoundsException();
-		LinkedListIterator iter = listIterator(idx);
+		ListIterator<E> iter = listIterator(idx);
 		iter.add(element);
 	}
 
@@ -56,8 +53,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		if (idx >= size)
 			throw new IndexOutOfBoundsException();
 
-		LinkedListIterator iter = listIterator(idx);
-		E rtn = iter.next();
+		ListIterator<E> iter = listIterator(idx);
+		E rtn = (E) iter.next();
 
 		iter.set(element);
 

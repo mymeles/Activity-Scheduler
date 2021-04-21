@@ -171,7 +171,7 @@ public class FacultyDirectory {
 	 */
 	public Faculty getFacultyById(String id) {
 		for (int i = 0; i < getFacultyDirectory().length; i++) {
-			if (facultyDirectory.get(i).getId().equals(id)) {
+			if (facultyDirectory.get(i).getId().equals(id)) {  
 				return facultyDirectory.get(i);
 			}
 		}

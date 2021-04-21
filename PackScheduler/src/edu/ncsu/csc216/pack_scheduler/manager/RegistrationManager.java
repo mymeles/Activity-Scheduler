@@ -276,7 +276,7 @@ public class RegistrationManager {
 	        schedule.resetSchedule();
 	    } catch (IllegalArgumentException e) {
 	        //do nothing 
-	    }
+	    } 
 	}
 
 	/** 
