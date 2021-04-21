@@ -53,7 +53,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	 */
 	@Override
 	public void add(int idx, E element) {
-		if (contains(element) && size > 0)
+		if (size > 0 && contains(element))
 			throw new IndexOutOfBoundsException();
 		ListIterator<E> iter = listIterator(idx);
 		iter.add(element);
@@ -181,11 +181,21 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			return rtn;
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public int nextIndex() {
 			return nextIdx;
 		}
 
+		/**
+		 * assuming there is an element before the iterators position the retrived data
+		 * node is updated to the next().data element we want to return and then the
+		 * current position idex is decremented.
+		 * @return  a generic type found at the idx of next idx
+		 * @throws NoSuchElementException is hasNext is false
+		 */
 		@Override
 		public E previous() {
 			if (!hasPrevious())
@@ -193,7 +203,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			lastRetrevied = previous;
 			E rtn = previous.data;
 
-			previous = previous.next;
+			previous = previous.prev;
 			next = next.prev;
 			nextIdx--;
 			prevIdx--;
