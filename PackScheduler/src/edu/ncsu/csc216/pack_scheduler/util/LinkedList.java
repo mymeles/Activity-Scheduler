@@ -5,7 +5,7 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
- * 
+ * A class that constructs a double linked list which utilizes ListIterators  
  * @author Meles Meles
  *
  * @param <E> The generic object type stored in the LinkedList
@@ -39,11 +39,18 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 
 	}
 
+	/**
+	 * Returns the size of the LinkedList 
+	 */
 	@Override
 	public int size() {
 		return size;
 	}
 
+	/**
+	 * Adds the element to the linked list at the given index 
+	 * @param idx an integer indicating the idx which the elemnts is added on 
+	 */
 	@Override
 	public void add(int idx, E element) {
 		if (contains(element) && size > 0)
@@ -154,7 +161,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		/**
 		 * assuming there is an element after the iterators position the retrived data
 		 * node is updated to the next().data element we want to return and then the
-		 * current position idex is decremented
+		 * current position idex is decremented.
 		 * @return  a generic type found at the idex of next idex 
 		 * @throws NoSuchElementException is hasNext is false
 		 */
@@ -168,8 +175,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 
 			previous = previous.next;
 			next = next.next;
-			nextIdx--;
-			prevIdx--;
+			nextIdx++;
+			prevIdx++;
 
 			return rtn;
 		}
