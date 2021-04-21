@@ -49,21 +49,21 @@ public class FacultyRecordIO {
 	/**
 	 * Constructs a Faculty object using the elements from the input string.
 	 * 
-	 * @param Faculty The string input being read to construct a Faculty object.
+	 * @param faculty The string input being read to construct a Faculty object.
 	 * @return A Faculty object using the tokens from the string as fields.
 	 * @throws IllegalArgumentException If the input string does not meet the
 	 *                                  necessary criteria to construct a Faculty
 	 *                                  object.
 	 */
-	private static Faculty processFaculty(String Faculty) {
-		Scanner input = new Scanner(Faculty);
+	private static Faculty processFaculty(String faculty) {
+		Scanner input = new Scanner(faculty);
 		Faculty outputFaculty;
 		input.useDelimiter(",");
 		int i = 0;
 		String[] facultyField = new String[6];
 		while (input.hasNext()) {
 			facultyField[i] = input.next();
-			i++;
+			i++; 
 		}
 		input.close();
 		if (i < 6)

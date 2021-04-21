@@ -17,7 +17,6 @@ public class Faculty extends User {
 	/** The Faculty's max courses numbers. */
 	private int maxCourses;
 
-
 	/**
 	 * Constructs a Faculty object with the given fields.
 	 * 
@@ -60,7 +59,7 @@ public class Faculty extends User {
 	 * 
 	 * @return String containing a list of fields in the Faculty object separated by
 	 *         commas.
-	 */ 
+	 */
 	@Override
 	public String toString() {
 		String finalString = this.getFirstName() + "," + this.getLastName() + "," + this.getId() + "," + this.getEmail()
@@ -77,10 +76,11 @@ public class Faculty extends User {
 	}
 
 	/**
-	 * Determines if the faculty's and User fields of the two given objects are equal.
+	 * Determines if the faculty's and User fields of the two given objects are
+	 * equal.
 	 * 
 	 * @return True if the fields of each object are equal
-	 */ 
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -90,9 +90,9 @@ public class Faculty extends User {
 		if (getClass() != obj.getClass())
 			return false;
 		Faculty other = (Faculty) obj;
-		if (maxCourses != other.maxCourses)
-			return false;
-		return true;
+
+		return maxCourses == other.maxCourses;
+
 	}
 
 }

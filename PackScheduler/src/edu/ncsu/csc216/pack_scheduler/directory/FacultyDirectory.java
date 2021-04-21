@@ -11,6 +11,13 @@ import edu.ncsu.csc216.pack_scheduler.user.Faculty;
 import edu.ncsu.csc216.pack_scheduler.user.User;
 import edu.ncsu.csc216.pack_scheduler.util.LinkedList;
 
+/**
+ * Maintains a directory of all faculty enrolled at NC State. All faculty have
+ * a unique id.
+ * 
+ * @author Meles Meles
+ *
+ */
 public class FacultyDirectory {
 
 	/** List of Facultys in the directory */
@@ -111,13 +118,13 @@ public class FacultyDirectory {
 	 * given id. Returns true if the Faculty is removed and false if the Faculty is
 	 * not in the list.
 	 * 
-	 * @param FacultyId Faculty's id
+	 * @param facultyId Faculty's id
 	 * @return true if removed
 	 */
-	public boolean removeFaculty(String FacultyId) {
+	public boolean removeFaculty(String facultyId) {
 		for (int i = 0; i < facultyDirectory.size(); i++) {
 			User s = facultyDirectory.get(i);
-			if (s.getId().equals(FacultyId)) {
+			if (s.getId().equals(facultyId)) {
 				facultyDirectory.remove(i);
 				return true;
 			}
