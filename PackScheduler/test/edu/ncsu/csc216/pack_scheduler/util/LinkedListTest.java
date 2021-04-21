@@ -1,12 +1,15 @@
 package edu.ncsu.csc216.pack_scheduler.util;
 
 import static org.junit.Assert.*;
-
-import java.util.Iterator;
 import java.util.ListIterator;
 
 import org.junit.Test;
 
+/**
+ * A test class for LinkedList
+ * @author Meles Meles
+ *
+ */
 public class LinkedListTest {
 
 	/**

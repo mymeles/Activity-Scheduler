@@ -30,7 +30,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		back = new ListNode(null);
 		front.next = back;
 		back.prev = front;
-		size = 0;
+		size = 0;  
 	}
 
 	@Override
@@ -40,20 +40,20 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	}
 
 	/**
-	 * Returns the size of the LinkedList 
+	 * Returns the size of the LinkedList.
 	 */
 	@Override
 	public int size() {
 		return size;
 	}
-
+ 
 	/**
 	 * Adds the element to the linked list at the given index.
 	 * @param idx an integer indicating the idx which the elemnts is added on 
 	 */
 	@Override
 	public void add(int idx, E element) {
-		if (size >= size && contains(element))
+		if (size >= 0 && contains(element))
 			throw new IndexOutOfBoundsException();
 		ListIterator<E> iter = listIterator(idx);
 		iter.add(element);
@@ -187,7 +187,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-		 * 
+		 * returns  the index of the next element in the list
 		 */
 		@Override
 		public int nextIndex() {
