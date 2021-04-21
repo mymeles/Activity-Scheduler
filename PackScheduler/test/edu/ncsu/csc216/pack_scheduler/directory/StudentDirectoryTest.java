@@ -42,8 +42,8 @@ public class StudentDirectoryTest {
 	@Before
 	public void setUp() throws Exception {		
 		//Reset student_records.txt so that it's fine for other needed tests
-		Path sourcePath = FileSystems.getDefault().getPath("test-files", "expected_full_student_records.txt");
-		Path destinationPath = FileSystems.getDefault().getPath("test-files", "student_records.txt");
+		Path sourcePath = FileSystems.getDefault().getPath("test-files", "expected_full_faculty_records.txt");
+		Path destinationPath = FileSystems.getDefault().getPath("test-files", "faculty_records.txt");
 		try {
 			Files.deleteIfExists(destinationPath);
 			Files.copy(sourcePath, destinationPath);

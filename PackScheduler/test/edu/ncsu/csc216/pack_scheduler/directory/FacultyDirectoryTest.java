@@ -168,7 +168,7 @@ public class FacultyDirectoryTest {
 			
 			expScanner.close();
 			actScanner.close();
-		} catch (IOException e) {
+		} catch (IOException e) { 
 			fail("Error reading files.");
 		}
 	}
