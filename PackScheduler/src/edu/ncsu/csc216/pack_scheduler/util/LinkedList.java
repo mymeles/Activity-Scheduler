@@ -10,7 +10,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	private int size;
 
 	/** The ListNode contained at index 0 */
-	private ListNode front;
+	private ListNode front; 
 
 	/** The ListNode containing the last element of the list. */
 	private ListNode back;
@@ -39,7 +39,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	@Override
 	public int size() {
 		return size;
-	}
+	} 
 
 	@Override
 	public void add(int idx, E element) {
@@ -187,7 +187,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			if (previous.prev != null)
 				previous.prev.next = next;
 
-			next.prev = previous.prev;
+			next.prev = previous.prev; 
 			previous = previous.prev;
 			lastRetrevied = null;
 			size--;

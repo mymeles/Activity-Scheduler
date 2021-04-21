@@ -39,7 +39,7 @@ public class FacultyDirectory {
 	 * 
 	 * @param fileName file containing list of Facultys
 	 */
-	public void loadFacultysFromFile(String fileName) {
+	public void loadFacultyFromFile(String fileName) {
 		try {
 			facultyDirectory = FacultyRecordIO.readFacultyRecords(fileName);
 		} catch (FileNotFoundException e) {

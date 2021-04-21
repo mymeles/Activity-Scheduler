@@ -125,25 +125,26 @@ public class CourseRoll {
 	 *                                  course
 	 */
 	public void drop(Student student) {
-		Student s;
+		Student s; 
 		if (student == null)
 			throw new IllegalArgumentException("Cannot remove null student");
-		if (roll.contains(student))
+		if (roll.contains(student)) {
 			roll.remove(student);
-
-		// checks if the Student is on wait list
-		if (!waitlist.isEmpty()) {
-			s = waitlist.dequeue(); // Removes and returns the element at the front of the Queue
-			roll.add(roll.size(), s);
-			s.getSchedule().addCourseToSchedule(course);
-		} else {
-			for (int i = 0; i < waitlist.size(); i++) {
+			if (!waitlist.isEmpty()) {
+				s = waitlist.dequeue(); // Removes and returns the element at the front of the Queue
+				roll.add(roll.size(), s);
+				s.getSchedule().addCourseToSchedule(course);
+			}
+		} else if (waitlist.contains(student)) {
+			int size = waitlist.size();
+			for (int i = 0; i < size; i++) {
 				s = waitlist.dequeue(); // Removes and returns the element at the front of the Queue
 				if (!student.equals(s)) {
 					waitlist.enqueue(s);
 				}
 			}
 		}
+
 	}
 
 	/**

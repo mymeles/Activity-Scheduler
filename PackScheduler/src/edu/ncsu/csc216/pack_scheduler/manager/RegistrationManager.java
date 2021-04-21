@@ -88,7 +88,7 @@ public class RegistrationManager {
 		} catch (NoSuchAlgorithmException e) {
 			throw new IllegalArgumentException("Cannot hash password");
 		}
-	}
+	} 
 
 	/**
 	 * Validates that there is no current instance of the Registration Manager
@@ -160,6 +160,7 @@ public class RegistrationManager {
 			} catch (NoSuchAlgorithmException e) {
 				throw new IllegalArgumentException();
 			}
+		
 		} else if(facultyDirectory.getFacultyById(id) != null) {
 			Faculty f = facultyDirectory.getFacultyById(id);
 			try {
@@ -285,6 +286,7 @@ public class RegistrationManager {
 	public void clearData() {
 		courseCatalog = new CourseCatalog();
 		studentDirectory = new StudentDirectory();
+		facultyDirectory = new FacultyDirectory();
 	}
  
 	/**

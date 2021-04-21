@@ -88,7 +88,7 @@ public class RegistrationManagerTest {
 		s.loadStudentsFromFile("test-files/student_records.txt");
 		assertEquals(10, s.getStudentDirectory().length);
 
-	}
+	} 
 	
 	/**
 	 * A test Method for getStudentDirectory
@@ -97,7 +97,7 @@ public class RegistrationManagerTest {
 	public void testGetFacultyDirectory() {
 		FacultyDirectory f = manager.getFacultyDirectory();
 
-		f.loadFacultysFromFile("test-files/faculty_records.txt");
+		f.loadFacultyFromFile("test-files/faculty_records.txt");
 		assertEquals(8, f.getFacultyDirectory().length);
 
 	} 
@@ -159,7 +159,7 @@ public class RegistrationManagerTest {
 		// initialize student directory
 		FacultyDirectory f = manager.getFacultyDirectory();
 
-		f.loadFacultysFromFile("test-files/faculty_records.txt");
+		f.loadFacultyFromFile("test-files/faculty_records.txt");
 		System.out.println(f.getFacultyDirectory().length);
 		Faculty f1 = f.getFacultyById("awitt");
 

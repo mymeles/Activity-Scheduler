@@ -68,7 +68,7 @@ public class FacultyDirectoryTest {
 		// are removed after calling newFacultyDirectory().
 		FacultyDirectory fy = new FacultyDirectory();
 
-		fy.loadFacultysFromFile(validTestFile);
+		fy.loadFacultyFromFile(validTestFile);
 		assertEquals(8, fy.getFacultyDirectory().length); 
 		fy.newFacultyDirectory();
 		assertEquals(0, fy.getFacultyDirectory().length);
@@ -79,13 +79,13 @@ public class FacultyDirectoryTest {
 		FacultyDirectory fy = new FacultyDirectory();
 
 		// Test valid file
-		fy.loadFacultysFromFile(validTestFile);
+		fy.loadFacultyFromFile(validTestFile);
 		assertEquals(8, fy.getFacultyDirectory().length);
 
 		fy = new FacultyDirectory();
 		// Test invalid file
 		try {
-			fy.loadFacultysFromFile("test-files/invalid_file.txt");
+			fy.loadFacultyFromFile("test-files/invalid_file.txt");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Unable to read file test-files/invalid_file.txt", e.getMessage());
 		}
@@ -115,7 +115,7 @@ public class FacultyDirectoryTest {
 		FacultyDirectory fy = new FacultyDirectory();
 
 		// Add Facultys and remove
-		fy.loadFacultysFromFile(validTestFile);
+		fy.loadFacultyFromFile(validTestFile);
 		assertEquals(8, fy.getFacultyDirectory().length);
 		assertTrue(fy.removeFaculty("awitt"));
 		String[][] facultyDirectory = fy.getFacultyDirectory();
