@@ -11,7 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.ncsu.csc216.pack_scheduler.catalog.CourseCatalog;
+import edu.ncsu.csc216.pack_scheduler.directory.FacultyDirectory;
 import edu.ncsu.csc216.pack_scheduler.directory.StudentDirectory;
+import edu.ncsu.csc216.pack_scheduler.user.Faculty;
 import edu.ncsu.csc216.pack_scheduler.user.Student;
 import edu.ncsu.csc216.pack_scheduler.user.schedule.Schedule;
 
@@ -35,7 +37,7 @@ public class RegistrationManagerTest {
 	/**
 	 * Sets up the CourseManager and clears the data.
 	 * @throws Exception if error
-	 */
+	 */ 
 	@Before
 	public void setUp() throws Exception {
 		manager = RegistrationManager.getInstance();
@@ -87,12 +89,24 @@ public class RegistrationManagerTest {
 		assertEquals(10, s.getStudentDirectory().length);
 
 	}
+	
+	/**
+	 * A test Method for getStudentDirectory
+	 */
+	@Test
+	public void testGetFacultyDirectory() {
+		FacultyDirectory f = manager.getFacultyDirectory();
+
+		f.loadFacultysFromFile("test-files/faculty_records.txt");
+		assertEquals(8, f.getFacultyDirectory().length);
+
+	} 
 
 	/**
 	 * A test Method for Login
 	 */
 	@Test
-	public void testLogin() {
+	public void testLoginStudent() {
 
 		// assert there is no user logged in
 		assertEquals(null, manager.getCurrentUser());
@@ -132,6 +146,52 @@ public class RegistrationManagerTest {
 			assertEquals("User doesn't exist.", e.getMessage());
 		}
 	}
+	
+	/**
+	 * A test Method for Login
+	 */
+	@Test
+	public void testLoginFaculty() {
+
+		// assert there is no user logged in
+		assertEquals(null, manager.getCurrentUser());
+
+		// initialize student directory
+		FacultyDirectory f = manager.getFacultyDirectory();
+
+		f.loadFacultysFromFile("test-files/faculty_records.txt");
+		System.out.println(f.getFacultyDirectory().length);
+		Faculty f1 = f.getFacultyById("awitt");
+
+		// login in a registarar
+		assertTrue(manager.login(registrarUsername, registrarPassword));
+		assertEquals(registrarUsername, manager.getCurrentUser().getId());
+		manager.logout();
+		assertEquals(null, manager.getCurrentUser());
+
+		// login in a student with valid credintials
+		assertTrue(manager.login(f1.getId(), "pw"));
+		assertFalse(manager.login("efrost", "pw"));
+		assertEquals(f1, manager.getCurrentUser());
+		manager.logout();
+		assertEquals(null, manager.getCurrentUser());
+
+		// login invalid registrar
+		assertFalse(manager.login(registrarUsername, "invalidpassword"));
+		assertEquals(null, manager.getCurrentUser());
+
+		// login in an invlaid student
+		assertFalse(manager.login(f1.getId(), "invalid"));
+		assertEquals(null, manager.getCurrentUser());
+
+		try {
+			manager.login("invalidid", "pw");
+		} catch (IllegalArgumentException e) {
+			assertEquals(null, manager.getCurrentUser());
+			assertEquals("User doesn't exist.", e.getMessage());
+		}
+	}
+
 
 	/**
 	 * A test Method for Logout

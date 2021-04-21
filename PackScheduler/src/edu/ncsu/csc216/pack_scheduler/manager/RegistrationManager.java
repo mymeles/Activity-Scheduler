@@ -119,7 +119,16 @@ public class RegistrationManager {
 	public StudentDirectory getStudentDirectory() {
 		return studentDirectory;
 	}
-
+	
+	/**
+	 * Gets the requested Faculty Directory after being called by the UI
+	 * 
+	 * @return returns the requested directory
+	 */
+	public FacultyDirectory getFacultyDirectory() {
+		return facultyDirectory;
+	}
+ 
 	/**
 	 * Validates the Registrar's session against the known hashed password in the
 	 * log
@@ -277,7 +286,7 @@ public class RegistrationManager {
 		courseCatalog = new CourseCatalog();
 		studentDirectory = new StudentDirectory();
 	}
-
+ 
 	/**
 	 * Inner class of the RegistrationManager that logs the user in but as a
 	 * Registrar

@@ -69,8 +69,7 @@ public class FacultyDirectoryTest {
 		FacultyDirectory fy = new FacultyDirectory();
 
 		fy.loadFacultysFromFile(validTestFile);
-		assertEquals(8, fy.getFacultyDirectory().length);
-
+		assertEquals(8, fy.getFacultyDirectory().length); 
 		fy.newFacultyDirectory();
 		assertEquals(0, fy.getFacultyDirectory().length);
 	}
