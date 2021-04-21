@@ -190,10 +190,17 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
+<<<<<<< HEAD
 		 * assuming there is an element before the iterators position the retrived data
 		 * node is updated to the next().data element we want to return and then the
 		 * current position idex is decremented.
 		 * @return  a generic type found at the idx of next idx
+=======
+		 * assuming there is an element after the iterators position the retrived data
+		 * node is updated to the next().data element we want to return and then the
+		 * current position idex is decremented.
+		 * @return  a generic type found at the idex of next idex 
+>>>>>>> branch 'main' of https://github.ncsu.edu/engr-csc216-spring2021/csc217-L-201-21.git
 		 * @throws NoSuchElementException is hasNext is false
 		 */
 		@Override
