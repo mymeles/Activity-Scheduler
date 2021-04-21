@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 import edu.ncsu.csc216.pack_scheduler.io.FacultyRecordIO;
 import edu.ncsu.csc216.pack_scheduler.user.Faculty;
 import edu.ncsu.csc216.pack_scheduler.user.User;
 import edu.ncsu.csc216.pack_scheduler.util.LinkedList;
+
 
 /**
  * Maintains a directory of all faculty enrolled at NC State. All faculty have
@@ -94,7 +96,9 @@ public class FacultyDirectory {
 			throw new IllegalArgumentException("Passwords do not match");
 		}
 
-		Iterator<Faculty> iter = facultyDirectory.iterator();
+				
+
+		ListIterator<Faculty> iter = facultyDirectory.listIterator(facultyDirectory.size());
 		while (iter.hasNext()) {
 			if (iter.next().getPassword().equals(password)) {
 				throw new IllegalArgumentException("Faculty already in system");
@@ -116,7 +120,7 @@ public class FacultyDirectory {
 	/**
 	 * Removes the Faculty with the given id from the list of Facultys with the
 	 * given id. Returns true if the Faculty is removed and false if the Faculty is
-	 * not in the list.
+	 * not in the list
 	 * 
 	 * @param facultyId Faculty's id
 	 * @return true if removed
