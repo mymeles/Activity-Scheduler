@@ -46,7 +46,7 @@ public class LinkedQueue<E> implements Queue<E> {
 	}
 
 	@Override
-	public boolean isEmpty() {
+	public boolean isEmpty() { 
 		return list.size() == 0;
 	}
 

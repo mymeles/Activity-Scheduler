@@ -12,7 +12,6 @@ import java.util.Scanner;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.ncsu.csc216.pack_scheduler.user.Faculty;
 
 /**
  * Tests FacultyDirectory.
@@ -54,14 +53,20 @@ public class FacultyDirectoryTest {
 		}
 	}
 	
+	/**
+	 * Tests FacultyDirectory().
+	 */
 	@Test
-	public void testDirectory() {
+	public void tesFacultyDirectory() {
 		// Test that the FacultyDirectory is initialized to an empty list
 		FacultyDirectory fy = new FacultyDirectory();
 		assertFalse(fy.removeFaculty("sesmith5"));
 		assertEquals(0, fy.getFacultyDirectory().length);
 	}
  
+	/**
+	 * Tests facultyDirectory.testNewfacultyDirectory().
+	 */
 	@Test
 	public void testNewFacultyDirectory() {
 		// Test that if there are faculty in the directory, they
@@ -74,6 +79,9 @@ public class FacultyDirectoryTest {
 		assertEquals(0, fy.getFacultyDirectory().length);
 	}
 
+	/**
+	 * Tests facultyDirectory.loadfacultysFromFile().
+	 */
 	@Test
 	public void testLoadsFromFile() {
 		FacultyDirectory fy = new FacultyDirectory();
@@ -83,7 +91,7 @@ public class FacultyDirectoryTest {
 		assertEquals(8, fy.getFacultyDirectory().length);
 
 		fy = new FacultyDirectory();
-		// Test invalid file
+		// Test invalid file 
 		try {
 			fy.loadFacultyFromFile("test-files/invalid_file.txt");
 		} catch (IllegalArgumentException e) {
@@ -91,6 +99,9 @@ public class FacultyDirectoryTest {
 		}
 	}
 
+	/**
+	 * Tests facultyDirectory.addfaculty().
+	 */
 	@Test
 	public void testAdd() {
 		FacultyDirectory fy = new FacultyDirectory();
@@ -110,6 +121,9 @@ public class FacultyDirectoryTest {
 		assertEquals(1, fy.getFacultyDirectory().length);
 	}
 
+	/**
+	 * Tests facultyDirectory.removefaculty().
+	 */
 	@Test
 	public void testFacultyRemove() {
 		FacultyDirectory fy = new FacultyDirectory();
@@ -125,29 +139,36 @@ public class FacultyDirectoryTest {
 		assertEquals("kpatel", facultyDirectory[3][2]);
 	}
 
+	/**
+	 * Tests facultyDirectory.getFacultyDirectory.
+	 */
+	
 	@Test
-	public void testGetDirectory() {
+	public void testGetFacultyDirectory() {
 		// Test that the FacultyDirectory is initialized to an empty list
 		FacultyDirectory fy = new FacultyDirectory();
 		assertFalse(fy.removeFaculty("namee"));
 		assertEquals(0, fy.getFacultyDirectory().length);
 	}
 
+	/**
+	 * Tests facultyDirectory.savefacultyDirectory().
+	 */
 	@Test
 	public void testSaveDirectory() {
 		FacultyDirectory fy = new FacultyDirectory();
 		fy.addFaculty("Ashely", "Witt", "awitt", "mollis@Fuscealiquetmagna.net", "pw", "pw", 2);
 		fy.addFaculty("Fiona", "Meadows", "fmeadow", "pharetra.sed@et.org", "pw", "pw", 3);
-		fy.addFaculty("Brent", "Brewer", "bbrewer", "sem.semper@orcisem.co.uk","pw", "pw", 1);
+		fy.addFaculty("Brent", "Brewer", "bbrewer", "sem.semper@orcisem.co.uk", "pw", "pw", 1);
 		assertEquals(3, fy.getFacultyDirectory().length);
 		fy.saveFacultyDirectory("test-files/actual_Faculty_records.txt");
 		checkFiles("test-files/expected_faculty_records.txt", "test-files/actual_Faculty_records.txt");
 
 		// Test IOException
 		try {
-			fy.saveFacultyDirectory("/home/sesmith5/actual_student_records.txt");
+			fy.saveFacultyDirectory("/home/sesmith5/actual_faculty_records.txt");
 		} catch (IllegalArgumentException e) {
-			assertEquals("Unable to write to file /home/sesmith5/actual_student_records.txt", e.getMessage());
+			assertEquals("Unable to write to file /home/sesmith5/actual_faculty_records.txt", e.getMessage());
 		}
 	}
 	
