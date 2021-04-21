@@ -48,7 +48,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	}
 
 	/**
-	 * Adds the element to the linked list at the given index 
+	 * Adds the element to the linked list at the given index.
 	 * @param idx an integer indicating the idx which the elemnts is added on 
 	 */
 	@Override
