@@ -11,15 +11,34 @@ import org.junit.Test;
  *
  */
 public class LinkedListRecursiveTest {
-
-	/**
-	 * Default test for LinkedListRecursive constructor
-	 */
-	@Test
-	public void testLinkedListRecursive() {
-		LinkedListRecursive<String> testList = new LinkedListRecursive<String>();
-		assertEquals(0, testList.size());
-	} 
+//
+//	/**
+//	 * Default test for LinkedListRecursive constructor
+//	 */
+//	@Test
+//	public void testLinkedListRecursive() {
+//		LinkedListRecursive<String> testList = new LinkedListRecursive<String>();
+//		assertEquals(0, testList.size());
+//		testList.add("1");
+//		testList.add("2");
+//		testList.add("3");
+//		testList.add("4");
+//		testList.add("5");
+//		testList.add("6");
+//		assertEquals(6, testList.size());
+//		assertEquals(true, testList.remove("1"));
+//		assertEquals(true, testList.remove("4"));
+//		assertEquals(false, testList.remove("87"));
+//		assertEquals(4, testList.size());
+//	//	assertEquals("6", testList.get(3));
+//		
+//		for(int i =0; i < testList.size(); i++) {
+//			System.out.println(testList.get(i));
+//		}
+//
+//		
+//
+//	} 
 
 	/**
 	 * Tests the functionality of the ArrayList add method
@@ -71,7 +90,7 @@ public class LinkedListRecursiveTest {
 		try {
 			testList.add(0, "Vegtable");
 			fail();
-		} catch (IndexOutOfBoundsException e) {
+		} catch (IllegalArgumentException e) {
 			assertEquals(4, testList.size());
 		}
 
@@ -254,5 +273,5 @@ public class LinkedListRecursiveTest {
 		assertEquals("Tomato", testList.get(3));
 
 	}
-	
+
  }

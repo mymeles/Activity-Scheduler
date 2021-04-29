@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.pack_scheduler.user;
 
+import edu.ncsu.csc216.pack_scheduler.user.schedule.FacultySchedule;
+
 /**
  * The following class stores the first name, last name, id, email, password,
  * and courses numbers of a given faculty.
@@ -16,6 +18,9 @@ public class Faculty extends User {
 
 	/** The Faculty's max courses numbers. */
 	private int maxCourses;
+	
+	/** A schedule representing facultyShedule */
+	private FacultySchedule schedule;
 
 	/**
 	 * Constructs a Faculty object with the given fields.
@@ -30,6 +35,7 @@ public class Faculty extends User {
 	public Faculty(String firstName, String lastName, String id, String email, String hashPW, int maxCourses) {
 		super(firstName, lastName, id, email, hashPW);
 		this.setMaxCourses(maxCourses);
+		schedule = new FacultySchedule(id);
 	}
 
 	/**
@@ -93,6 +99,15 @@ public class Faculty extends User {
 
 		return maxCourses == other.maxCourses;
 
+	}
+
+	public FacultySchedule getSchedule() {
+		return schedule;
+	}
+
+	public boolean isOverloaded() {
+		
+		return schedule.getNumScheduledCourses() > maxCourses;
 	}
 
 }

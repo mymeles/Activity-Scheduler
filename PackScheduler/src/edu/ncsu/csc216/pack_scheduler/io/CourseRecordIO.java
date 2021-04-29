@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import edu.ncsu.csc216.pack_scheduler.course.Course;
+import edu.ncsu.csc216.pack_scheduler.manager.RegistrationManager;
 import edu.ncsu.csc217.collections.list.SortedList;
 
 /**
@@ -84,10 +85,12 @@ public class CourseRecordIO {
 		Course returnCourse = null;
 		String[] courseField = new String[9];
 		int i = 0;
+
 		while (lineReader.hasNext() && i < 9) {
 			courseField[i] = lineReader.next();
 			i++;
 		}
+		String id = courseField[4];
 		if (i < 7 || lineReader.hasNext()) {
 			lineReader.close();
 			throw new IllegalArgumentException("Invalid course");
@@ -97,15 +100,23 @@ public class CourseRecordIO {
 				throw new IllegalArgumentException("Invalid Course");
 			}
 			returnCourse = new Course(courseField[0], courseField[1], courseField[2], Integer.parseInt(courseField[3]),
-					courseField[4], Integer.parseInt(courseField[5]), courseField[6]);
+					null, Integer.parseInt(courseField[5]), courseField[6]);
+
 		} else {
 			returnCourse = new Course(courseField[0], courseField[1], courseField[2], Integer.parseInt(courseField[3]),
-					courseField[4], Integer.parseInt(courseField[5]), courseField[6], Integer.parseInt(courseField[7]),
+					null, Integer.parseInt(courseField[5]), courseField[6], Integer.parseInt(courseField[7]),
 					Integer.parseInt(courseField[8]));
 		}
-
 		lineReader.close();
-		return returnCourse;
+		
+		RegistrationManager manager = RegistrationManager.getInstance();
+		if (manager.getFacultyDirectory().getFacultyById(id) != null) {
+			manager.addFacultyToCourse(returnCourse, manager.getFacultyDirectory().getFacultyById(id));
+			return returnCourse;
+		} else {
+			return returnCourse;
+		}
+
 	}
 
 	/**

@@ -101,7 +101,7 @@ public class Schedule {
 		}
 		return outputArray;
 	}
-
+ 
 	/**
 	 * Changes the current schedule's title field with the given string
 	 * 
