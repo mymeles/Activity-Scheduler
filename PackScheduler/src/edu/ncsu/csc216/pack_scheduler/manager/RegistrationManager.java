@@ -130,16 +130,18 @@ public class RegistrationManager {
 	}
 
 	public boolean addFacultyToCourse(Course c, Faculty f) {
-		if (c == null || f == null)
-			return false;
-		else {
-			f.getSchedule().addCourseToSchedule(c);
-			}
-		return true;
+		if (!(currentUser instanceof Registrar)) // there is check for the
+			throw new IllegalArgumentException("Illegal Action");
+
+	
+		return f.getSchedule().addCourseToSchedule(c);
+	
 	}
 
 	public boolean removeFacultyFromCourse(Course c, Faculty f) {
-		return true; 
+		if (!(currentUser instanceof Registrar)) // there is check for the
+			throw new IllegalArgumentException("Illegal Action");
+		return f.getSchedule().removeCourseFromSchedule(c);
 	}
 
 	/**
@@ -300,7 +302,10 @@ public class RegistrationManager {
 	 * @param f
 	 */
 	public void resetFacultySchedule(Faculty f) {
+		if (!(currentUser instanceof Registrar)) // there is check for the
+			throw new IllegalArgumentException("Illegal Action");
 
+		f.getSchedule().resetSchedule();
 	}
 
 	/**

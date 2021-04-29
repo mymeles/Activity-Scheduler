@@ -29,7 +29,7 @@ public class CourseRecordIOTest {
 	private final String invalidTestFile = "test-files/invalid_course_records.txt";
 
 	/** Expected results for valid courses in course_records.txt - line 1 */
-	private final String validCourse1 = "CSC116,Intro to Programming - Java,001,3,jdyoung2,10,MW,910,1100";
+	private final String validCourse1 = "CSC116,Intro to Programming - Java,001,3,null,10,MW,910,1100";
 	/** Expected results for valid courses in course_records.txt - line 2 */
 	private final String validCourse2 = "CSC116,Intro to Programming - Java,002,3,spbalik,10,MW,1120,1310";
 	/** Expected results for valid courses in course_records.txt - line 3 */

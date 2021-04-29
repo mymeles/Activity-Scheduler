@@ -516,18 +516,17 @@ public class CourseTest {
 		// (or anything else).
 		try {
 			c.setInstructorId(null);
-			fail();
-		} catch (IllegalArgumentException e) {
 			assertEquals(NAME, c.getName());
 			assertEquals(TITLE, c.getTitle());
 			assertEquals(SECTION, c.getSection());
 			assertEquals(CREDITS, c.getCredits());
-			assertEquals(INSTRUCTOR_ID, c.getInstructorId());
+			assertNull(c.getInstructorId());
 			assertEquals(ENCAP, c.getCourseRoll().getEnrollmentCap());
 			assertEquals(MEETING_DAYS, c.getMeetingDays());
 			assertEquals(START_TIME, c.getStartTime());
 			assertEquals(END_TIME, c.getEndTime());
-			assertEquals("Invalid instructor unity id", e.getMessage());
+		} catch (IllegalArgumentException e) {
+			
 		}
 
 		// Test that setting the instructor id to "" doesn't change the instructor id
@@ -540,7 +539,7 @@ public class CourseTest {
 			assertEquals(TITLE, c.getTitle());
 			assertEquals(SECTION, c.getSection());
 			assertEquals(CREDITS, c.getCredits());
-			assertEquals(INSTRUCTOR_ID, c.getInstructorId());
+			assertNull(c.getInstructorId());
 			assertEquals(ENCAP, c.getCourseRoll().getEnrollmentCap());
 			assertEquals(MEETING_DAYS, c.getMeetingDays());
 			assertEquals(START_TIME, c.getStartTime());

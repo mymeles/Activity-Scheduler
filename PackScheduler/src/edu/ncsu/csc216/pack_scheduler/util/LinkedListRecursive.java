@@ -26,7 +26,10 @@ public class LinkedListRecursive<E> {
 	public int size() {
 		return size;
 	}
-
+	
+	public boolean isEmpty() {
+		return size == 0;
+	}
 	public void add(int idx, E e) {
 		if (contains(e))
 			throw new IllegalArgumentException();
