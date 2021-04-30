@@ -128,9 +128,20 @@ public class RegistrationManagerTest {
 			assertEquals("Illegal Action", e.getMessage());
 		}
 
+		
+		try {
+			manager.login(registrarUsername, registrarPassword);
+			assertTrue(manager.removeFacultyFromCourse(cr, fy));
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals("Illegal Action", e.getMessage());
+		}
+		
 		manager.login(registrarUsername, registrarPassword);
 
 		assertTrue(manager.addFacultyToCourse(cr, fy));
+		manager.logout();
+		
 	}
 
 	/**
