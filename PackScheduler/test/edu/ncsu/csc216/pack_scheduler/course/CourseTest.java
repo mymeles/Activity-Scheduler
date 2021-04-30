@@ -526,7 +526,7 @@ public class CourseTest {
 			assertEquals(START_TIME, c.getStartTime());
 			assertEquals(END_TIME, c.getEndTime());
 		} catch (IllegalArgumentException e) {
-			
+			//
 		}
 
 		// Test that setting the instructor id to "" doesn't change the instructor id

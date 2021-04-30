@@ -31,10 +31,8 @@ public class FacultySchedule {
 	 */
 	public boolean addCourseToSchedule(Course course) {
 		for (int i = 0; i < schedule.size(); i++) {
-			if (schedule.get(i).isDuplicate(course)) {
-				if (schedule.get(i).getSection().equals(course.getSection())) {
-					throw new IllegalArgumentException("Already assigned " + course.getName());
-				}
+			if (schedule.get(i).isDuplicate(course) && schedule.get(i).getSection().equals(course.getSection()) ) {
+							throw new IllegalArgumentException("Already assigned " + course.getName());
 			}
 			try {
 				schedule.get(i).checkConflict(course);
@@ -73,7 +71,7 @@ public class FacultySchedule {
 		for (int i = 0; i < startingSize; i++) {
 			removeCourseFromSchedule(schedule.get(0)); //also removes from Course
 		}
-	}
+	} 
 	
 	/**
 	 * Returns the list of scheduled Courses.
