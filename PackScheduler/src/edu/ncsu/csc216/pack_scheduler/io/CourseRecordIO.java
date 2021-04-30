@@ -91,7 +91,6 @@ public class CourseRecordIO {
 			courseField[i] = lineReader.next();
 			i++;
 		}
-		lineReader.close();
 		String id = courseField[4];
 		if (i < 7 || lineReader.hasNext()) {
 			lineReader.close();
@@ -103,29 +102,23 @@ public class CourseRecordIO {
 			}
 			returnCourse = new Course(courseField[0], courseField[1], courseField[2], Integer.parseInt(courseField[3]),
 					null, Integer.parseInt(courseField[5]), courseField[6]);
-			return managerHelper(returnCourse, id);
+
+			if (RegistrationManager.getInstance().getFacultyDirectory().getFacultyById(id) != null)
+				RegistrationManager.getInstance().getFacultyDirectory().getFacultyById(id).getSchedule()
+						.addCourseToSchedule(returnCourse);
 
 		} else {
 			returnCourse = new Course(courseField[0], courseField[1], courseField[2], Integer.parseInt(courseField[3]),
 					null, Integer.parseInt(courseField[5]), courseField[6], Integer.parseInt(courseField[7]),
 					Integer.parseInt(courseField[8]));
-			return managerHelper(returnCourse, id);
-		}
+			if (RegistrationManager.getInstance().getFacultyDirectory().getFacultyById(id) != null)
+				RegistrationManager.getInstance().getFacultyDirectory().getFacultyById(id).getSchedule()
+						.addCourseToSchedule(returnCourse);
 
-	}
-
-	/**
-	 * A method to help add course to faculty schedule
-	 * 
-	 * @param c
-	 * @param id
-	 */
-	private static Course managerHelper(Course c, String id) {
-		if (RegistrationManager.getInstance().getFacultyDirectory().getFacultyById(id) != null) {
-			RegistrationManager.getInstance().getFacultyDirectory().getFacultyById(id).getSchedule()
-					.addCourseToSchedule(c);
 		}
-		return c;
+		lineReader.close();
+		return returnCourse;
+
 	}
 
 	/**
