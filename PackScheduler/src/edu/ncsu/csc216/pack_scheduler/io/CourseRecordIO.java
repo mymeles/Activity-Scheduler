@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import edu.ncsu.csc216.pack_scheduler.course.Course;
 import edu.ncsu.csc216.pack_scheduler.manager.RegistrationManager;
+import edu.ncsu.csc216.pack_scheduler.user.Faculty;
 import edu.ncsu.csc217.collections.list.SortedList;
 
 /**
@@ -101,22 +102,19 @@ public class CourseRecordIO {
 			}
 			returnCourse = new Course(courseField[0], courseField[1], courseField[2], Integer.parseInt(courseField[3]),
 					null, Integer.parseInt(courseField[5]), courseField[6]);
+			Faculty f = RegistrationManager.getInstance().getFacultyDirectory().getFacultyById(courseField[4]);
+			if (f != null)
+				f.getSchedule().addCourseToSchedule(returnCourse);
 
 		} else {
 			returnCourse = new Course(courseField[0], courseField[1], courseField[2], Integer.parseInt(courseField[3]),
 					null, Integer.parseInt(courseField[5]), courseField[6], Integer.parseInt(courseField[7]),
 					Integer.parseInt(courseField[8]));
+			Faculty f = RegistrationManager.getInstance().getFacultyDirectory().getFacultyById(courseField[4]);
+			if (f != null)
+				f.getSchedule().addCourseToSchedule(returnCourse);
 		}
 		lineReader.close();
-
-		RegistrationManager manager = RegistrationManager.getInstance();
-		for (int k = 0; k < manager.getFacultyDirectory().getFacultyDirectory().length; k++) {
-			if (manager.getFacultyDirectory().getFacultyDirectory()[i][2].equals(id)) {
-				manager.getFacultyDirectory().getFacultyById(id).getSchedule().addCourseToSchedule(returnCourse);
-				return returnCourse;
-			}
-		}
-
 		return returnCourse;
 
 	}

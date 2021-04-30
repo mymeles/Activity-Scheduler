@@ -23,13 +23,30 @@ public class LinkedListRecursive<E> {
 		size = 0;
 	}
 
+	/**
+	 * A method that returns the size of the list
+	 * 
+	 * @return an integer
+	 */
 	public int size() {
 		return size;
 	}
-	
+
+	/**
+	 * Returns a true value if the list is empty, otherwise false
+	 * 
+	 * @return a boolean
+	 */
 	public boolean isEmpty() {
 		return size == 0;
 	}
+
+	/**
+	 * A method that adds an element into a list by the indicated index
+	 * 
+	 * @param idx is an integer indicating where the element is added
+	 * @param e   is the element that is being added
+	 */
 	public void add(int idx, E e) {
 		if (contains(e))
 			throw new IllegalArgumentException();
@@ -47,6 +64,12 @@ public class LinkedListRecursive<E> {
 		size++;
 	}
 
+	/**
+	 * A method that adds the given element to the list
+	 * 
+	 * @param e is the element
+	 * @return a boolean, true if the element is added, false otherwise
+	 */
 	public boolean add(E e) {
 		if (contains(e))
 			throw new IllegalArgumentException();
@@ -60,6 +83,15 @@ public class LinkedListRecursive<E> {
 		return true;
 	}
 
+	/**
+	 * Returns an element from the list at a given index
+	 * 
+	 * @param idx is the index at which we get the element
+	 * @return the object E
+	 * 
+	 * @throws IndexOutOfBoundsException if the index is less than 0 or greater than
+	 *                                   or equals to the size of the list.
+	 */
 	public E get(int idx) {
 		if (idx < 0 || idx >= size)
 			throw new IndexOutOfBoundsException();
@@ -68,6 +100,19 @@ public class LinkedListRecursive<E> {
 
 	}
 
+	/**
+	 * Sets an element in the list by a given idx with the element passed @param idx
+	 * is an integer indicating the set element
+	 * 
+	 * @param e   is the element that we set
+	 * @param idx is an integer indicating the element that is to be replaced
+	 * @return the value of the replaced element E
+	 * 
+	 * @throws IndexOutOfBoundsException if the index is less than 0 or greater than
+	 *                                   or equals to the size of the list.
+	 * @throws NullPointerException      if the element is null
+	 * @throws IllegalArgumentException  if the element is contained in the list
+	 */
 	public E set(int idx, E e) {
 		if (idx < 0 || idx >= size)
 			throw new IndexOutOfBoundsException();
@@ -80,7 +125,16 @@ public class LinkedListRecursive<E> {
 
 	}
 
-	public E remove(int idx) { 
+	/**
+	 * removes an element in the list by a given idx
+	 * 
+	 * @param idx is an integer indicating the element that is to be replaced
+	 * @return the value of the removed element
+	 * 
+	 * @throws IndexOutOfBoundsException if the index is less than 0 or greater than
+	 *                                   or equals to the size of the list.
+	 */
+	public E remove(int idx) {
 		if (idx < 0 || idx >= size)
 			throw new IndexOutOfBoundsException();
 		E rtn = null;
@@ -96,8 +150,14 @@ public class LinkedListRecursive<E> {
 
 	}
 
+	/**
+	 * removes an element in the list by a given idx
+	 * 
+	 * @param e is the element that we remove
+	 * @return the value of the removed element
+	 */
 	public boolean remove(E e) {
- 
+
 		if (front == null)
 			return false;
 		else if (e == null)
@@ -112,6 +172,11 @@ public class LinkedListRecursive<E> {
 		}
 	}
 
+	/**
+	 * A method that checks if an element is contained within the list 
+	 * @param e is the element that we check in the list 
+	 * @return a boolean, true if it is contained, otherwise false 
+	 */
 	public boolean contains(E e) {
 		if (front != null)
 			return front.contains(e);

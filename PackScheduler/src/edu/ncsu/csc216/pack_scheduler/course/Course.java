@@ -202,7 +202,7 @@ public class Course extends Activity implements Comparable<Course> {
 			throw new IllegalArgumentException("Invalid instructor unity id");
 		else
 		this.instructorId = instructorId;
-	}
+	} 
 
 	/**
 	 * Returns a string containing the fields within the course object
