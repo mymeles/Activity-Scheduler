@@ -1,7 +1,6 @@
 package edu.ncsu.csc216.pack_scheduler.util;
 
 import static org.junit.Assert.*;
-import java.util.ListIterator;
 
 import org.junit.Test;
 
@@ -11,37 +10,9 @@ import org.junit.Test;
  *
  */
 public class LinkedListRecursiveTest {
-//
-//	/**
-//	 * Default test for LinkedListRecursive constructor
-//	 */
-//	@Test
-//	public void testLinkedListRecursive() {
-//		LinkedListRecursive<String> testList = new LinkedListRecursive<String>();
-//		assertEquals(0, testList.size());
-//		testList.add("1");
-//		testList.add("2");
-//		testList.add("3");
-//		testList.add("4");
-//		testList.add("5");
-//		testList.add("6");
-//		assertEquals(6, testList.size());
-//		assertEquals(true, testList.remove("1"));
-//		assertEquals(true, testList.remove("4"));
-//		assertEquals(false, testList.remove("87"));
-//		assertEquals(4, testList.size());
-//	//	assertEquals("6", testList.get(3));
-//		
-//		for(int i =0; i < testList.size(); i++) {
-//			System.out.println(testList.get(i));
-//		}
-//
-//		
-//
-//	} 
 
 	/**
-	 * Tests the functionality of the ArrayList add method
+	 * A test method for LinkedListRecursive.add()
 	 */
 	@Test
 	public void testAdd() {
@@ -121,7 +92,7 @@ public class LinkedListRecursiveTest {
 	}
 
 	/**
-	 * Tests the functionality of the remove method in ArrayList
+	 * A test method for LinkedListRecursive.remove()
 	 */
 	@Test
 	public void testRemove() {

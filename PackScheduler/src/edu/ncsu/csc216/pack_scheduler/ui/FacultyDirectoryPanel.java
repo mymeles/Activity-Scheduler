@@ -369,7 +369,7 @@ public class FacultyDirectoryPanel extends JPanel implements ActionListener {
 		
 		/**
 		 * Returns the column name at the given index.
-		 * @param col location of the column
+		 * @param col is a colomon S
 		 * @return the column name at the given column.
 		 */
 		public String getColumnName(int col) {
@@ -378,8 +378,8 @@ public class FacultyDirectoryPanel extends JPanel implements ActionListener {
 
 		/**
 		 * Returns the data at the given {row, col} index.
-		 * @param row location to get the data
-		 * @param col location to get the data
+		 * @param col is a colomon 
+		 * @param row is a row 
 		 * @return the data at the given location.
 		 */
 		public Object getValueAt(int row, int col) {

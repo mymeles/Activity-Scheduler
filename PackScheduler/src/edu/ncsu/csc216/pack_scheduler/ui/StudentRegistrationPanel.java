@@ -309,8 +309,6 @@ public class StudentRegistrationPanel  extends JPanel implements ActionListener 
 				try {
 					if (!RegistrationManager.getInstance().enrollStudentInCourse(catalog.getCourseFromCatalog(tableCatalog.getValueAt(row, 0).toString(), tableCatalog.getValueAt(row, 1).toString()))) {
 						JOptionPane.showMessageDialog(this, "Course cannot be added to schedule.");
-					} else {
-						updateCourseDetails(catalog.getCourseFromCatalog(tableCatalog.getValueAt(row, 0).toString(), tableCatalog.getValueAt(row, 1).toString()));
 					}
 				} catch (IllegalArgumentException iae) {
 					JOptionPane.showMessageDialog(this, iae.getMessage());
@@ -324,8 +322,6 @@ public class StudentRegistrationPanel  extends JPanel implements ActionListener 
 			} else {
 				if (!RegistrationManager.getInstance().dropStudentFromCourse(catalog.getCourseFromCatalog(tableSchedule.getValueAt(row, 0).toString(), tableSchedule.getValueAt(row, 1).toString()))) {
 					JOptionPane.showMessageDialog(this, "Cannot drop student from " + tableSchedule.getValueAt(row, 0).toString());
-				} else {
-					updateCourseDetails(catalog.getCourseFromCatalog(tableCatalog.getValueAt(row, 0).toString(), tableCatalog.getValueAt(row, 1).toString()));
 				}
 			}
 			updateTables();
@@ -356,7 +352,7 @@ public class StudentRegistrationPanel  extends JPanel implements ActionListener 
 	/**
 	 * Updates the pnlCourseDetails with full information about the most
 	 * recently selected course.
-	 * @param c Course that is selected
+	 * @param c is a course value 
 	 */
 	private void updateCourseDetails(Course c) {
 		if (c != null) {
@@ -369,16 +365,6 @@ public class StudentRegistrationPanel  extends JPanel implements ActionListener 
 			lblEnrollmentCap.setText("" + c.getCourseRoll().getEnrollmentCap());
 			lblOpenSeats.setText("" + c.getCourseRoll().getOpenSeats());
 			lblWaitlist.setText("" + c.getCourseRoll().getNumberOnWaitlist());
-		} else {
-			lblName.setText("");
-			lblSection.setText("");
-			lblTitle.setText("");
-			lblInstructor.setText("");
-			lblCredits.setText("");
-			lblMeeting.setText("");
-			lblEnrollmentCap.setText("");
-			lblOpenSeats.setText("");
-			lblWaitlist.setText("");
 		}
 	}
 	
@@ -401,7 +387,8 @@ public class StudentRegistrationPanel  extends JPanel implements ActionListener 
 		/**
 		 * Constructs the {@link CourseTableModel} by requesting the latest information
 		 * from the {@link RequirementTrackerModel}.
-		 * @param isCatalog true if catalog
+		 * 
+		 * @param isCatalog is a boolean value 
 		 */
 		public CourseTableModel(boolean isCatalog) {
 			this.isCatalog = isCatalog;
@@ -428,7 +415,7 @@ public class StudentRegistrationPanel  extends JPanel implements ActionListener 
 		
 		/**
 		 * Returns the column name at the given index.
-		 * @param col index of the column for the name
+		 * @param col with a list of names 
 		 * @return the column name at the given column.
 		 */
 		public String getColumnName(int col) {
@@ -437,8 +424,9 @@ public class StudentRegistrationPanel  extends JPanel implements ActionListener 
 
 		/**
 		 * Returns the data at the given {row, col} index.
-		 * @param row index of row for data
-		 * @param col index of column for data
+		 *  @param col is an inetger
+		 *    @param row is an inetger
+		 * 
 		 * @return the data at the given location.
 		 */
 		public Object getValueAt(int row, int col) {

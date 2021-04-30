@@ -548,7 +548,7 @@ public class CourseCatalogPanel extends JPanel implements ActionListener {
 		
 		/**
 		 * Returns the column name at the given index.
-		 * @param col column index
+		 * @param col is a columon 
 		 * @return the column name at the given column.
 		 */
 		public String getColumnName(int col) {
@@ -557,8 +557,8 @@ public class CourseCatalogPanel extends JPanel implements ActionListener {
 
 		/**
 		 * Returns the data at the given {row, col} index.
-		 * @param row row index
-		 * @param col column index
+		 * @param row is a row 
+		 * @param col is a colomun 
 		 * @return the data at the given location.
 		 */
 		public Object getValueAt(int row, int col) {

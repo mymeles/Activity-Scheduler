@@ -25,7 +25,7 @@ public class LinkedListRecursive<E> {
 
 	/**
 	 * A method that returns the size of the list
-	 * 
+	 *  
 	 * @return an integer
 	 */
 	public int size() {

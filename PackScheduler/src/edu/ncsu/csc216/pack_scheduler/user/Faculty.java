@@ -101,10 +101,19 @@ public class Faculty extends User {
 
 	}
 
+	
+	/**
+	 * A method that returns the Faculty schedule 
+	 * @return Faculty Schedule 
+	 */
 	public FacultySchedule getSchedule() {
 		return schedule;
 	}
 
+	/**
+	 * A method that checks if a faculty is overLoaded with courses 
+	 * @return a boolean
+	 */
 	public boolean isOverloaded() {
 		
 		return schedule.getNumScheduledCourses() > maxCourses;

@@ -129,6 +129,12 @@ public class RegistrationManager {
 		return facultyDirectory;
 	}
 
+	/**
+	 * A method that adds A course to facultys schedule 
+	 * @param c is course to be added to faculty 
+	 * @param f is faculty that the schedule needs update 
+	 * @return boolean 
+	 */
 	public boolean addFacultyToCourse(Course c, Faculty f) {
 		if (currentUser != registrar ) // there is check for the
 			throw new IllegalArgumentException("Illegal Action");
@@ -141,6 +147,12 @@ public class RegistrationManager {
 	
 	}
 
+	/**
+	 * A method that removes A course to faculty schedule 
+	 * @param c is course to be removed from faculty 
+	 * @param f is faculty that the schedule needs update 
+	 * @return boolean 
+	 */
 	public boolean removeFacultyFromCourse(Course c, Faculty f) {
 		if (!(currentUser instanceof Registrar)) // there is check for the
 			throw new IllegalArgumentException("Illegal Action");
@@ -301,8 +313,8 @@ public class RegistrationManager {
 	}
 
 	/**
-	 * 
-	 * @param f
+	 * A method that resets the Faculty schedule 
+	 * @param f is the fqaculty the scheudle is reset 
 	 */
 	public void resetFacultySchedule(Faculty f) {
 		if (!(currentUser instanceof Registrar)) // there is check for the

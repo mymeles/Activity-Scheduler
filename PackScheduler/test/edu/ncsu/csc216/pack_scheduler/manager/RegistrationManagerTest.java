@@ -103,7 +103,10 @@ public class RegistrationManagerTest {
 
 	}
 
-	@Test
+	/**
+	 * A test to check the added fuctionality of remove and add from faculty 
+	 */
+	@Test 
 	public void testAddAndRemoveFromFaccultyToCourse() {
 		StudentDirectory s = manager.getStudentDirectory();
 		s.loadStudentsFromFile("test-files/student_records.txt");
