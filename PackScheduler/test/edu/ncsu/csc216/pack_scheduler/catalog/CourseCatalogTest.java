@@ -89,7 +89,7 @@ public class CourseCatalogTest {
 		
 		assertNull(cc.getCourseFromCatalog("CSC492", "001"));
 		
-		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, ENCAP, MEETING_DAYS, START_TIME, END_TIME);
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, null, ENCAP, MEETING_DAYS, START_TIME, END_TIME);
 		assertEquals(c, cc.getCourseFromCatalog("CSC216", "001"));
 	}
 	

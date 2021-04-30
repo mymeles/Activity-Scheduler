@@ -108,14 +108,16 @@ public class CourseRecordIO {
 					Integer.parseInt(courseField[8]));
 		}
 		lineReader.close();
-		
+
 		RegistrationManager manager = RegistrationManager.getInstance();
-		if (manager.getFacultyDirectory().getFacultyById(id) != null) {
-			manager.addFacultyToCourse(returnCourse, manager.getFacultyDirectory().getFacultyById(id));
-			return returnCourse;
-		} else {
-			return returnCourse;
+		for (int k = 0; k < manager.getFacultyDirectory().getFacultyDirectory().length; k++) {
+			if (manager.getFacultyDirectory().getFacultyDirectory()[i][2].equals(id)) {
+				manager.getFacultyDirectory().getFacultyById(id).getSchedule().addCourseToSchedule(returnCourse);
+				return returnCourse;
+			}
 		}
+
+		return returnCourse;
 
 	}
 

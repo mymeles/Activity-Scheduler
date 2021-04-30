@@ -130,11 +130,14 @@ public class RegistrationManager {
 	}
 
 	public boolean addFacultyToCourse(Course c, Faculty f) {
-		if (!(currentUser instanceof Registrar)) // there is check for the
+		if (currentUser != registrar ) // there is check for the
 			throw new IllegalArgumentException("Illegal Action");
+		if(currentUser != null && currentUser == registrar) {
+			return f.getSchedule().addCourseToSchedule(c); 
 
+		}
 	
-		return f.getSchedule().addCourseToSchedule(c);
+		return false;
 	
 	}
 

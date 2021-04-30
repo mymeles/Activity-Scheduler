@@ -71,7 +71,7 @@ public class LinkedListTest {
 		try {
 			testList.add(0, "Vegtable");
 			fail();
-		} catch (IndexOutOfBoundsException e) {
+		} catch (IllegalArgumentException e) {
 			assertEquals(4, testList.size());
 		}
 

@@ -31,9 +31,9 @@ public class CourseRecordIOTest {
 	/** Expected results for valid courses in course_records.txt - line 1 */
 	private final String validCourse1 = "CSC116,Intro to Programming - Java,001,3,null,10,MW,910,1100";
 	/** Expected results for valid courses in course_records.txt - line 2 */
-	private final String validCourse2 = "CSC116,Intro to Programming - Java,002,3,spbalik,10,MW,1120,1310";
+	private final String validCourse2 = "CSC116,Intro to Programming - Java,002,3,null,10,MW,1120,1310";
 	/** Expected results for valid courses in course_records.txt - line 3 */
-	private final String validCourse3 = "CSC116,Intro to Programming - Java,003,3,tbdimitr,10,TH,1120,1310";
+	private final String validCourse3 = "CSC116,Intro to Programming - Java,003,3,null,10,TH,1120,1310";
 	/**
 	 * Expected results for valid courses in course_records.txt - line 5 (line 4 is
 	 * a duplicate of line 2 b/c of how we defined Course.equals().)

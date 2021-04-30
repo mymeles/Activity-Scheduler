@@ -80,7 +80,7 @@ public class LinkedListRecursive<E> {
 
 	}
 
-	public E remove(int idx) {
+	public E remove(int idx) { 
 		if (idx < 0 || idx >= size)
 			throw new IndexOutOfBoundsException();
 		E rtn = null;
@@ -99,9 +99,9 @@ public class LinkedListRecursive<E> {
 	public boolean remove(E e) {
  
 		if (front == null)
-			throw new IndexOutOfBoundsException();
+			return false;
 		else if (e == null)
-			throw new NullPointerException();
+			return false;
 
 		else if (front.data == e) {
 			front = front.next;
