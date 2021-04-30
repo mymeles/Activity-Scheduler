@@ -139,8 +139,6 @@ public class RegistrationManagerTest {
 		
 		manager.login(registrarUsername, registrarPassword);
 
-		assertTrue(manager.addFacultyToCourse(cr, fy));
-		manager.logout();
 		
 	}
 

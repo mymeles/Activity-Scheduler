@@ -1,7 +1,7 @@
 package edu.ncsu.csc216.pack_scheduler.util;
 
 /**
- * 
+ * A class of LinkedList that is implemented in a way that uses recursive froms. 
  * @author Meles Meles
  *
  * @param <E> The generic object type stored in the LinkedList
@@ -173,9 +173,10 @@ public class LinkedListRecursive<E> {
 	}
 
 	/**
-	 * A method that checks if an element is contained within the list 
-	 * @param e is the element that we check in the list 
-	 * @return a boolean, true if it is contained, otherwise false 
+	 * A method that checks if an element is contained within the list
+	 * 
+	 * @param e is the element that we check in the list
+	 * @return a boolean, true if it is contained, otherwise false
 	 */
 	public boolean contains(E e) {
 		if (front != null)
@@ -209,6 +210,12 @@ public class LinkedListRecursive<E> {
 
 		}
 
+		/**
+		 * A method that is checks if a given element is contained in the list
+		 * 
+		 * @param e is the element that we check in the list
+		 * @return a boolean, true if it is contained, otherwise false
+		 */
 		private boolean contains(E e) {
 			if (data == e)
 				return true;
@@ -218,6 +225,12 @@ public class LinkedListRecursive<E> {
 			return false;
 		}
 
+		/**
+		 * A method in the list node to add an element in the list via index
+		 * 
+		 * @param idx is an integer indicating where the element is added
+		 * @param e   is the element that is being added
+		 */
 		private void add(int idx, E e) {
 			if (idx == 0)
 				next = new ListNode(e, next);
@@ -226,6 +239,12 @@ public class LinkedListRecursive<E> {
 
 		}
 
+		/**
+		 * A method in the list node to add an element
+		 * 
+		 * @param e is the element
+		 * @return a boolean, true if the element is added, false otherwise
+		 */
 		private boolean add(E e) {
 			if (next == null) {
 				next = new ListNode(e, null);
@@ -235,6 +254,12 @@ public class LinkedListRecursive<E> {
 
 		}
 
+		/**
+		 * A method in the list node to get an element in the list
+		 * 
+		 * @param idx the reference of the element we get
+		 * @return a value of E
+		 */
 		private E get(int idx) {
 			if (idx == 0)
 				return data;
@@ -243,6 +268,12 @@ public class LinkedListRecursive<E> {
 
 		}
 
+		/**
+		 * A method in the list node to remove an element by a given element
+		 * 
+		 * @param e is the element that we remove
+		 * @return the value of the removed element
+		 */
 		private boolean remove(E e) {
 			if (next == null) {
 				return false;
@@ -257,6 +288,12 @@ public class LinkedListRecursive<E> {
 
 		}
 
+		/**
+		 * A method in the list node to remove by a give index
+		 * 
+		 * @param idx is an integer indicating the element that is to be replaced
+		 * @return the value of the removed element
+		 */
 		private E remove(int idx) {
 			E rtn = null;
 			if (idx == 0) {
@@ -269,6 +306,13 @@ public class LinkedListRecursive<E> {
 
 		}
 
+		/**
+		 * A method in the list node to set the element passed
+		 * 
+		 * @param e   is the element that we set
+		 * @param idx is an integer indicating the element that is to be replaced
+		 * @return the value of the replaced element E
+		 */
 		private E set(int idx, E e) {
 			E rtn = null;
 			if (idx == 0) {
